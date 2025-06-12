@@ -1,0 +1,73 @@
+@config "./tailwind.config.js";
+@import "tailwindcss";
+
+:root {
+    /* Common colors */
+    --color-indigo-primary: #7c5dfa;
+    --color-white: #ffffff;
+    --color-indigo-hover: #9277ff;
+
+    --color-red-primary: #ec5757;
+    --color-red-hover: #ff9797;
+
+    /* Gray tones */
+    --color-gray-soft: #dfe3fa; /* Gray highlight & menu text dark */
+    --color-gray-dark: #494e6e; /* gray text */
+    --color-gray-very-dark: #0c0e16; /* menu text light */
+    --color-gray-deep: #252945;
+    --color-gray-muted: #7e88c3;
+    --color-gray-cool: #858bb2; /* gray text light */
+    --color-gray-steel: #888eb0;
+    --color-gray-ink: #1e2139;
+
+    /* Color variables for light mode */
+    --color-bg: #f8f8fb;
+    --color-text: #0c0e16;
+    --color-secondary-bg: #ffffff;
+    --color-border: #dfe3fa;
+    --color-sidebar-bg: #373b53;
+    --color-icon: #7e88c3;
+
+    --color-button3-bg: #f9fafe;
+    --color-button3-text: #7e88c3;
+    --color-button3-hover: #dfe3fa;
+
+    --color-button4-bg: #373b53;
+    --color-button4-text: #888eb0;
+    --color-button4-hover: #0c0e16;
+
+    /* Font variables */
+    --font-sans: var(--font-league-spartan), sans-serif;
+}
+
+.dark {
+    /* Dark mode overrides */
+    --color-bg: #141625;
+    --color-text: #ffffff;
+    --color-secondary-bg: #1e2139;
+    --color-border: #252945;
+    --color-sidebar-bg: #1e2139;
+    --color-icon: #858bb2;
+
+    --color-button3-bg: #252945;
+    --color-button3-text: #dfe3fa;
+    --color-button3-hover: #ffffff;
+
+    --color-button4-bg: #373b53;
+    --color-button4-text: #dfe3fa;
+    --color-button4-hover: #1e2139;
+}
+
+* {
+    @apply box-border;
+}
+
+html,
+body {
+    @apply m-0 p-0 antialiased;
+    scroll-behavior: smooth;
+    min-block-size: 100%;
+    font-family: var(--font-sans);
+    background-color: var(--color-bg);
+    color: var(--color-text);
+}

@@ -1,0 +1,15 @@
+{
+    "semi": true,
+    "tabWidth": 4,
+    "printWidth": 80,
+    "singleQuote": false,
+    "trailingComma": "es5",
+    "arrowParens": "avoid",
+    "bracketSameLine": false,
+    "jsxSingleQuote": false,
+    "plugins": [
+        "prettier-plugin-organize-imports",
+        "prettier-plugin-tailwindcss"
+    ],
+    "organizeImportsSkipDestructiveCodeActions": true
+}
