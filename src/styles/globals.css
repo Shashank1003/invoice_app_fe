@@ -6,6 +6,7 @@
     --color-indigo-primary: #7c5dfa;
     --color-white: #ffffff;
     --color-indigo-hover: #9277ff;
+    --color-black: #000000;
 
     --color-red-primary: #ec5757;
     --color-red-hover: #ff9797;
@@ -19,6 +20,8 @@
     --color-gray-cool: #858bb2; /* gray text light */
     --color-gray-steel: #888eb0;
     --color-gray-ink: #1e2139;
+    --color-cloud-white: #f9fafe;
+    --color-slate-blue: #373b53;
 
     /* Color variables for light mode */
     --color-bg: #f8f8fb;
@@ -27,6 +30,7 @@
     --color-border: #dfe3fa;
     --color-sidebar-bg: #373b53;
     --color-icon: #7e88c3;
+    --color-text-secondary: #7e88c3;
 
     --color-button3-bg: #f9fafe;
     --color-button3-text: #7e88c3;
@@ -48,6 +52,7 @@
     --color-border: #252945;
     --color-sidebar-bg: #1e2139;
     --color-icon: #858bb2;
+    --color-text-secondary: #dfe3fa;
 
     --color-button3-bg: #252945;
     --color-button3-text: #dfe3fa;

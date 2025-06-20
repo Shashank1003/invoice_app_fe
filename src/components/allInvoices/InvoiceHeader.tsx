@@ -1,5 +1,5 @@
 import { JSX, useEffect, useState } from "react";
-import Dropdown from "../Dropdown";
+import Dropdown from "../common/Dropdown";
 import CreateInvoiceButton from "../common/buttons/CreateInvoiceButton";
 
 interface InvoiceHeaderProps {

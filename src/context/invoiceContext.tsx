@@ -12,8 +12,8 @@ import React, {
 export interface InvoiceContextType {
     invoices: InvoiceBrief[];
     setInvoices: (invoices: InvoiceBrief[]) => void;
-    selectedInvoiceId: string | null;
-    setSelectedInvoiceId: (id: string | null) => void;
+    activeInvoiceId: string | null;
+    setActiveInvoiceId: (id: string | null) => void;
 }
 const InvoiceContext = createContext<InvoiceContextType | undefined>(undefined);
 
@@ -23,17 +23,15 @@ export const InvoiceProvider = ({
     children: ReactNode;
 }): JSX.Element => {
     const [invoices, setInvoices] = useState<InvoiceBrief[]>([]);
-    const [selectedInvoiceId, setSelectedInvoiceId] = useState<string | null>(
-        null
-    );
+    const [activeInvoiceId, setActiveInvoiceId] = useState<string | null>(null);
 
     return (
         <InvoiceContext.Provider
             value={{
                 invoices,
                 setInvoices,
-                selectedInvoiceId,
-                setSelectedInvoiceId,
+                activeInvoiceId,
+                setActiveInvoiceId,
             }}
         >
             {children}

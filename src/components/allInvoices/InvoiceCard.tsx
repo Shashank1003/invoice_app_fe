@@ -1,41 +1,21 @@
-import { useThemeContext } from "@/context/themeContext";
-import { statusColors } from "@/misc/statusColors";
 import { InvoiceBrief } from "@/types/invoiceTypes";
 import { renderId } from "@/utils/generateRenderId";
-import { toCapitalized } from "@/utils/toCapitalized";
 import moment from "moment";
 import { JSX } from "react";
-
-interface StatusColorsInterface {
-    background: string;
-    color: string;
-}
+import StatusBox from "../common/StatusBox";
 
 export default function InvoiceCard({
     invoice,
+    handleClick,
 }: {
     invoice: InvoiceBrief;
+    handleClick: (invoiceId: string) => void;
 }): JSX.Element {
-    const { isDarkMode } = useThemeContext();
-
-    const getStatusColors = (status: string): StatusColorsInterface => {
-        if (status in statusColors) {
-            if (status === "DRAFT" && isDarkMode) {
-                return {
-                    background: statusColors.DRAFT.backgroundDark,
-                    color: statusColors.DRAFT.colorDark,
-                };
-            }
-            return statusColors[status as keyof typeof statusColors];
-        }
-        return {
-            background: "transparent",
-            color: "#000", // Fallback color
-        };
-    };
-
     return (
-        <div className="shadow-custom text-text bg-secondary-bg flex h-[134px] w-full flex-col items-center justify-between rounded-[8px] px-[24px]">
+        <div
+            onClick={() => handleClick(invoice.id)}
+            className="shadow-custom text-text bg-secondary-bg flex h-[134px] w-full flex-col items-center justify-between rounded-[8px] px-[24px]"
+        >
             <div className="mt-[24px] flex w-full items-center justify-between">
                 <h2 className="text-[12px] leading-[15px] font-bold">
                     <span className="text-gray-muted">#</span>
@@ -59,21 +39,7 @@ export default function InvoiceCard({
                     </p>
                 </div>
 
-                <div
-                    style={{
-                        background: getStatusColors(invoice.status)?.background,
-                        color: getStatusColors(invoice.status)?.color,
-                    }}
-                    className="flex h-[40px] w-[104px] items-center justify-center gap-[8px] rounded-[6px] text-[12px] leading-[15px] font-bold"
-                >
-                    <span
-                        style={{
-                            background: getStatusColors(invoice.status)?.color,
-                        }}
-                        className="h-[8px] w-[8px] rounded-full"
-                    />
-                    <span>{toCapitalized(invoice.status)}</span>
-                </div>
+                <StatusBox invoiceStatus={invoice.status} />
             </div>
         </div>
     );

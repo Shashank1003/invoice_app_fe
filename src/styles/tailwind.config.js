@@ -15,6 +15,10 @@ module.exports = {
             icon: "var(--color-icon)",
             "sidebar-bg": "var(--color-sidebar-bg)",
             white: "var(--color-white)",
+            black: "var(--color-black)",
+            "text-secondary": "var(--color-text-secondary)",
+            "cloud-white": "var(--color-cloud-white)",
+            "slate-blue": "var(--color-slate-blue)",
 
             "gray-dark": "var(--color-gray-dark)",
             "gray-soft": "var(--color-gray-soft)",

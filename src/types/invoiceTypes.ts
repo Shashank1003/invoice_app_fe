@@ -2,10 +2,11 @@ import { Item } from "./itemTypes";
 
 export interface InvoiceDetailed {
     id?: string;
-    due_date: string;
+    due_date?: string;
     client_name: string;
     client_email: string;
     street_from: string;
+    street_to: string;
     city_from: string;
     state_to: string;
     city_to: string;
