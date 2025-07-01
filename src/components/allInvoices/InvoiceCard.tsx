@@ -13,8 +13,9 @@ export default function InvoiceCard({
 }): JSX.Element {
     return (
         <div
+            id={`invoiceCard-${invoice.id}`}
             onClick={() => handleClick(invoice.id)}
-            className="shadow-custom text-text bg-secondary-bg flex h-[134px] w-full flex-col items-center justify-between rounded-[8px] px-[24px]"
+            className="shadow-custom text-text bg-secondary-bg flex h-[134px] w-full cursor-pointer flex-col items-center justify-between rounded-[8px] px-[24px]"
         >
             <div className="mt-[24px] flex w-full items-center justify-between">
                 <h2 className="text-[12px] leading-[15px] font-bold">

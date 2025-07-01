@@ -22,10 +22,15 @@ export const deleteInvoice = async (
     return resp.data;
 };
 
-// export const createInvoice = async (data: any) => {
-//     const response = await axios.post("/invoices", data);
-//     return response.data;
-// };
+export const createInvoice = async (
+    payload: InvoiceDetailed
+): Promise<InvoiceDetailed> => {
+    const resp: AxiosResponse<InvoiceDetailed> = await axios.post(
+        "/invoices",
+        payload
+    );
+    return resp.data;
+};
 
 export const updateInvoice = async (
     payload: InvoiceDetailed

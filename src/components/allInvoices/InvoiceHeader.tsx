@@ -1,3 +1,4 @@
+import { useRouter } from "next/navigation";
 import { JSX, useCallback, useEffect, useState } from "react";
 import Dropdown from "../common/Dropdown";
 import CreateInvoiceButton from "../common/buttons/CreateInvoiceButton";
@@ -16,6 +17,7 @@ export default function InvoiceHeader({
     totalInvoices,
 }: InvoiceHeaderProps): JSX.Element {
     const [isOpen, setIsOpen] = useState(false);
+    const router = useRouter();
 
     useEffect(() => {
         setIsOpen(false);
@@ -24,6 +26,10 @@ export default function InvoiceHeader({
     const toggleDropdown = useCallback(() => {
         setIsOpen(prev => !prev);
     }, []);
+
+    const handleInvoiceCreate = useCallback(() => {
+        router.push("/invoices/create");
+    }, [router]);
 
     return (
         <div className="mx-[24px] mt-[32px] flex items-center justify-between">
@@ -47,7 +53,7 @@ export default function InvoiceHeader({
                     id="filterDropdown"
                     onForceClose={() => setIsOpen(false)}
                 />
-                <CreateInvoiceButton />
+                <CreateInvoiceButton onClick={handleInvoiceCreate} />
             </div>
         </div>
     );

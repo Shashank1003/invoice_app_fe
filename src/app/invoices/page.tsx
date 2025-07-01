@@ -39,6 +39,31 @@ export default function Invoices(): JSX.Element {
         setTotalInvoices(invoiceData.length);
     }, [invoiceData]);
 
+    useEffect(() => {
+        const searchParams = new URLSearchParams(window.location.search);
+        const scrollId = searchParams.get("scrollId");
+
+        if (!scrollId) return;
+        const maxAttempts = 20;
+        let attempts = 0;
+
+        const scrollToId = () => {
+            const element = document.getElementById(scrollId);
+
+            if (element) {
+                element.scrollIntoView({
+                    behavior: "smooth",
+                    block: "center",
+                });
+            } else if (attempts < maxAttempts) {
+                attempts += 1;
+                setTimeout(scrollToId, 100);
+            }
+        };
+
+        scrollToId();
+    }, []);
+
     const handleStatus = useCallback(
         (status: string) => {
             if (status === activeStatus) {

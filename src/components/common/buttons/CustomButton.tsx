@@ -5,7 +5,7 @@ interface CustomButtonProps {
     buttonText: string;
     style?: React.CSSProperties; // just in case some style changes are required
     onClick: () => void;
-    variant?: "redButton" | "indigoButton" | "button3";
+    variant?: "redButton" | "indigoButton" | "button3" | "button4";
     extendedClass?: string;
     disabled?: boolean;
 }
@@ -30,6 +30,8 @@ export default function CustomButton({
                 {
                     "bg-button3-bg text-button3-text hover:bg-button3-hover w-[73px]":
                         variant === "button3",
+                    "bg-button4-bg text-button4-text hover:bg-button4-hover w-[73px]":
+                        variant === "button4",
                     "bg-red-primary hover:bg-red-hover w-[89px] text-white":
                         variant === "redButton",
                     "bg-indigo-primary hover:bg-indigo-hover w-[149px] text-white":

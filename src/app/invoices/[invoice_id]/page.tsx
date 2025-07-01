@@ -39,8 +39,12 @@ export default function InvoicePage(): JSX.Element {
     const handleBack = useCallback(() => {
         // Can use router.back() as well but it won't work if user
         // directly navigates to this page from bookmarks or other sites
-        router.push("/invoices");
-    }, [router]);
+        if (invoiceData && invoiceData.id) {
+            router.push(`/invoices?scrollId=invoiceCard-${invoiceData?.id}`);
+        } else {
+            router.push("/invoices");
+        }
+    }, [router, invoiceData]);
 
     const handleCancel = useCallback(() => {
         setIsDeletePopup(false);

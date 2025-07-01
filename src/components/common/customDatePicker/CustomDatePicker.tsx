@@ -59,7 +59,7 @@ export default function CustomDatePicker({
                 showYearDropdown
                 dropdownMode="select"
                 renderCustomHeader={props => <DateHeader {...props} />}
-                closeOnScroll={true}
+                closeOnScroll={false}
                 popperModifiers={[
                     {
                         name: "myModifier",

@@ -9,7 +9,7 @@ export default function BackButton({
     return (
         <button
             onClick={onClick}
-            className="mt-[32px] ml-[24px] flex items-center justify-center gap-[16px]"
+            className="mt-[32px] ml-[24px] flex cursor-pointer items-center justify-center gap-[16px] p-1 pl-0"
         >
             <LeftIcon className="h-[12px] w-[12px]" />
             <span className="text-text text-[12px] leading-[15px] font-bold tracking-[-0.25px]">

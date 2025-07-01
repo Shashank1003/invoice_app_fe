@@ -4,34 +4,31 @@ import CustomButton from "@/components/common/buttons/CustomButton";
 import Menubar from "@/components/common/Menubar";
 import InvoiceForm from "@/components/invoiceForm/InvoiceForm";
 import { useInvoiceContext } from "@/context/invoiceContext";
-import { useFetchInvoiceById, useUpdateInvoice } from "@/hooks/useInvoices";
+import { useCreateInvoice } from "@/hooks/useInvoices";
+import { emptyInvoiceData } from "@/misc/emptyInvoiceData";
 import { invoiceDetailedSchema } from "@/misc/invoiceFormSchema";
 import { InvoiceDetailed } from "@/types/invoiceTypes";
-import { renderId } from "@/utils/generateRenderId";
 import { format } from "date-fns";
-import { useParams, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { JSX, useCallback, useEffect, useState } from "react";
-import { v4 as uuidv4 } from "uuid";
+import { v4 as uuid4 } from "uuid";
 
-export default function EditInvoice(): JSX.Element {
+export default function CreateNewInvoice(): JSX.Element {
     const router = useRouter();
-    const params = useParams();
-    const invoiceId = params.invoice_id as string;
-    const { setActiveInvoice, activeInvoice } = useInvoiceContext();
-    const { data, isLoading } = useFetchInvoiceById(invoiceId);
-    const { mutate: updateInvoice, isPending } = useUpdateInvoice();
+    const { activeInvoice, setActiveInvoice } = useInvoiceContext();
+    const { mutate: createInvoice, isPending } = useCreateInvoice();
     const [invoice, setInvoice] = useState<InvoiceDetailed | null>(null);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
     useEffect(() => {
-        if (!data || !invoiceId) return;
-        setInvoice(data || null);
-        setActiveInvoice(data || null);
-    }, [data, setActiveInvoice, invoiceId]);
+        if (!emptyInvoiceData) return;
+        setInvoice(emptyInvoiceData || null);
+        setActiveInvoice(emptyInvoiceData || null);
+    }, [setActiveInvoice]);
 
-    const backHandler = useCallback(() => {
-        router.push(`/invoices/${invoiceId}`);
-    }, [router, invoiceId]);
+    const handleBack = useCallback(() => {
+        router.push("/invoices");
+    }, [router]);
 
     const handleFormChange = useCallback(
         (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -119,7 +116,7 @@ export default function EditInvoice(): JSX.Element {
             quantity: 1,
             price: 1,
             total: 1,
-            id: `temp-${uuidv4()}`,
+            id: `temp-${uuid4()}`,
         };
         setInvoice(prev => {
             if (!prev) return prev;
@@ -132,7 +129,7 @@ export default function EditInvoice(): JSX.Element {
     }, [activeInvoice]);
 
     const handleSubmit = useCallback(
-        (payload: InvoiceDetailed) => {
+        (payload: InvoiceDetailed, isDraft: boolean = false) => {
             const result = invoiceDetailedSchema.safeParse(payload);
 
             if (!result.success) {
@@ -144,6 +141,7 @@ export default function EditInvoice(): JSX.Element {
 
             const updatedPayload = {
                 ...result.data,
+                status: isDraft ? "DRAFT" : "PENDING",
                 items: result.data.items.map(val => {
                     if (val?.id?.startsWith("temp-")) {
                         // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
@@ -153,31 +151,27 @@ export default function EditInvoice(): JSX.Element {
                     return val;
                 }),
             };
-            updateInvoice(updatedPayload, {
-                onSuccess: () => {
-                    setActiveInvoice(updatedPayload);
+            createInvoice(updatedPayload, {
+                onSuccess: data => {
+                    router.push(`/invoices?scrollId=invoiceCard-${data.id}`);
                 },
             });
         },
-        [updateInvoice, setActiveInvoice]
+        [createInvoice, router]
     );
-
-    if (isLoading) return <div>Loading...</div>;
 
     return (
         <div>
             <Menubar />
-            <BackButton onClick={backHandler} />
 
-            {invoice && (
-                <div className="mt-6 mb-22 px-6">
-                    <div className="text-text text-[24px] leading-[32px] font-bold tracking-[-0.5px]">
-                        <p>
-                            Edit <span className="text-gray-steel">#</span>
-                            {renderId(invoiceId)}
-                        </p>
-                    </div>
+            <BackButton onClick={handleBack} />
 
+            <div className="mt-6 mb-22 px-6">
+                <div className="text-text text-[24px] leading-[32px] font-bold tracking-[-0.5px]">
+                    <p>New Invoice</p>
+                </div>
+
+                {invoice && (
                     <InvoiceForm
                         invoice={invoice}
                         handleChange={handleFormChange}
@@ -185,28 +179,37 @@ export default function EditInvoice(): JSX.Element {
                         handlePaymentTerms={handlePaymentTerms}
                         isDropdownOpen={isDropdownOpen}
                         setIsDropdownOpen={setIsDropdownOpen}
-                        isDateDisabled={true}
+                        isDateDisabled={false}
                         onItemChange={handleItemsChange}
                         onRemoveItem={handleRemoveItem}
                         onAddItem={handleAddItem}
                     />
-                </div>
-            )}
+                )}
+            </div>
 
-            <div className="bg-secondary-bg shadow-custom flex h-[91px] items-center justify-end gap-2 px-6">
+            <div className="bg-secondary-bg shadow-custom flex h-[91px] items-center justify-center gap-2 px-6">
                 <CustomButton
-                    buttonText="Cancel"
+                    buttonText="Discard"
                     onClick={handleReset}
                     variant="button3"
-                    extendedClass="w-[96px]"
+                    extendedClass="w-[84px]"
                 />
 
                 {invoice && (
                     <CustomButton
-                        buttonText={isPending ? "Saving..." : "Save Changes"}
+                        buttonText="Save as Draft"
+                        onClick={() => handleSubmit(invoice, true)}
+                        variant="button4"
+                        extendedClass="w-[117px]"
+                    />
+                )}
+
+                {invoice && (
+                    <CustomButton
+                        buttonText={isPending ? "Saving..." : "Save & Send"}
                         onClick={() => handleSubmit(invoice)}
                         variant="indigoButton"
-                        extendedClass="w-[138px]"
+                        extendedClass="w-[112px]"
                     />
                 )}
             </div>

@@ -1,5 +1,6 @@
 "use client";
 import {
+    createInvoice,
     deleteInvoice,
     getInvoiceById,
     getInvoices,
@@ -47,21 +48,24 @@ export const useDeleteInvoice = (): UseMutationResult<
     });
 };
 
-// export const useCreateInvoice = (): UseMutationResult<
-//     InvoiceDetailed,
-//     Error,
-//     any,
-//     unknown
-// > => {
-//     const queryClient = useQueryClient();
+export const useCreateInvoice = (): UseMutationResult<
+    InvoiceDetailed,
+    Error,
+    InvoiceDetailed,
+    unknown
+> => {
+    const queryClient = useQueryClient();
 
-//     return useMutation<InvoiceDetailed, Error, any, unknown>({
-//         mutationFn: createInvoice,
-//         onSuccess: () => {
-//             queryClient.invalidateQueries({ queryKey: ["invoices"] });
-//         },
-//     });
-// };
+    return useMutation<InvoiceDetailed, Error, InvoiceDetailed, unknown>({
+        mutationFn: payload => createInvoice(payload),
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ["invoices"] });
+        },
+        onError: error => {
+            console.error("🚨 Error creating invoice:", error);
+        },
+    });
+};
 
 export const useUpdateInvoice = (): UseMutationResult<
     InvoiceDetailed,
