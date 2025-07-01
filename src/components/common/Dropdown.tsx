@@ -1,45 +1,114 @@
 import DownIcon from "@/assets/icon-arrow-down.svg";
 import CheckIcon from "@/assets/icon-check.svg";
+import { useForceClose } from "@/hooks/useForceClose";
 import { toCapitalized } from "@/utils/toCapitalized";
-import { JSX } from "react";
+import { flip, offset, shift, useFloating } from "@floating-ui/react";
+import clsx from "clsx";
+import { JSX, useRef } from "react";
+
+interface Option {
+    key: string;
+    value: string;
+}
 
 interface DropdownProps {
     value: string;
     open: boolean;
-    onClick: () => void;
-    onOptionClick: (status: string) => void;
+    onToggle: () => void;
+    onChange: (_option: string) => void;
+    options: string[] | Option[];
+    type: "FILTER" | "SELECT";
+    id: string;
+    label?: string;
+    onForceClose: () => void;
+    closeOnScroll?: boolean;
 }
-
-const STATUS_VALS = ["DRAFT", "PENDING", "PAID"];
 
 export default function Dropdown({
     value,
     open,
-    onClick,
-    onOptionClick,
+    onToggle,
+    onChange,
+    options,
+    type,
+    id,
+    label,
+    onForceClose,
+    closeOnScroll = true,
 }: DropdownProps): JSX.Element {
+    const ref = useRef<HTMLDivElement>(null);
+
+    useForceClose({ ref, onForceClose, closeOnScroll });
+
+    const getValueFromKey = (val: string): string => {
+        const keyVal = options.find(x => {
+            if (typeof x === "object" && "key" in x) return x.key === val;
+        });
+        return keyVal && typeof keyVal === "object" ? keyVal.value : val;
+    };
+
+    const { refs, floatingStyles } = useFloating({
+        placement: "bottom-start", // preferred, will flip if needed
+        middleware: [
+            offset(12), // offset the floating element by 24px
+            flip(),
+            shift(state => ({ padding: state.rects.reference.width / 2 + 24 })),
+        ],
+    });
+
     return (
-        <div className="relative">
-            <button
-                onClick={onClick}
-                className="bg-bg text-text flex cursor-pointer items-center justify-between gap-[12px] text-[12px] leading-[15px] font-bold"
-            >
-                <span>Filter</span>
-                <DownIcon />
-            </button>
+        <div className="relative" ref={ref}>
+            {type === "FILTER" ? (
+                <button
+                    onClick={onToggle}
+                    id={id}
+                    ref={refs.setReference}
+                    className="bg-bg text-text flex cursor-pointer items-center justify-between gap-[12px] text-[12px] leading-[15px] font-bold"
+                >
+                    <span>Filter</span>
+                    <DownIcon />
+                </button>
+            ) : (
+                <div className="flex w-full flex-col gap-[10px]">
+                    <label
+                        htmlFor={id}
+                        className="text-form-label text-[12px] leading-[15px] font-medium tracking-[-0.25px]"
+                    >
+                        {label}
+                    </label>
+                    <button
+                        ref={refs.setReference}
+                        onClick={onToggle}
+                        className="bg-secondary-bg text-text border-border focus:border-indigo-primary hover:border-indigo-primary flex h-12 w-full items-center justify-between rounded border px-5 text-[12px] leading-[15px] font-bold tracking-[-0.25px] focus:outline-none"
+                    >
+                        <span>{getValueFromKey(value)}</span>
+                        <DownIcon />
+                    </button>
+                </div>
+            )}
 
             {open && (
                 <ul
+                    ref={refs.setFloating}
                     role="listbox"
-                    className="shadow-dd-light dark:shadow-dd-dark bg-secondary-bg absolute top-[24px] left-1/2 flex w-[120px] -translate-x-1/2 flex-col items-start justify-center gap-[12px] rounded-[8px] p-[16px]"
+                    style={floatingStyles}
+                    className={clsx(
+                        "shadow-dd-light dark:shadow-dd-dark absolute top-[24px] left-1/2 -translate-x-1/2 rounded-[8px]",
+                        {
+                            "bg-calender-bg w-full": type === "SELECT",
+
+                            "bg-secondary-bg flex w-[120px] flex-col items-start justify-center gap-[12px] p-[20px]":
+                                type === "FILTER",
+                        }
+                    )}
                 >
-                    {STATUS_VALS.map(status => {
-                        return (
+                    {options.map((option, i) => {
+                        return typeof option === "string" ? (
                             <li
-                                key={status}
+                                key={option as string}
                                 role="option"
-                                aria-selected={value === status}
-                                onClick={() => onOptionClick(status)}
+                                aria-selected={value === option}
+                                onClick={() => onChange(option as string)}
                             >
                                 <button
                                     type="button"
@@ -48,17 +117,38 @@ export default function Dropdown({
                                     <div
                                         className={
                                             "border-indigo-primary flex h-[16px] w-[16px] items-center justify-center rounded-[2px] border" +
-                                            (value === status
+                                            (value === option
                                                 ? " bg-indigo-primary"
                                                 : " bg-gray-soft dark:bg-gray-ink")
                                         }
                                     >
-                                        {value === status ? <CheckIcon /> : ""}
+                                        {value === option ? <CheckIcon /> : ""}
                                     </div>
                                     <div className="text-gray-ink text-[12px] leading-[15px] font-bold dark:text-white">
-                                        {toCapitalized(status)}
+                                        {toCapitalized(option as string)}
                                     </div>
                                 </button>
+                            </li>
+                        ) : (
+                            <li
+                                key={option.key as string}
+                                role="option"
+                                aria-selected={value === option.key}
+                                onClick={() => onChange(option.key as string)}
+                            >
+                                <button
+                                    className={clsx(
+                                        "h-12 w-full cursor-pointer px-6 py-4 text-left text-[12px] leading-[15px] font-bold tracking-[-0.25px]",
+                                        value === option.key
+                                            ? "text-indigo-primary"
+                                            : "text-calender-text"
+                                    )}
+                                >
+                                    {toCapitalized(option.value)}
+                                </button>
+                                {i !== options.length - 1 && (
+                                    <div className="bg-gray-soft dark:bg-gray-ink h-[1px] w-full" />
+                                )}
                             </li>
                         );
                     })}

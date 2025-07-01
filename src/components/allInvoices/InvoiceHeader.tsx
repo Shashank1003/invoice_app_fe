@@ -1,12 +1,14 @@
-import { JSX, useEffect, useState } from "react";
+import { JSX, useCallback, useEffect, useState } from "react";
 import Dropdown from "../common/Dropdown";
 import CreateInvoiceButton from "../common/buttons/CreateInvoiceButton";
 
 interface InvoiceHeaderProps {
     activeStatus: string;
-    onOptionClick: (status: string) => void;
+    onOptionClick: (_status: string) => void;
     totalInvoices: number;
 }
+
+const STATUS_VALS = ["DRAFT", "PENDING", "PAID"];
 
 export default function InvoiceHeader({
     activeStatus,
@@ -19,9 +21,9 @@ export default function InvoiceHeader({
         setIsOpen(false);
     }, [activeStatus]);
 
-    const toggleDropdown = () => {
+    const toggleDropdown = useCallback(() => {
         setIsOpen(prev => !prev);
-    };
+    }, []);
 
     return (
         <div className="mx-[24px] mt-[32px] flex items-center justify-between">
@@ -38,8 +40,12 @@ export default function InvoiceHeader({
                 <Dropdown
                     value={activeStatus}
                     open={isOpen}
-                    onClick={toggleDropdown}
-                    onOptionClick={onOptionClick}
+                    onToggle={toggleDropdown}
+                    onChange={onOptionClick}
+                    options={STATUS_VALS}
+                    type="FILTER"
+                    id="filterDropdown"
+                    onForceClose={() => setIsOpen(false)}
                 />
                 <CreateInvoiceButton />
             </div>

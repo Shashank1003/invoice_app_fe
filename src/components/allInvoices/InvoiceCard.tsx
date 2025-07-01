@@ -9,7 +9,7 @@ export default function InvoiceCard({
     handleClick,
 }: {
     invoice: InvoiceBrief;
-    handleClick: (invoiceId: string) => void;
+    handleClick: (_invoiceId: string) => void;
 }): JSX.Element {
     return (
         <div

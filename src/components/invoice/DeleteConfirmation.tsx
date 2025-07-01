@@ -13,7 +13,7 @@ export default function DeleteConfirmation({
 
     return (
         <div className="fixed inset-0 flex items-center justify-center bg-black/75 px-[24px]">
-            <div className="bg-secondary-bg rounded-[8px] p-[32px]">
+            <div className="bg-secondary-bg shadow-custom rounded-[8px] p-[32px]">
                 <p className="text-text text-[20px] leading-[32px] font-bold tracking-[-0.42px]">
                     Confirm Deletion
                 </p>

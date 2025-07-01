@@ -1,5 +1,4 @@
-// next.config.js
-/** @type {import('next').NextConfig} */
+// ✅ Proper TS-style config
 const nextConfig = {
     webpack(config) {
         config.module.rules.push({
@@ -11,4 +10,4 @@ const nextConfig = {
     },
 };
 
-module.exports = nextConfig;
+export default nextConfig;

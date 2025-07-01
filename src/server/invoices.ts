@@ -21,7 +21,18 @@ export const deleteInvoice = async (
     const resp = await axios.delete(`${api.invoices}/${id}`);
     return resp.data;
 };
+
 // export const createInvoice = async (data: any) => {
 //     const response = await axios.post("/invoices", data);
 //     return response.data;
 // };
+
+export const updateInvoice = async (
+    payload: InvoiceDetailed
+): Promise<InvoiceDetailed> => {
+    const resp: AxiosResponse<InvoiceDetailed> = await axios.put(
+        `${api.invoices}/${payload.id}`,
+        payload
+    );
+    return resp.data;
+};

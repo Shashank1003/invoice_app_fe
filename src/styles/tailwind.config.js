@@ -19,6 +19,9 @@ module.exports = {
             "text-secondary": "var(--color-text-secondary)",
             "cloud-white": "var(--color-cloud-white)",
             "slate-blue": "var(--color-slate-blue)",
+            "form-label": "var(--color-form-label)",
+            "calender-text": "var(--color-calender-text)",
+            "calender-bg": "var(--color-calender-bg)",
 
             "gray-dark": "var(--color-gray-dark)",
             "gray-soft": "var(--color-gray-soft)",
@@ -28,6 +31,7 @@ module.exports = {
             "gray-cool": "var(--color-gray-cool)",
             "gray-steel": "var(--color-gray-steel)",
             "gray-ink": "var(--color-gray-ink)",
+            "gray-graphite": "var(--color-gray-graphite)",
 
             "indigo-primary": "var(--color-indigo-primary)",
             "indigo-hover": "var(--color-indigo-hover)",
@@ -42,6 +46,9 @@ module.exports = {
             "button4-bg": "var(--color-button4-bg)",
             "button4-text": "var(--color-button4-text)",
             "button4-hover": "var(--color-button4-hover)",
+        },
+        fontSize: {
+            base: "16px",
         },
         extend: {
             fontFamily: {

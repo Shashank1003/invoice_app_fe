@@ -1,5 +1,10 @@
 "use client";
-import { deleteInvoice, getInvoiceById, getInvoices } from "@/server/invoices";
+import {
+    deleteInvoice,
+    getInvoiceById,
+    getInvoices,
+    updateInvoice,
+} from "@/server/invoices";
 import { InvoiceBrief, InvoiceDetailed } from "@/types/invoiceTypes";
 import {
     useMutation,
@@ -23,6 +28,7 @@ export const useFetchInvoiceById = (
         queryKey: ["invoice", invoiceId],
         queryFn: () => getInvoiceById(invoiceId),
         enabled: !!invoiceId,
+        staleTime: 1000 * 60 * 5, //5 minutes cache time
     });
 };
 
@@ -56,3 +62,22 @@ export const useDeleteInvoice = (): UseMutationResult<
 //         },
 //     });
 // };
+
+export const useUpdateInvoice = (): UseMutationResult<
+    InvoiceDetailed,
+    Error,
+    InvoiceDetailed
+> => {
+    const queryClient = useQueryClient();
+
+    return useMutation({
+        mutationFn: updateInvoice,
+        onSuccess: (data, variables) => {
+            queryClient.invalidateQueries({ queryKey: ["invoices"] });
+            queryClient.invalidateQueries({
+                queryKey: ["invoice", variables.id],
+            });
+        },
+        onError: e => console.log("error while updating invoice - ", e),
+    });
+};

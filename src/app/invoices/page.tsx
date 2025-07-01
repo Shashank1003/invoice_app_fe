@@ -12,7 +12,7 @@ import { JSX, useCallback, useEffect, useState } from "react";
 export default function Invoices(): JSX.Element {
     const router = useRouter();
     const { data, isLoading } = useFetchInvoices();
-    const { invoices, setInvoices, setActiveInvoiceId } = useInvoiceContext();
+    const { invoices, setInvoices } = useInvoiceContext();
     const [invoiceData, setInvoiceData] = useState<InvoiceBrief[]>([]);
     const [activeStatus, setActiveStatus] = useState<string>("");
     const [totalInvoices, setTotalInvoices] = useState<number>(0);
@@ -52,10 +52,9 @@ export default function Invoices(): JSX.Element {
 
     const handleClick = useCallback(
         (invoiceId: string) => {
-            setActiveInvoiceId(invoiceId);
             router.push(`/invoices/${invoiceId}`);
         },
-        [router, setActiveInvoiceId]
+        [router]
     );
 
     if (isLoading) return <div>Loading...</div>;

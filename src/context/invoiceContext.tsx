@@ -1,6 +1,6 @@
 "use client";
 
-import { InvoiceBrief } from "@/types/invoiceTypes";
+import { InvoiceBrief, InvoiceDetailed } from "@/types/invoiceTypes";
 import React, {
     createContext,
     JSX,
@@ -11,9 +11,9 @@ import React, {
 
 export interface InvoiceContextType {
     invoices: InvoiceBrief[];
-    setInvoices: (invoices: InvoiceBrief[]) => void;
-    activeInvoiceId: string | null;
-    setActiveInvoiceId: (id: string | null) => void;
+    setInvoices: (_invoices: InvoiceBrief[]) => void;
+    activeInvoice: InvoiceDetailed | null;
+    setActiveInvoice: (_invoice: InvoiceDetailed | null) => void;
 }
 const InvoiceContext = createContext<InvoiceContextType | undefined>(undefined);
 
@@ -23,15 +23,17 @@ export const InvoiceProvider = ({
     children: ReactNode;
 }): JSX.Element => {
     const [invoices, setInvoices] = useState<InvoiceBrief[]>([]);
-    const [activeInvoiceId, setActiveInvoiceId] = useState<string | null>(null);
+    const [activeInvoice, setActiveInvoice] = useState<InvoiceDetailed | null>(
+        null
+    );
 
     return (
         <InvoiceContext.Provider
             value={{
                 invoices,
                 setInvoices,
-                activeInvoiceId,
-                setActiveInvoiceId,
+                activeInvoice,
+                setActiveInvoice,
             }}
         >
             {children}

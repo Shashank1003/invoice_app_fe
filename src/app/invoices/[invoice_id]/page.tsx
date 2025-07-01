@@ -1,29 +1,46 @@
 "use client";
-import LeftIcon from "@/assets/icon-arrow-left.svg";
+import BackButton from "@/components/common/buttons/BackButton";
 import CustomButton from "@/components/common/buttons/CustomButton";
 import Menubar from "@/components/common/Menubar";
 import DeleteConfirmation from "@/components/invoice/DeleteConfirmation";
 import InvoiceDetails from "@/components/invoice/InvoiceDetails";
-import { useDeleteInvoice, useFetchInvoiceById } from "@/hooks/useInvoices";
+import { useInvoiceContext } from "@/context/invoiceContext";
+import {
+    useDeleteInvoice,
+    useFetchInvoiceById,
+    useUpdateInvoice,
+} from "@/hooks/useInvoices";
 import { InvoiceDetailed } from "@/types/invoiceTypes";
+import { useQueryClient } from "@tanstack/react-query";
 import { useParams, useRouter } from "next/navigation";
 import { JSX, useCallback, useEffect, useState } from "react";
 
 export default function InvoicePage(): JSX.Element {
     const params = useParams();
     const router = useRouter();
+    const queryClient = useQueryClient();
     const invoiceId = params.invoice_id as string;
+    const { setActiveInvoice } = useInvoiceContext();
     const { data, isLoading } = useFetchInvoiceById(invoiceId);
     const { mutate: deleteInvoice } = useDeleteInvoice();
+    const { mutate: updateInvoice, isPending } = useUpdateInvoice();
     const [isDeletePopup, setIsDeletePopup] = useState(false);
     const [invoiceData, setInvoiceData] = useState<InvoiceDetailed | null>(
         null
     );
 
     useEffect(() => {
-        if (!data) return;
+        if (!data || !invoiceId) return;
         setInvoiceData(data || null);
-    }, [data]);
+        setActiveInvoice(data || null);
+        queryClient.setQueryData(["invoice", invoiceId], data);
+    }, [data, setActiveInvoice, invoiceId, queryClient]);
+
+    const handleBack = useCallback(() => {
+        // Can use router.back() as well but it won't work if user
+        // directly navigates to this page from bookmarks or other sites
+        router.push("/invoices");
+    }, [router]);
 
     const handleCancel = useCallback(() => {
         setIsDeletePopup(false);
@@ -31,8 +48,25 @@ export default function InvoicePage(): JSX.Element {
 
     const handleDelete = useCallback(() => {
         deleteInvoice(invoiceId);
-        router.back();
+        router.push("/invoices");
     }, [deleteInvoice, invoiceId, router]);
+
+    const handleEdit = useCallback(() => {
+        router.push(`/invoices/${invoiceId}/edit`);
+    }, [invoiceId, router]);
+
+    const handlePaid = useCallback(() => {
+        if (!invoiceData) return;
+
+        const payload = { ...invoiceData, status: "PAID" };
+
+        updateInvoice(payload, {
+            onSuccess: () => {
+                setActiveInvoice(payload);
+                setInvoiceData(payload);
+            },
+        });
+    }, [invoiceData, setActiveInvoice, setInvoiceData, updateInvoice]);
 
     if (isLoading) return <div>Loading...</div>;
 
@@ -40,15 +74,7 @@ export default function InvoicePage(): JSX.Element {
         <div>
             <Menubar />
 
-            <button
-                onClick={() => router.back()}
-                className="mt-[32px] ml-[24px] flex items-center justify-center gap-[16px]"
-            >
-                <LeftIcon className="h-[12px] w-[12px]" />
-                <span className="text-text text-[12px] leading-[15px] font-bold tracking-[-0.25px]">
-                    Go Back
-                </span>
-            </button>
+            <BackButton onClick={handleBack} />
 
             {invoiceData && <InvoiceDetails invoiceData={invoiceData} />}
 
@@ -56,7 +82,7 @@ export default function InvoicePage(): JSX.Element {
                 <CustomButton
                     variant="button3"
                     buttonText="Edit"
-                    onClick={() => console.log("Edit")}
+                    onClick={handleEdit}
                 />
                 <CustomButton
                     variant="redButton"
@@ -65,8 +91,9 @@ export default function InvoicePage(): JSX.Element {
                 />
                 <CustomButton
                     variant="indigoButton"
-                    buttonText="Mark as Paid"
-                    onClick={() => console.log("paid")}
+                    buttonText={isPending ? "Marking..." : "Mark as Paid"}
+                    onClick={handlePaid}
+                    disabled={invoiceData?.status !== "PENDING"}
                 />
             </div>
 

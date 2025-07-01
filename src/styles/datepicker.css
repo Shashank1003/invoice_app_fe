@@ -1,0 +1,41 @@
+@import "tailwindcss";
+@config "./tailwind.config.js";
+
+.react-datepicker {
+    @apply text-calender-text !bg-calender-bg w-full px-5 pb-4;
+    border: 0px !important;
+    border-radius: 8px !important;
+}
+
+.react-datepicker__header {
+    @apply !bg-calender-bg w-full;
+    border: 0px !important;
+}
+
+.react-datepicker__month-container {
+    @apply w-full;
+}
+
+.react-datepicker__day-names {
+    @apply grid w-full grid-cols-7;
+}
+
+.react-datepicker__day-name {
+    @apply !text-form-label !mt-6 text-[12px] leading-[15px] font-medium tracking-[-0.25px];
+}
+
+.react-datepicker__week {
+    @apply grid w-full grid-cols-7;
+}
+
+.react-datepicker__day {
+    @apply !text-calender-text hover:!bg-calender-bg text-[12px] leading-[15px] font-bold tracking-[-0.25px] duration-150;
+}
+
+.react-datepicker__day--outside-month {
+    @apply !text-calender-text text-[12px] leading-[15px] font-bold tracking-[-0.25px] opacity-8 transition-colors duration-150;
+}
+
+.react-datepicker__day--selected {
+    @apply !text-indigo-primary !bg-calender-bg text-[12px] leading-[15px] font-bold tracking-[-0.25px];
+}

@@ -22,6 +22,7 @@
     --color-gray-ink: #1e2139;
     --color-cloud-white: #f9fafe;
     --color-slate-blue: #373b53;
+    --color-gray-graphite: #777f98;
 
     /* Color variables for light mode */
     --color-bg: #f8f8fb;
@@ -31,6 +32,9 @@
     --color-sidebar-bg: #373b53;
     --color-icon: #7e88c3;
     --color-text-secondary: #7e88c3;
+    --color-form-label: #7e88c3;
+    --color-calender-text: #0c0e16;
+    --color-calender-bg: #ffffff;
 
     --color-button3-bg: #f9fafe;
     --color-button3-text: #7e88c3;
@@ -53,6 +57,9 @@
     --color-sidebar-bg: #1e2139;
     --color-icon: #858bb2;
     --color-text-secondary: #dfe3fa;
+    --color-form-label: #888eb0;
+    --color-calender-text: #dfe3fa;
+    --color-calender-bg: #252945;
 
     --color-button3-bg: #252945;
     --color-button3-text: #dfe3fa;
@@ -75,4 +82,16 @@ body {
     font-family: var(--font-sans);
     background-color: var(--color-bg);
     color: var(--color-text);
+}
+
+@layer utilities {
+    .no-spinner::-webkit-outer-spin-button,
+    .no-spinner::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    .no-spinner {
+        -moz-appearance: textfield;
+    }
 }

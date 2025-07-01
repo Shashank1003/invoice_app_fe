@@ -8,7 +8,6 @@ export interface InvoiceDetailed {
     street_from: string;
     street_to: string;
     city_from: string;
-    state_to: string;
     city_to: string;
     postcode_from: string;
     postcode_to: string;

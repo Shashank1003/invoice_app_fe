@@ -1,7 +1,7 @@
 import { Item } from "@/types/itemTypes";
 import { JSX } from "react";
 
-export default function ItemWrapper({
+export default function ItemsBox({
     items,
     total,
 }: {
