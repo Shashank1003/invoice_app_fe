@@ -16,9 +16,9 @@ const DateInput = React.forwardRef<HTMLButtonElement, DateInputProps>(
             className={clsx(
                 "bg-secondary-bg text-text border-border flex h-12 w-full items-center justify-between rounded border px-5 text-[12px] leading-[15px] font-bold tracking-[-0.25px] focus:outline-none",
                 {
-                    "focus:border-indigo-primary hover:border-indigo-primary":
+                    "focus:border-indigo-primary hover:border-indigo-primary cursor-pointer":
                         !isDisabled,
-                    "focus:border-border": isDisabled,
+                    "focus:border-border cursor-default": isDisabled,
                 }
             )}
             onClick={onClick}

@@ -79,7 +79,7 @@ export default function Dropdown({
                     <button
                         ref={refs.setReference}
                         onClick={onToggle}
-                        className="bg-secondary-bg text-text border-border focus:border-indigo-primary hover:border-indigo-primary flex h-12 w-full items-center justify-between rounded border px-5 text-[12px] leading-[15px] font-bold tracking-[-0.25px] focus:outline-none"
+                        className="bg-secondary-bg text-text border-border focus:border-indigo-primary hover:border-indigo-primary flex h-12 w-full cursor-pointer items-center justify-between rounded border px-5 text-[12px] leading-[15px] font-bold tracking-[-0.25px] focus:outline-none"
                     >
                         <span>{getValueFromKey(value)}</span>
                         <DownIcon />
@@ -112,7 +112,7 @@ export default function Dropdown({
                             >
                                 <button
                                     type="button"
-                                    className="flex items-center justify-between gap-[14px]"
+                                    className="flex cursor-pointer items-center justify-between gap-[14px]"
                                 >
                                     <div
                                         className={
@@ -124,7 +124,7 @@ export default function Dropdown({
                                     >
                                         {value === option ? <CheckIcon /> : ""}
                                     </div>
-                                    <div className="text-gray-ink text-[12px] leading-[15px] font-bold dark:text-white">
+                                    <div className="text-gray-ink flex items-center justify-center text-[12px] leading-[15px] font-bold dark:text-white">
                                         {toCapitalized(option as string)}
                                     </div>
                                 </button>
@@ -138,7 +138,7 @@ export default function Dropdown({
                             >
                                 <button
                                     className={clsx(
-                                        "h-12 w-full cursor-pointer px-6 py-4 text-left text-[12px] leading-[15px] font-bold tracking-[-0.25px]",
+                                        "hover:dark:bg-slate-blue hover:bg-gray-soft h-12 w-full cursor-pointer px-6 py-4 text-left text-[12px] leading-[15px] font-bold tracking-[-0.25px]",
                                         value === option.key
                                             ? "text-indigo-primary"
                                             : "text-calender-text"

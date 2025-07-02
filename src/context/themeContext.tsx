@@ -23,11 +23,30 @@ export const ThemeProvider = ({
     const toggleDarkMode = () => setIsDarkMode(prev => !prev);
 
     useEffect(() => {
+        const saved = localStorage.getItem("theme") as string | null;
+        const prefersDark = window.matchMedia(
+            "(prefers-color-schema: dark)"
+        ).matches;
+
+        if (saved) {
+            if (saved === "dark") {
+                setIsDarkMode(true);
+            } else {
+                setIsDarkMode(false);
+            }
+        } else if (prefersDark) {
+            setIsDarkMode(true);
+        }
+    }, []);
+
+    useEffect(() => {
         const root = window.document.documentElement;
         if (isDarkMode) {
             root.classList.add("dark");
+            localStorage.setItem("theme", "dark");
         } else {
             root.classList.remove("dark");
+            localStorage.setItem("theme", "light");
         }
     }, [isDarkMode]);
 
