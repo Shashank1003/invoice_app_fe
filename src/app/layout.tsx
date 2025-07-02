@@ -5,7 +5,7 @@ import "@/styles/globals.css";
 import type { Metadata, Viewport } from "next";
 import { League_Spartan } from "next/font/google";
 import { FC, ReactNode } from "react";
-
+import { Toaster } from "sonner";
 interface RootLayoutProps {
     children: ReactNode;
 }
@@ -36,6 +36,20 @@ const RootLayout: FC<RootLayoutProps> = ({ children }) => {
                     <TanstackProvider>
                         <InvoiceProvider>{children}</InvoiceProvider>
                     </TanstackProvider>
+                    <Toaster
+                        position="top-right"
+                        richColors
+                        toastOptions={{
+                            classNames: {
+                                toast: "!bg-secondary-bg !text-text !rounded-[8px] !py-[14px] !px-[18px] !shadow-toaster !border !border-border !text-[14px] !font-medium !flex !items-center !gap-3 !transition-all !duration-300 !ease-in-out",
+
+                                success: "!border-l-4 !border-l-color-success",
+                                error: "!border-l-4 !border-l-color-error",
+                                warning: "!border-l-4 !border-l-color-warning",
+                                info: "!border-l-4 !border-l-color-info",
+                            },
+                        }}
+                    />
                 </ThemeProvider>
             </body>
         </html>

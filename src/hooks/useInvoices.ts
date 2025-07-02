@@ -14,6 +14,7 @@ import {
     useQueryClient,
     UseQueryResult,
 } from "@tanstack/react-query";
+import { toast } from "sonner";
 
 export const useFetchInvoices = (): UseQueryResult<InvoiceBrief[], Error> => {
     return useQuery<InvoiceBrief[], Error>({
@@ -44,6 +45,7 @@ export const useDeleteInvoice = (): UseMutationResult<
         mutationFn: deleteInvoice,
         onSuccess: () => {
             QueryClient.invalidateQueries({ queryKey: ["invoices"] });
+            toast.success("Invoice deleted successfully");
         },
     });
 };
@@ -60,9 +62,11 @@ export const useCreateInvoice = (): UseMutationResult<
         mutationFn: payload => createInvoice(payload),
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ["invoices"] });
+            toast.success("Invoice created successfully");
         },
         onError: error => {
-            console.error("🚨 Error creating invoice:", error);
+            console.log("error while creating invoice - ", error);
+            toast.error("Something went wrong!");
         },
     });
 };
@@ -81,7 +85,11 @@ export const useUpdateInvoice = (): UseMutationResult<
             queryClient.invalidateQueries({
                 queryKey: ["invoice", variables.id],
             });
+            toast.success("Invoice updated successfully");
         },
-        onError: e => console.log("error while updating invoice - ", e),
+        onError: e => {
+            console.log("error while updating invoice - ", e);
+            toast.error("Something went wrong!");
+        },
     });
 };

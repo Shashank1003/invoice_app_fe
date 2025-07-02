@@ -23,6 +23,11 @@ module.exports = {
             "calender-text": "var(--color-calender-text)",
             "calender-bg": "var(--color-calender-bg)",
 
+            "color-success": "var(--color-success)",
+            "color-error": "var(--color-error)",
+            "color-warning": "var(--color-warning)",
+            "color-info": "var(--color-info)",
+
             "gray-dark": "var(--color-gray-dark)",
             "gray-soft": "var(--color-gray-soft)",
             "gray-very-dark": "var(--color-gray-very-dark)",
@@ -58,6 +63,7 @@ module.exports = {
                 custom: "0px 10px 10px -10px rgba(72,84,159,0.1004)",
                 "dd-dark": "0px 10px 20px 0px rgba(0, 0, 0, 0.25)",
                 "dd-light": "0px 10px 20px 0px rgba(72, 84, 159, 0.25)",
+                toaster: "0 6px 16px rgba(0, 0, 0, 0.1)",
             },
         },
     },

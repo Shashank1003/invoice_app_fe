@@ -5,12 +5,13 @@ import Menubar from "@/components/common/Menubar";
 import InvoiceForm from "@/components/invoiceForm/InvoiceForm";
 import { useInvoiceContext } from "@/context/invoiceContext";
 import { useFetchInvoiceById, useUpdateInvoice } from "@/hooks/useInvoices";
-import { invoiceDetailedSchema } from "@/misc/invoiceFormSchema";
+import { invoiceDetailedSchema } from "@/schemas/invoiceFormSchema";
 import { InvoiceDetailed } from "@/types/invoiceTypes";
 import { renderId } from "@/utils/generateRenderId";
 import { format } from "date-fns";
 import { useParams, useRouter } from "next/navigation";
 import { JSX, useCallback, useEffect, useState } from "react";
+import { toast } from "sonner";
 import { v4 as uuidv4 } from "uuid";
 
 export default function EditInvoice(): JSX.Element {
@@ -136,9 +137,16 @@ export default function EditInvoice(): JSX.Element {
             const result = invoiceDetailedSchema.safeParse(payload);
 
             if (!result.success) {
-                const errors = result.error.flatten().fieldErrors;
-                console.log("Validation failed:", errors);
-                // 🛑 Optionally store errors in state to show on UI
+                //Show all error messages in single toast
+                // const messages = result.error.issues
+                //     .map(issue => `• ${issue.message}`)
+                //     .join("\n");
+                // toast.error(messages);
+
+                // Separate toast for each error message
+                result.error.issues.forEach(issue => {
+                    toast.error(issue.message);
+                });
                 return;
             }
 

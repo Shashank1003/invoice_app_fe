@@ -6,8 +6,10 @@ import Menubar from "@/components/common/Menubar";
 import { useInvoiceContext } from "@/context/invoiceContext";
 import { useFetchInvoices } from "@/hooks/useInvoices";
 import { InvoiceBrief } from "@/types/invoiceTypes";
+import { toCapitalized } from "@/utils/toCapitalized";
 import { useRouter } from "next/navigation"; // ✅ App Router
-import { JSX, useCallback, useEffect, useState } from "react";
+import { JSX, useCallback, useEffect, useRef, useState } from "react";
+import { toast } from "sonner";
 
 export default function Invoices(): JSX.Element {
     const router = useRouter();
@@ -16,6 +18,7 @@ export default function Invoices(): JSX.Element {
     const [invoiceData, setInvoiceData] = useState<InvoiceBrief[]>([]);
     const [activeStatus, setActiveStatus] = useState<string>("");
     const [totalInvoices, setTotalInvoices] = useState<number>(0);
+    const isFirstRender = useRef(true);
 
     useEffect(() => {
         if (!data) return;
@@ -34,6 +37,20 @@ export default function Invoices(): JSX.Element {
             setInvoiceData(data || []);
         }
     }, [activeStatus, data, invoices]);
+
+    useEffect(() => {
+        if (isFirstRender.current) {
+            isFirstRender.current = false;
+            return;
+        }
+        if (activeStatus) {
+            toast.info(
+                `Showing invoices marked as ${toCapitalized(activeStatus)}!`
+            );
+        } else {
+            toast.info("Showing all invoices!");
+        }
+    }, [activeStatus]);
 
     useEffect(() => {
         setTotalInvoices(invoiceData.length);

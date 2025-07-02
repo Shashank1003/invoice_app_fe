@@ -24,6 +24,11 @@
     --color-slate-blue: #373b53;
     --color-gray-graphite: #777f98;
 
+    --color-success: #33d69f;
+    --color-error: #ff5e5e;
+    --color-warning: #f2c94c;
+    --color-info: #0ea5e9;
+
     /* Color variables for light mode */
     --color-bg: #f8f8fb;
     --color-text: #0c0e16;
