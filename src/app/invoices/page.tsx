@@ -1,5 +1,6 @@
 "use client";
 
+import NoInvoiceImg from "@/assets/illustration-empty.svg";
 import InvoiceCard from "@/components/allInvoices/InvoiceCard";
 import InvoiceHeader from "@/components/allInvoices/InvoiceHeader";
 import Menubar from "@/components/common/Menubar";
@@ -124,6 +125,27 @@ export default function Invoices(): JSX.Element {
                             />
                         );
                     })}
+                </div>
+            ) : !invoiceData || invoiceData?.length === 0 ? (
+                <div
+                    style={{ height: `calc(100vh - 180px)` }}
+                    className="flex flex-col items-center justify-center gap-10"
+                >
+                    <NoInvoiceImg />
+
+                    <div>
+                        <p className="text-text text-[20px] leading-normal font-bold tracking-[-0.63px]">
+                            There is nothing here
+                        </p>
+
+                        <p className="text-gray-steel dark:text-gray-soft tracking-[-0.25px mt-6 flex flex-col items-center justify-center text-[12px] leading-[15px] font-medium">
+                            <span>Create an invoice by clicking the</span>
+                            <span>
+                                <span className="font-bold">New</span> button
+                                and get started
+                            </span>
+                        </p>
+                    </div>
                 </div>
             ) : (
                 <div className="mx-[24px] mt-[32px] mb-[24px] flex flex-col items-center justify-center gap-[16px]">

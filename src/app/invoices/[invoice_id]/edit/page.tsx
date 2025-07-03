@@ -33,12 +33,12 @@ export default function EditInvoice(): JSX.Element {
 
     const backHandler = useCallback(() => {
         router.push(`/invoices/${invoiceId}`);
-        ``;
     }, [router, invoiceId]);
 
     const handleReset = useCallback(() => {
         setInvoice(activeInvoice);
-    }, [activeInvoice]);
+        backHandler();
+    }, [activeInvoice, backHandler]);
 
     const handleSubmit = useCallback(
         (payload: InvoiceDetailed) => {
@@ -117,9 +117,17 @@ export default function EditInvoice(): JSX.Element {
 
                                 <CustomButton
                                     buttonText={
-                                        isPending ? "Saving..." : "Save Changes"
+                                        isPending ? (
+                                            <div className="flex items-center justify-center gap-2">
+                                                <div className="h-4 w-4 animate-spin rounded-full border-2 border-current border-r-transparent"></div>
+                                                <span>Please wait!</span>
+                                            </div>
+                                        ) : (
+                                            "Save Invoice"
+                                        )
                                     }
                                     onClick={() => handleSubmit(invoice)}
+                                    disabled={isPending}
                                     variant="indigoButton"
                                     extendedClass="w-[138px]"
                                 />

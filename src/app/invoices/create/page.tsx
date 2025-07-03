@@ -30,7 +30,8 @@ export default function CreateNewInvoice(): JSX.Element {
 
     const handleReset = useCallback(() => {
         setInvoice(activeInvoice);
-    }, [activeInvoice]);
+        handleBack();
+    }, [activeInvoice, handleBack]);
 
     const handleSubmit = useCallback(
         (payload: InvoiceDetailed, isDraft: boolean = false) => {
@@ -101,16 +102,36 @@ export default function CreateNewInvoice(): JSX.Element {
 
                 {invoice && (
                     <CustomButton
-                        buttonText="Save as Draft"
+                        buttonText={
+                            isPending ? (
+                                <div className="flex items-center justify-center gap-2">
+                                    <div className="h-4 w-4 animate-spin rounded-full border-2 border-current border-r-transparent"></div>
+                                    <span>Please wait!</span>
+                                </div>
+                            ) : (
+                                "Save as Draft"
+                            )
+                        }
                         onClick={() => handleSubmit(invoice, true)}
                         variant="button4"
                         extendedClass="w-[117px]"
+                        disabled={isPending}
                     />
                 )}
 
                 {invoice && (
                     <CustomButton
-                        buttonText={isPending ? "Saving..." : "Save & Send"}
+                        buttonText={
+                            isPending ? (
+                                <div className="flex items-center justify-center gap-2">
+                                    <div className="h-4 w-4 animate-spin rounded-full border-2 border-current border-r-transparent"></div>
+                                    <span>Please wait!</span>
+                                </div>
+                            ) : (
+                                "Save & Send"
+                            )
+                        }
+                        disabled={isPending}
                         onClick={() => handleSubmit(invoice)}
                         variant="indigoButton"
                         extendedClass="w-[112px]"

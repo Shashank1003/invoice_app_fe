@@ -2,7 +2,7 @@ import clsx from "clsx";
 import { JSX } from "react";
 
 interface CustomButtonProps {
-    buttonText: string;
+    buttonText: string | React.ReactElement;
     style?: React.CSSProperties; // just in case some style changes are required
     onClick: () => void;
     variant?: "redButton" | "indigoButton" | "button3" | "button4";

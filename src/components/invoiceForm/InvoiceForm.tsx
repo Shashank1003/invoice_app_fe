@@ -37,35 +37,44 @@ export default function InvoiceForm({
                 return { ...prev, [name as keyof InvoiceDetailed]: value };
             });
         },
-        []
+        [setInvoice]
     );
 
-    const handleDateChange = useCallback((updatedDate: string) => {
-        setInvoice(prev => {
-            if (!prev) return prev;
-
-            return { ...prev, invoice_date: format(updatedDate, "yyyy-MM-dd") };
-        });
-    }, []);
-
-    const handlePaymentTerms = useCallback((val: string) => {
-        //use if statement instead of direct type-casting as default function accepts string input
-        if (
-            val === "ONE" ||
-            val === "SEVEN" ||
-            val === "FOURTEEN" ||
-            val === "THIRTY"
-        ) {
+    const handleDateChange = useCallback(
+        (updatedDate: string) => {
             setInvoice(prev => {
                 if (!prev) return prev;
+
                 return {
                     ...prev,
-                    payment_terms: val as string,
+                    invoice_date: format(updatedDate, "yyyy-MM-dd"),
                 };
             });
-        }
-        setIsDropdownOpen(false);
-    }, []);
+        },
+        [setInvoice]
+    );
+
+    const handlePaymentTerms = useCallback(
+        (val: string) => {
+            //use if statement instead of direct type-casting as default function accepts string input
+            if (
+                val === "ONE" ||
+                val === "SEVEN" ||
+                val === "FOURTEEN" ||
+                val === "THIRTY"
+            ) {
+                setInvoice(prev => {
+                    if (!prev) return prev;
+                    return {
+                        ...prev,
+                        payment_terms: val as string,
+                    };
+                });
+            }
+            setIsDropdownOpen(false);
+        },
+        [setInvoice]
+    );
 
     const onItemChange = useCallback(
         (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -95,16 +104,22 @@ export default function InvoiceForm({
                 };
             });
         },
-        []
+        [setInvoice]
     );
 
-    const onRemoveItem = useCallback((itemId: string) => {
-        return setInvoice(prev => {
-            if (!prev) return prev;
+    const onRemoveItem = useCallback(
+        (itemId: string) => {
+            return setInvoice(prev => {
+                if (!prev) return prev;
 
-            return { ...prev, items: prev?.items.filter(x => x.id !== itemId) };
-        });
-    }, []);
+                return {
+                    ...prev,
+                    items: prev?.items.filter(x => x.id !== itemId),
+                };
+            });
+        },
+        [setInvoice]
+    );
 
     const onAddItem = useCallback(() => {
         const newItem = {
@@ -118,7 +133,7 @@ export default function InvoiceForm({
             if (!prev) return prev;
             return { ...prev, items: [...prev.items, newItem] };
         });
-    }, []);
+    }, [setInvoice]);
 
     return (
         <div>

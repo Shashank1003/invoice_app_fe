@@ -96,7 +96,7 @@ export default function InvoicePage(): JSX.Element {
 
                             <div
                                 className={clsx(
-                                    "bg-secondary-bg flex h-[91px] items-center justify-between px-[24px]"
+                                    "bg-secondary-bg shadow-custom flex h-[91px] items-center justify-between px-[24px]"
                                 )}
                             >
                                 <CustomButton
@@ -112,12 +112,23 @@ export default function InvoicePage(): JSX.Element {
                                 <CustomButton
                                     variant="indigoButton"
                                     buttonText={
-                                        isPending
-                                            ? "Marking..."
-                                            : "Mark as Paid"
+                                        isPending ? (
+                                            <div className="flex items-center justify-center gap-2">
+                                                <div className="h-4 w-4 animate-spin rounded-full border-2 border-current border-r-transparent"></div>
+                                                <span>Please wait!</span>
+                                            </div>
+                                        ) : (
+                                            "Mark as Paid"
+                                        )
                                     }
                                     onClick={handlePaid}
-                                    disabled={invoiceData?.status !== "PENDING"}
+                                    disabled={
+                                        isPending
+                                            ? true
+                                            : invoiceData?.status !== "PENDING"
+                                              ? true
+                                              : false
+                                    }
                                 />
                             </div>
                         </div>
