@@ -1,6 +1,6 @@
 import { InvoiceBrief } from "@/types/invoiceTypes";
 import { renderId } from "@/utils/generateRenderId";
-import moment from "moment";
+import { format } from "date-fns";
 import { JSX } from "react";
 import StatusBox from "../common/StatusBox";
 
@@ -33,7 +33,7 @@ export default function InvoiceCard({
                         <span className="text-gray-steel dark:text-gray-soft">
                             Due
                         </span>
-                        {moment(invoice.due_date).format(" DD MMM YYYY")}
+                        {format(new Date(invoice.due_date), "dd MMMM yyyy")}
                     </p>
                     <p className="text-text text-[16px] leading-[24px] font-bold">
                         £ {invoice.total.toFixed(2)}

@@ -2,7 +2,7 @@ import StatusBox from "@/components/common/StatusBox";
 import ItemsBox from "@/components/invoice/ItemsBox";
 import { InvoiceDetailed } from "@/types/invoiceTypes";
 import { renderId } from "@/utils/generateRenderId";
-import moment from "moment";
+import { format } from "date-fns";
 import { JSX } from "react";
 
 export default function InvoiceDetails({
@@ -46,8 +46,9 @@ export default function InvoiceDetails({
                                 Invoice Date
                             </p>
                             <p className="text-text mt-[12px] text-[15px] leading-[20px] font-bold tracking-[-0.31px]">
-                                {moment(invoiceData.invoice_date).format(
-                                    "DD MMM YYYY"
+                                {format(
+                                    new Date(invoiceData.invoice_date),
+                                    "dd MMM yyyyy"
                                 )}
                             </p>
                         </div>
@@ -57,9 +58,11 @@ export default function InvoiceDetails({
                                 Payment Due
                             </p>
                             <p className="text-text mt-[12px] text-[15px] leading-[20px] font-bold tracking-[-0.31px]">
-                                {moment(invoiceData.due_date).format(
-                                    "DD MMM YYYY"
-                                )}
+                                {invoiceData.due_date &&
+                                    format(
+                                        new Date(invoiceData.due_date),
+                                        "dd MMM yyyyy"
+                                    )}
                             </p>
                         </div>
                     </div>
