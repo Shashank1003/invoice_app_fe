@@ -28,25 +28,17 @@ export const ThemeProvider = ({
             "(prefers-color-schema: dark)"
         ).matches;
 
-        if (saved) {
-            if (saved === "dark") {
-                setIsDarkMode(true);
-            } else {
-                setIsDarkMode(false);
-            }
-        } else if (prefersDark) {
-            setIsDarkMode(true);
-        }
+        setIsDarkMode(saved === "dark" || (!saved && prefersDark));
     }, []);
 
     useEffect(() => {
         const root = window.document.documentElement;
         if (isDarkMode) {
             root.classList.add("dark");
-            localStorage.setItem("theme", "dark");
+            document.cookie = `theme=dark; path=/; max-age=31536000`;
         } else {
             root.classList.remove("dark");
-            localStorage.setItem("theme", "light");
+            document.cookie = `theme=light; path=/; max-age=31536000`;
         }
     }, [isDarkMode]);
 

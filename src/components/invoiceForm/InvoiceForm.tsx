@@ -1,7 +1,9 @@
 import { paymentTerms } from "@/misc/paymentTerms";
 import { InvoiceDetailed } from "@/types/invoiceTypes";
 import { Item } from "@/types/itemTypes";
-import React, { JSX } from "react";
+import { format } from "date-fns";
+import React, { JSX, useCallback, useState } from "react";
+import { v4 as uuid4 } from "uuid";
 import CustomButton from "../common/buttons/CustomButton";
 import CustomDatePicker from "../common/customDatePicker/CustomDatePicker";
 import CustomInput from "../common/CustomInput";
@@ -10,32 +12,113 @@ import ItemCard from "./ItemCard";
 
 interface InvoiceFormProps {
     invoice: InvoiceDetailed;
-    handleChange: (_event: React.ChangeEvent<HTMLInputElement>) => void;
-    handleDateChange: (_updatedDate: string) => void;
-    handlePaymentTerms: (_value: string) => void;
-    isDropdownOpen: boolean;
-    setIsDropdownOpen: (_bool: boolean) => void;
     isDateDisabled: boolean;
-    onItemChange: (_event: React.ChangeEvent<HTMLInputElement>) => void;
-    onRemoveItem: (_itemId: string) => void;
-    onAddItem: () => void;
+    setInvoice: React.Dispatch<React.SetStateAction<InvoiceDetailed | null>>;
 }
 
 export default function InvoiceForm({
     invoice,
-    handleChange,
-    handleDateChange,
-    handlePaymentTerms,
-    isDropdownOpen,
-    setIsDropdownOpen,
     isDateDisabled,
-    onItemChange,
-    onRemoveItem,
-    onAddItem,
+    setInvoice,
 }: InvoiceFormProps): JSX.Element {
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const dropdownOptions = Object.entries(paymentTerms).map(([key, value]) => {
         return { key: key, value: value };
     });
+
+    const handleChange = useCallback(
+        (e: React.ChangeEvent<HTMLInputElement>) => {
+            const name = e.target.name;
+            const value = e.target.value;
+
+            setInvoice(prev => {
+                if (!prev) return prev;
+
+                return { ...prev, [name as keyof InvoiceDetailed]: value };
+            });
+        },
+        []
+    );
+
+    const handleDateChange = useCallback((updatedDate: string) => {
+        setInvoice(prev => {
+            if (!prev) return prev;
+
+            return { ...prev, invoice_date: format(updatedDate, "yyyy-MM-dd") };
+        });
+    }, []);
+
+    const handlePaymentTerms = useCallback((val: string) => {
+        //use if statement instead of direct type-casting as default function accepts string input
+        if (
+            val === "ONE" ||
+            val === "SEVEN" ||
+            val === "FOURTEEN" ||
+            val === "THIRTY"
+        ) {
+            setInvoice(prev => {
+                if (!prev) return prev;
+                return {
+                    ...prev,
+                    payment_terms: val as string,
+                };
+            });
+        }
+        setIsDropdownOpen(false);
+    }, []);
+
+    const onItemChange = useCallback(
+        (e: React.ChangeEvent<HTMLInputElement>) => {
+            const name = e.target.name;
+            const [field, id] = name.split(/-(.+)/);
+            const value =
+                field === "name" ? e.target.value : Number(e.target.value);
+
+            //Also handle item.total if price or amount changes
+            setInvoice(prev => {
+                if (!prev) return prev;
+                return {
+                    ...prev,
+                    items: prev.items.map(item => {
+                        if (item.id === id) {
+                            const updatedItem = { ...item, [field]: value };
+
+                            if (field !== "name") {
+                                updatedItem.total =
+                                    Number(updatedItem.price) *
+                                    Number(updatedItem.quantity);
+                            }
+                            return updatedItem;
+                        }
+                        return item;
+                    }),
+                };
+            });
+        },
+        []
+    );
+
+    const onRemoveItem = useCallback((itemId: string) => {
+        return setInvoice(prev => {
+            if (!prev) return prev;
+
+            return { ...prev, items: prev?.items.filter(x => x.id !== itemId) };
+        });
+    }, []);
+
+    const onAddItem = useCallback(() => {
+        const newItem = {
+            name: "",
+            quantity: 1,
+            price: 1,
+            total: 1,
+            id: `temp-${uuid4()}`,
+        };
+        setInvoice(prev => {
+            if (!prev) return prev;
+            return { ...prev, items: [...prev.items, newItem] };
+        });
+    }, []);
 
     return (
         <div>
@@ -144,32 +227,34 @@ export default function InvoiceForm({
                     onChange={handleChange}
                 />
 
-                <CustomDatePicker
-                    invoiceDate={invoice.invoice_date}
-                    updateInvoiceDate={handleDateChange}
-                    disabled={isDateDisabled}
-                />
+                <div className="mt-[50px] space-y-6">
+                    <CustomDatePicker
+                        invoiceDate={invoice.invoice_date}
+                        updateInvoiceDate={handleDateChange}
+                        disabled={isDateDisabled}
+                    />
 
-                <Dropdown
-                    id="payment_terms"
-                    label="Payment Terms"
-                    value={invoice.payment_terms}
-                    onChange={handlePaymentTerms}
-                    options={dropdownOptions}
-                    open={isDropdownOpen}
-                    onToggle={() => setIsDropdownOpen(!isDropdownOpen)}
-                    type="SELECT"
-                    onForceClose={() => setIsDropdownOpen(false)}
-                />
+                    <Dropdown
+                        id="payment_terms"
+                        label="Payment Terms"
+                        value={invoice.payment_terms}
+                        onChange={handlePaymentTerms}
+                        options={dropdownOptions}
+                        open={isDropdownOpen}
+                        onToggle={() => setIsDropdownOpen(!isDropdownOpen)}
+                        type="SELECT"
+                        onForceClose={() => setIsDropdownOpen(false)}
+                    />
 
-                <CustomInput
-                    id="description"
-                    label="Project / Description"
-                    type="text"
-                    placeholder="Graphic Design"
-                    value={invoice.description}
-                    onChange={handleChange}
-                />
+                    <CustomInput
+                        id="description"
+                        label="Project / Description"
+                        type="text"
+                        placeholder="Graphic Design"
+                        value={invoice.description}
+                        onChange={handleChange}
+                    />
+                </div>
             </div>
 
             <div className="mt-[66px]">

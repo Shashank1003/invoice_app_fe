@@ -2,17 +2,17 @@
 import BackButton from "@/components/common/buttons/BackButton";
 import CustomButton from "@/components/common/buttons/CustomButton";
 import Menubar from "@/components/common/Menubar";
+import FormLoaderUi from "@/components/invoiceForm/FormLoaderUI";
 import InvoiceForm from "@/components/invoiceForm/InvoiceForm";
 import { useInvoiceContext } from "@/context/invoiceContext";
 import { useFetchInvoiceById, useUpdateInvoice } from "@/hooks/useInvoices";
+import { useLockScroll } from "@/hooks/useLockScroll";
 import { invoiceDetailedSchema } from "@/schemas/invoiceFormSchema";
 import { InvoiceDetailed } from "@/types/invoiceTypes";
 import { renderId } from "@/utils/generateRenderId";
-import { format } from "date-fns";
 import { useParams, useRouter } from "next/navigation";
 import { JSX, useCallback, useEffect, useState } from "react";
 import { toast } from "sonner";
-import { v4 as uuidv4 } from "uuid";
 
 export default function EditInvoice(): JSX.Element {
     const router = useRouter();
@@ -22,7 +22,8 @@ export default function EditInvoice(): JSX.Element {
     const { data, isLoading } = useFetchInvoiceById(invoiceId);
     const { mutate: updateInvoice, isPending } = useUpdateInvoice();
     const [invoice, setInvoice] = useState<InvoiceDetailed | null>(null);
-    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+    useLockScroll(isLoading);
 
     useEffect(() => {
         if (!data || !invoiceId) return;
@@ -32,101 +33,8 @@ export default function EditInvoice(): JSX.Element {
 
     const backHandler = useCallback(() => {
         router.push(`/invoices/${invoiceId}`);
+        ``;
     }, [router, invoiceId]);
-
-    const handleFormChange = useCallback(
-        (e: React.ChangeEvent<HTMLInputElement>) => {
-            const name = e.target.name;
-            const value = e.target.value;
-
-            setInvoice(prev => {
-                if (!prev) return prev;
-
-                return { ...prev, [name as keyof InvoiceDetailed]: value };
-            });
-        },
-        []
-    );
-
-    const handleInvoiceDateChange = useCallback((updatedDate: string) => {
-        setInvoice(prev => {
-            if (!prev) return prev;
-
-            return { ...prev, invoice_date: format(updatedDate, "yyyy-MM-dd") };
-        });
-    }, []);
-
-    const handlePaymentTerms = useCallback((val: string) => {
-        //use if statement instead of direct type-casting as default function accepts string input
-        if (
-            val === "ONE" ||
-            val === "SEVEN" ||
-            val === "FOURTEEN" ||
-            val === "THIRTY"
-        ) {
-            setInvoice(prev => {
-                if (!prev) return prev;
-                return {
-                    ...prev,
-                    payment_terms: val as string,
-                };
-            });
-        }
-        setIsDropdownOpen(false);
-    }, []);
-
-    const handleItemsChange = useCallback(
-        (e: React.ChangeEvent<HTMLInputElement>) => {
-            const name = e.target.name;
-            const [field, id] = name.split(/-(.+)/);
-            const value =
-                field === "name" ? e.target.value : Number(e.target.value);
-
-            //Also handle item.total if price or amount changes
-            setInvoice(prev => {
-                if (!prev) return prev;
-                return {
-                    ...prev,
-                    items: prev.items.map(item => {
-                        if (item.id === id) {
-                            const updatedItem = { ...item, [field]: value };
-
-                            if (field !== "name") {
-                                updatedItem.total =
-                                    Number(updatedItem.price) *
-                                    Number(updatedItem.quantity);
-                            }
-                            return updatedItem;
-                        }
-                        return item;
-                    }),
-                };
-            });
-        },
-        []
-    );
-
-    const handleRemoveItem = useCallback((itemId: string) => {
-        return setInvoice(prev => {
-            if (!prev) return prev;
-
-            return { ...prev, items: prev?.items.filter(x => x.id !== itemId) };
-        });
-    }, []);
-
-    const handleAddItem = useCallback(() => {
-        const newItem = {
-            name: "",
-            quantity: 1,
-            price: 1,
-            total: 1,
-            id: `temp-${uuidv4()}`,
-        };
-        setInvoice(prev => {
-            if (!prev) return prev;
-            return { ...prev, items: [...prev.items, newItem] };
-        });
-    }, []);
 
     const handleReset = useCallback(() => {
         setInvoice(activeInvoice);
@@ -170,54 +78,56 @@ export default function EditInvoice(): JSX.Element {
         [updateInvoice, setActiveInvoice]
     );
 
-    if (isLoading) return <div>Loading...</div>;
-
     return (
         <div>
             <Menubar />
             <BackButton onClick={backHandler} />
 
-            {invoice && (
-                <div className="mt-6 mb-22 px-6">
-                    <div className="text-text text-[24px] leading-[32px] font-bold tracking-[-0.5px]">
-                        <p>
-                            Edit <span className="text-gray-steel">#</span>
-                            {renderId(invoiceId)}
-                        </p>
-                    </div>
+            {isLoading ? (
+                <FormLoaderUi />
+            ) : (
+                <div>
+                    {invoice && (
+                        <div>
+                            <div className="mt-6 mb-22 px-6">
+                                <div className="text-text text-[24px] leading-[32px] font-bold tracking-[-0.5px]">
+                                    <p>
+                                        Edit{" "}
+                                        <span className="text-gray-steel">
+                                            #
+                                        </span>
+                                        {renderId(invoiceId)}
+                                    </p>
+                                </div>
 
-                    <InvoiceForm
-                        invoice={invoice}
-                        handleChange={handleFormChange}
-                        handleDateChange={handleInvoiceDateChange}
-                        handlePaymentTerms={handlePaymentTerms}
-                        isDropdownOpen={isDropdownOpen}
-                        setIsDropdownOpen={setIsDropdownOpen}
-                        isDateDisabled={true}
-                        onItemChange={handleItemsChange}
-                        onRemoveItem={handleRemoveItem}
-                        onAddItem={handleAddItem}
-                    />
+                                <InvoiceForm
+                                    invoice={invoice}
+                                    isDateDisabled={false}
+                                    setInvoice={setInvoice}
+                                />
+                            </div>
+
+                            <div className="bg-secondary-bg shadow-custom flex h-[91px] items-center justify-end gap-2 px-6">
+                                <CustomButton
+                                    buttonText="Cancel"
+                                    onClick={handleReset}
+                                    variant="button3"
+                                    extendedClass="w-[96px]"
+                                />
+
+                                <CustomButton
+                                    buttonText={
+                                        isPending ? "Saving..." : "Save Changes"
+                                    }
+                                    onClick={() => handleSubmit(invoice)}
+                                    variant="indigoButton"
+                                    extendedClass="w-[138px]"
+                                />
+                            </div>
+                        </div>
+                    )}
                 </div>
             )}
-
-            <div className="bg-secondary-bg shadow-custom flex h-[91px] items-center justify-end gap-2 px-6">
-                <CustomButton
-                    buttonText="Cancel"
-                    onClick={handleReset}
-                    variant="button3"
-                    extendedClass="w-[96px]"
-                />
-
-                {invoice && (
-                    <CustomButton
-                        buttonText={isPending ? "Saving..." : "Save Changes"}
-                        onClick={() => handleSubmit(invoice)}
-                        variant="indigoButton"
-                        extendedClass="w-[138px]"
-                    />
-                )}
-            </div>
         </div>
     );
 }

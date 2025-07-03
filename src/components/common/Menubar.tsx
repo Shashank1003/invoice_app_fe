@@ -33,6 +33,7 @@ export default function Menubar(): JSX.Element {
                         width={32}
                         height={32}
                         className="rounded-full"
+                        priority
                     />
                 </div>
             </div>

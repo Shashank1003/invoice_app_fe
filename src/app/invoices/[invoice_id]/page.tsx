@@ -4,14 +4,17 @@ import CustomButton from "@/components/common/buttons/CustomButton";
 import Menubar from "@/components/common/Menubar";
 import DeleteConfirmation from "@/components/invoice/DeleteConfirmation";
 import InvoiceDetails from "@/components/invoice/InvoiceDetails";
+import { Skeleton } from "@/components/ui/skeleton";
 import { useInvoiceContext } from "@/context/invoiceContext";
 import {
     useDeleteInvoice,
     useFetchInvoiceById,
     useUpdateInvoice,
 } from "@/hooks/useInvoices";
+import { useLockScroll } from "@/hooks/useLockScroll";
 import { InvoiceDetailed } from "@/types/invoiceTypes";
 import { useQueryClient } from "@tanstack/react-query";
+import clsx from "clsx";
 import { useParams, useRouter } from "next/navigation";
 import { JSX, useCallback, useEffect, useState } from "react";
 
@@ -28,6 +31,8 @@ export default function InvoicePage(): JSX.Element {
     const [invoiceData, setInvoiceData] = useState<InvoiceDetailed | null>(
         null
     );
+
+    useLockScroll(isLoading);
 
     useEffect(() => {
         if (!data || !invoiceId) return;
@@ -72,34 +77,53 @@ export default function InvoicePage(): JSX.Element {
         });
     }, [invoiceData, setActiveInvoice, setInvoiceData, updateInvoice]);
 
-    if (isLoading) return <div>Loading...</div>;
-
     return (
         <div>
             <Menubar />
 
             <BackButton onClick={handleBack} />
 
-            {invoiceData && <InvoiceDetails invoiceData={invoiceData} />}
+            {isLoading ? (
+                <div className="mx-6 mt-8">
+                    <Skeleton className="bg-skeleton h-[90px] w-full rounded-[8px]" />
+                    <Skeleton className="bg-skeleton mt-4 h-[700px] w-full rounded-[8px]" />
+                </div>
+            ) : (
+                <div>
+                    {invoiceData && (
+                        <div>
+                            <InvoiceDetails invoiceData={invoiceData} />
 
-            <div className="bg-secondary-bg flex h-[91px] items-center justify-between px-[24px]">
-                <CustomButton
-                    variant="button3"
-                    buttonText="Edit"
-                    onClick={handleEdit}
-                />
-                <CustomButton
-                    variant="redButton"
-                    buttonText="Delete"
-                    onClick={() => setIsDeletePopup(true)}
-                />
-                <CustomButton
-                    variant="indigoButton"
-                    buttonText={isPending ? "Marking..." : "Mark as Paid"}
-                    onClick={handlePaid}
-                    disabled={invoiceData?.status !== "PENDING"}
-                />
-            </div>
+                            <div
+                                className={clsx(
+                                    "bg-secondary-bg flex h-[91px] items-center justify-between px-[24px]"
+                                )}
+                            >
+                                <CustomButton
+                                    variant="button3"
+                                    buttonText="Edit"
+                                    onClick={handleEdit}
+                                />
+                                <CustomButton
+                                    variant="redButton"
+                                    buttonText="Delete"
+                                    onClick={() => setIsDeletePopup(true)}
+                                />
+                                <CustomButton
+                                    variant="indigoButton"
+                                    buttonText={
+                                        isPending
+                                            ? "Marking..."
+                                            : "Mark as Paid"
+                                    }
+                                    onClick={handlePaid}
+                                    disabled={invoiceData?.status !== "PENDING"}
+                                />
+                            </div>
+                        </div>
+                    )}
+                </div>
+            )}
 
             {isDeletePopup && (
                 <DeleteConfirmation

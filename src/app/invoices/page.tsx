@@ -3,8 +3,10 @@
 import InvoiceCard from "@/components/allInvoices/InvoiceCard";
 import InvoiceHeader from "@/components/allInvoices/InvoiceHeader";
 import Menubar from "@/components/common/Menubar";
+import { Skeleton } from "@/components/ui/skeleton";
 import { useInvoiceContext } from "@/context/invoiceContext";
 import { useFetchInvoices } from "@/hooks/useInvoices";
+import { useLockScroll } from "@/hooks/useLockScroll";
 import { InvoiceBrief } from "@/types/invoiceTypes";
 import { toCapitalized } from "@/utils/toCapitalized";
 import { useRouter } from "next/navigation"; // ✅ App Router
@@ -19,6 +21,8 @@ export default function Invoices(): JSX.Element {
     const [activeStatus, setActiveStatus] = useState<string>("");
     const [totalInvoices, setTotalInvoices] = useState<number>(0);
     const isFirstRender = useRef(true);
+
+    useLockScroll(isLoading ? true : false);
 
     useEffect(() => {
         if (!data) return;
@@ -70,7 +74,7 @@ export default function Invoices(): JSX.Element {
             if (element) {
                 element.scrollIntoView({
                     behavior: "smooth",
-                    block: "center",
+                    block: "start",
                 });
             } else if (attempts < maxAttempts) {
                 attempts += 1;
@@ -99,28 +103,40 @@ export default function Invoices(): JSX.Element {
         [router]
     );
 
-    if (isLoading) return <div>Loading...</div>;
-
     return (
         <div>
             <Menubar />
-
             <InvoiceHeader
                 onOptionClick={handleStatus}
                 activeStatus={activeStatus}
                 totalInvoices={totalInvoices}
             />
 
-            <div className="mx-[24px] mt-[32px] mb-[24px] flex flex-col items-center justify-center gap-[16px]">
-                {invoiceData &&
-                    invoiceData.map((invoice: InvoiceBrief) => (
-                        <InvoiceCard
-                            key={invoice.id}
-                            invoice={invoice}
-                            handleClick={handleClick}
-                        />
-                    ))}
-            </div>
+            {isLoading ? (
+                <div className="mx-6 mt-8 flex flex-col items-center justify-center gap-4">
+                    {Array.from({
+                        length: 10,
+                    }).map((_, i) => {
+                        return (
+                            <Skeleton
+                                key={i}
+                                className="bg-skeleton h-[134px] w-full rounded-[8px]"
+                            />
+                        );
+                    })}
+                </div>
+            ) : (
+                <div className="mx-[24px] mt-[32px] mb-[24px] flex flex-col items-center justify-center gap-[16px]">
+                    {invoiceData &&
+                        invoiceData.map((invoice: InvoiceBrief) => (
+                            <InvoiceCard
+                                key={invoice.id}
+                                invoice={invoice}
+                                handleClick={handleClick}
+                            />
+                        ))}
+                </div>
+            )}
         </div>
     );
 }

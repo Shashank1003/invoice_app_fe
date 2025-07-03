@@ -22,6 +22,7 @@ module.exports = {
             "form-label": "var(--color-form-label)",
             "calender-text": "var(--color-calender-text)",
             "calender-bg": "var(--color-calender-bg)",
+            skeleton: "var(--color-skeleton)",
 
             "color-success": "var(--color-success)",
             "color-error": "var(--color-error)",
