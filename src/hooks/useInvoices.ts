@@ -65,6 +65,7 @@ export const useCreateInvoice = (): UseMutationResult<
             toast.success("Invoice created successfully");
         },
         onError: error => {
+            // eslint-disable-next-line no-console
             console.log("error while creating invoice - ", error);
             toast.error("Something went wrong!");
         },
@@ -88,6 +89,7 @@ export const useUpdateInvoice = (): UseMutationResult<
             toast.success("Invoice updated successfully");
         },
         onError: e => {
+            // eslint-disable-next-line no-console
             console.log("error while updating invoice - ", e);
             toast.error("Something went wrong!");
         },
