@@ -9,9 +9,9 @@ export default function BackButton({
     return (
         <button
             onClick={onClick}
-            className="mt-[32px] ml-[24px] flex cursor-pointer items-center justify-center gap-[16px] p-1 pl-0"
+            className="mt-8 ml-6 flex cursor-pointer items-center justify-center gap-4 p-1 pl-0 md:mt-12 md:ml-10 md:gap-6"
         >
-            <LeftIcon className="h-[12px] w-[12px]" />
+            <LeftIcon className="h-3 w-3" />
             <span className="text-text text-[12px] leading-[15px] font-bold tracking-[-0.25px]">
                 Go Back
             </span>

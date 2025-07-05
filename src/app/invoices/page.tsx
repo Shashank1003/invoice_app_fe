@@ -1,7 +1,8 @@
 "use client";
 
 import NoInvoiceImg from "@/assets/illustration-empty.svg";
-import InvoiceCard from "@/components/allInvoices/InvoiceCard";
+import InvoiceCardMedium from "@/components/allInvoices/InvoiceCardMedium";
+import InvoiceCardSmall from "@/components/allInvoices/InvoiceCardSmall";
 import InvoiceHeader from "@/components/allInvoices/InvoiceHeader";
 import Menubar from "@/components/common/Menubar";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -10,6 +11,7 @@ import { useFetchInvoices } from "@/hooks/useInvoices";
 import { useLockScroll } from "@/hooks/useLockScroll";
 import { InvoiceBrief } from "@/types/invoiceTypes";
 import { toCapitalized } from "@/utils/toCapitalized";
+import { useMediaQuery } from "@react-hookz/web";
 import { useRouter } from "next/navigation"; // ✅ App Router
 import { JSX, useCallback, useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
@@ -22,6 +24,7 @@ export default function Invoices(): JSX.Element {
     const [activeStatus, setActiveStatus] = useState<string>("");
     const [totalInvoices, setTotalInvoices] = useState<number>(0);
     const isFirstRender = useRef(true);
+    const isMd = useMediaQuery("(min-width: 768px)");
 
     useLockScroll(isLoading ? true : false);
 
@@ -148,15 +151,23 @@ export default function Invoices(): JSX.Element {
                     </div>
                 </div>
             ) : (
-                <div className="mx-[24px] mt-[32px] mb-[24px] flex flex-col items-center justify-center gap-[16px]">
+                <div className="mx-6 mt-8 mb-6 flex flex-col items-center justify-center gap-4 md:mx-12 md:mt-14 md:mb-12">
                     {invoiceData &&
-                        invoiceData.map((invoice: InvoiceBrief) => (
-                            <InvoiceCard
-                                key={invoice.id}
-                                invoice={invoice}
-                                handleClick={handleClick}
-                            />
-                        ))}
+                        invoiceData.map((invoice: InvoiceBrief) =>
+                            isMd ? (
+                                <InvoiceCardMedium
+                                    key={invoice.id}
+                                    invoice={invoice}
+                                    handleClick={handleClick}
+                                />
+                            ) : (
+                                <InvoiceCardSmall
+                                    key={invoice.id}
+                                    invoice={invoice}
+                                    handleClick={handleClick}
+                                />
+                            )
+                        )}
                 </div>
             )}
         </div>

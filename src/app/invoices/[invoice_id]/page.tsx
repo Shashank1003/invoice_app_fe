@@ -1,4 +1,5 @@
 "use client";
+
 import BackButton from "@/components/common/buttons/BackButton";
 import CustomButton from "@/components/common/buttons/CustomButton";
 import Menubar from "@/components/common/Menubar";
@@ -13,6 +14,7 @@ import {
 } from "@/hooks/useInvoices";
 import { useLockScroll } from "@/hooks/useLockScroll";
 import { InvoiceDetailed } from "@/types/invoiceTypes";
+import { useMediaQuery } from "@react-hookz/web";
 import { useQueryClient } from "@tanstack/react-query";
 import clsx from "clsx";
 import { useParams, useRouter } from "next/navigation";
@@ -28,6 +30,7 @@ export default function InvoicePage(): JSX.Element {
     const { mutate: deleteInvoice } = useDeleteInvoice();
     const { mutate: updateInvoice, isPending } = useUpdateInvoice();
     const [isDeletePopup, setIsDeletePopup] = useState(false);
+    const isMd = useMediaQuery("(min-width: 768px)");
     const [invoiceData, setInvoiceData] = useState<InvoiceDetailed | null>(
         null
     );
@@ -91,46 +94,52 @@ export default function InvoicePage(): JSX.Element {
             ) : (
                 <div>
                     {invoiceData && (
-                        <div>
-                            <InvoiceDetails invoiceData={invoiceData} />
+                        <InvoiceDetails
+                            invoiceData={invoiceData}
+                            handleEdit={handleEdit}
+                            showDeletePopup={() => setIsDeletePopup(true)}
+                            isPending={isPending}
+                            handlePaid={handlePaid}
+                        />
+                    )}
 
-                            <div
-                                className={clsx(
-                                    "bg-secondary-bg shadow-custom flex h-[91px] items-center justify-between px-[24px]"
-                                )}
-                            >
-                                <CustomButton
-                                    variant="button3"
-                                    buttonText="Edit"
-                                    onClick={handleEdit}
-                                />
-                                <CustomButton
-                                    variant="redButton"
-                                    buttonText="Delete"
-                                    onClick={() => setIsDeletePopup(true)}
-                                />
-                                <CustomButton
-                                    variant="indigoButton"
-                                    buttonText={
-                                        isPending ? (
-                                            <div className="flex items-center justify-center gap-2">
-                                                <div className="h-4 w-4 animate-spin rounded-full border-2 border-current border-r-transparent"></div>
-                                                <span>Please wait!</span>
-                                            </div>
-                                        ) : (
-                                            "Mark as Paid"
-                                        )
-                                    }
-                                    onClick={handlePaid}
-                                    disabled={
-                                        isPending
-                                            ? true
-                                            : invoiceData?.status !== "PENDING"
-                                              ? true
-                                              : false
-                                    }
-                                />
-                            </div>
+                    {!isMd && (
+                        <div
+                            className={clsx(
+                                "bg-secondary-bg shadow-custom flex h-[91px] items-center justify-between px-6"
+                            )}
+                        >
+                            <CustomButton
+                                variant="button3"
+                                buttonText="Edit"
+                                onClick={handleEdit}
+                            />
+                            <CustomButton
+                                variant="redButton"
+                                buttonText="Delete"
+                                onClick={() => setIsDeletePopup(true)}
+                            />
+                            <CustomButton
+                                variant="indigoButton"
+                                buttonText={
+                                    isPending ? (
+                                        <div className="flex items-center justify-center gap-2">
+                                            <div className="h-4 w-4 animate-spin rounded-full border-2 border-current border-r-transparent"></div>
+                                            <span>Please wait!</span>
+                                        </div>
+                                    ) : (
+                                        "Mark as Paid"
+                                    )
+                                }
+                                onClick={handlePaid}
+                                disabled={
+                                    isPending
+                                        ? true
+                                        : invoiceData?.status !== "PENDING"
+                                          ? true
+                                          : false
+                                }
+                            />
                         </div>
                     )}
                 </div>

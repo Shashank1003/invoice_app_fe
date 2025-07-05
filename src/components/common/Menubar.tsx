@@ -17,15 +17,15 @@ export default function Menubar(): JSX.Element {
     }, [router]);
 
     return (
-        <div className="bg-sidebar-bg flex h-[72px] w-full items-center justify-between">
+        <div className="bg-sidebar-bg flex h-18 w-full items-center justify-between md:h-20">
             <MobileLogo onClick={navigateToHome} />
 
-            <div className="mr-[24px] flex items-center justify-between gap-[24px]">
+            <div className="mr-6 flex items-center justify-between gap-6 md:gap-[30px]">
                 <TransparentButton
                     ButtonIcon={isDarkMode ? Sun : Moon}
                     onClick={toggleDarkMode}
                 />
-                <div className="bg-gray-dark h-[72px] w-[1px]" />
+                <div className="bg-gray-dark h-18 w-[1px] md:h-20" />
                 <div>
                     <Image
                         src={UserImage}

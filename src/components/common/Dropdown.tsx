@@ -63,9 +63,9 @@ export default function Dropdown({
                     onClick={onToggle}
                     id={id}
                     ref={refs.setReference}
-                    className="bg-bg text-text flex cursor-pointer items-center justify-between gap-[12px] text-[12px] leading-[15px] font-bold"
+                    className="bg-bg text-text flex cursor-pointer items-center justify-between gap-3 text-[12px] leading-[15px] font-bold tracking-[-0.25px] md:gap-4"
                 >
-                    <span>Filter</span>
+                    <span>{label}</span>
                     <DownIcon />
                 </button>
             ) : (

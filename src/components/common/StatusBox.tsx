@@ -37,7 +37,7 @@ export default function StatusBox({
                 background: getStatusColors(invoiceStatus)?.background,
                 color: getStatusColors(invoiceStatus)?.color,
             }}
-            className="flex h-[40px] w-[104px] items-center justify-center gap-[8px] rounded-[6px] text-[12px] leading-[15px] font-bold"
+            className="flex h-10 w-26 items-center justify-center gap-2 rounded-[6px] text-[12px] leading-[15px] font-bold tracking-[-0.25px]"
         >
             <span
                 style={{
