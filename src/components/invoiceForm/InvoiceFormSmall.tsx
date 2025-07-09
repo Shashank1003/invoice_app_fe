@@ -1,6 +1,7 @@
 import { paymentTerms } from "@/misc/paymentTerms";
 import { InvoiceDetailed } from "@/types/invoiceTypes";
 import { Item } from "@/types/itemTypes";
+import { useMediaQuery } from "@react-hookz/web";
 import { format } from "date-fns";
 import React, { JSX, useCallback, useState } from "react";
 import { v4 as uuid4 } from "uuid";
@@ -8,7 +9,8 @@ import CustomButton from "../common/buttons/CustomButton";
 import CustomDatePicker from "../common/customDatePicker/CustomDatePicker";
 import CustomInput from "../common/CustomInput";
 import Dropdown from "../common/Dropdown";
-import ItemCard from "./ItemCard";
+import ItemCardMedium from "./ItemCardMedium";
+import ItemCardSmall from "./ItemCardSmall";
 
 interface InvoiceFormProps {
     invoice: InvoiceDetailed;
@@ -16,7 +18,7 @@ interface InvoiceFormProps {
     setInvoice: React.Dispatch<React.SetStateAction<InvoiceDetailed | null>>;
 }
 
-export default function InvoiceForm({
+export default function InvoiceFormSmall({
     invoice,
     isDateDisabled,
     setInvoice,
@@ -25,6 +27,7 @@ export default function InvoiceForm({
     const dropdownOptions = Object.entries(paymentTerms).map(([key, value]) => {
         return { key: key, value: value };
     });
+    const isMd = useMediaQuery("(min-width: 768px)");
 
     const handleChange = useCallback(
         (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -137,7 +140,7 @@ export default function InvoiceForm({
 
     return (
         <div>
-            <div className="mt-6 space-y-6">
+            <div className="mt-6 space-y-6 md:mt-12">
                 <p className="text-indigo-primary text-[12px] leading-[15px] font-bold tracking-[-0.25px]">
                     Bill From
                 </p>
@@ -169,26 +172,39 @@ export default function InvoiceForm({
                         value={invoice.postcode_from}
                         onChange={handleChange}
                     />
+
+                    <div className="hidden w-full md:block">
+                        <CustomInput
+                            id="country_from"
+                            label="Country"
+                            type="text"
+                            placeholder="United Kingdom"
+                            value={invoice.country_from}
+                            onChange={handleChange}
+                        />
+                    </div>
                 </div>
 
-                <CustomInput
-                    id="country_from"
-                    label="Country"
-                    type="text"
-                    placeholder="United Kingdom"
-                    value={invoice.country_from}
-                    onChange={handleChange}
-                />
+                <div className="w-full md:hidden">
+                    <CustomInput
+                        id="country_from"
+                        label="Country"
+                        type="text"
+                        placeholder="United Kingdom"
+                        value={invoice.country_from}
+                        onChange={handleChange}
+                    />
+                </div>
             </div>
 
-            <div className="mt-10 space-y-6">
+            <div className="mt-10 space-y-6 md:mt-12">
                 <p className="text-indigo-primary text-[12px] leading-[15px] font-bold tracking-[-0.25px]">
                     Bill To
                 </p>
 
                 <CustomInput
                     id="client_name"
-                    label="CLient`s Name"
+                    label="Client`s Name"
                     type="text"
                     placeholder="Alex Grim"
                     value={invoice.client_name}
@@ -197,7 +213,7 @@ export default function InvoiceForm({
 
                 <CustomInput
                     id="client_email"
-                    label="CLient`s Email"
+                    label="Client`s Email"
                     type="text"
                     placeholder="alexgrim@mail.com"
                     value={invoice.client_email}
@@ -231,35 +247,56 @@ export default function InvoiceForm({
                         value={invoice.postcode_to}
                         onChange={handleChange}
                     />
+
+                    <div className="hidden w-full md:block">
+                        <CustomInput
+                            id="country_to"
+                            label="Country"
+                            type="text"
+                            placeholder="United Kingdom"
+                            value={invoice.country_to}
+                            onChange={handleChange}
+                        />
+                    </div>
                 </div>
 
-                <CustomInput
-                    id="country_to"
-                    label="Country"
-                    type="text"
-                    placeholder="United Kingdom"
-                    value={invoice.country_to}
-                    onChange={handleChange}
-                />
-
-                <div className="mt-[50px] space-y-6">
-                    <CustomDatePicker
-                        invoiceDate={invoice.invoice_date}
-                        updateInvoiceDate={handleDateChange}
-                        disabled={isDateDisabled}
+                <div className="w-full md:hidden">
+                    <CustomInput
+                        id="country_to"
+                        label="Country"
+                        type="text"
+                        placeholder="United Kingdom"
+                        value={invoice.country_to}
+                        onChange={handleChange}
                     />
+                </div>
 
-                    <Dropdown
-                        id="payment_terms"
-                        label="Payment Terms"
-                        value={invoice.payment_terms}
-                        onChange={handlePaymentTerms}
-                        options={dropdownOptions}
-                        open={isDropdownOpen}
-                        onToggle={() => setIsDropdownOpen(!isDropdownOpen)}
-                        type="SELECT"
-                        onForceClose={() => setIsDropdownOpen(false)}
-                    />
+                <div className="mt-10 space-y-6 md:mt-12">
+                    <div className="md:flex md:items-center md:justify-center md:gap-6">
+                        <div className="w-full">
+                            <CustomDatePicker
+                                invoiceDate={invoice.invoice_date}
+                                updateInvoiceDate={handleDateChange}
+                                disabled={isDateDisabled}
+                            />
+                        </div>
+
+                        <div className="mt-6 w-full md:mt-0">
+                            <Dropdown
+                                id="payment_terms"
+                                label="Payment Terms"
+                                value={invoice.payment_terms}
+                                onChange={handlePaymentTerms}
+                                options={dropdownOptions}
+                                open={isDropdownOpen}
+                                onToggle={() =>
+                                    setIsDropdownOpen(!isDropdownOpen)
+                                }
+                                type="SELECT"
+                                onForceClose={() => setIsDropdownOpen(false)}
+                            />
+                        </div>
+                    </div>
 
                     <CustomInput
                         id="description"
@@ -272,31 +309,61 @@ export default function InvoiceForm({
                 </div>
             </div>
 
-            <div className="mt-[66px]">
+            <div className="mt-[66px] md:mt-12">
                 <p className="text-gray-graphite mb-6 text-[18px] leading-[32px] font-bold tracking-[-0.38px]">
                     Items List
                 </p>
 
-                <div className="flex flex-col items-center justify-center gap-12">
-                    {invoice.items?.length &&
-                        invoice.items.map((item: Item) => {
-                            return (
-                                <ItemCard
-                                    key={item.id}
-                                    item={item}
-                                    onChange={onItemChange}
-                                    onRemoveItem={onRemoveItem}
-                                />
-                            );
-                        })}
+                {isMd ? (
+                    <div className="space-y-4">
+                        <div className="text-12px text-form-label flex items-center justify-start gap-4 leading-[15px] font-medium tracking-[-0.25px]">
+                            <p className="w-[214px]">Item Name</p>
+                            <p className="w-[46px]">Qty.</p>
+                            <p className="w-25">Price</p>
+                            <p className="w-17">Total</p>
+                        </div>
 
-                    <CustomButton
-                        buttonText="+ Add New Item"
-                        onClick={onAddItem}
-                        variant="button3"
-                        extendedClass="w-full dark:text-gray-steel"
-                    />
-                </div>
+                        {invoice.items?.length &&
+                            invoice.items.map((item: Item) => {
+                                return (
+                                    <ItemCardMedium
+                                        key={item.id}
+                                        item={item}
+                                        onChange={onItemChange}
+                                        onRemoveItem={onRemoveItem}
+                                    />
+                                );
+                            })}
+
+                        <CustomButton
+                            buttonText="+ Add New Item"
+                            onClick={onAddItem}
+                            variant="button3"
+                            extendedClass="w-full"
+                        />
+                    </div>
+                ) : (
+                    <div className="space-y-12">
+                        {invoice.items?.length &&
+                            invoice.items.map((item: Item) => {
+                                return (
+                                    <ItemCardSmall
+                                        key={item.id}
+                                        item={item}
+                                        onChange={onItemChange}
+                                        onRemoveItem={onRemoveItem}
+                                    />
+                                );
+                            })}
+
+                        <CustomButton
+                            buttonText="+ Add New Item"
+                            onClick={onAddItem}
+                            variant="button3"
+                            extendedClass="w-full"
+                        />
+                    </div>
+                )}
             </div>
         </div>
     );

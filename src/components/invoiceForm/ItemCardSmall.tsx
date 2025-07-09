@@ -9,7 +9,7 @@ interface ItemCardProps {
     onRemoveItem: (_itemId: string) => void;
 }
 
-export default function ItemCard({
+export default function ItemCardSmall({
     item,
     onChange,
     onRemoveItem,
@@ -70,7 +70,7 @@ export default function ItemCard({
                         </label>
                         <div
                             role="textbox"
-                            aria-readonly="true"
+                            aria-disabled="true"
                             aria-labelledby={`total-${item.id}`}
                             className="bg-bg text-gray-steel flex h-12 w-full items-center justify-start text-[12px] leading-[15px] font-bold tracking-[-0.25px]"
                         >

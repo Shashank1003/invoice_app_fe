@@ -3,13 +3,14 @@ import BackButton from "@/components/common/buttons/BackButton";
 import CustomButton from "@/components/common/buttons/CustomButton";
 import Menubar from "@/components/common/Menubar";
 import FormLoaderUi from "@/components/invoiceForm/FormLoaderUI";
-import InvoiceForm from "@/components/invoiceForm/InvoiceForm";
+import InvoiceFormSmall from "@/components/invoiceForm/InvoiceFormSmall";
 import { useInvoiceContext } from "@/context/invoiceContext";
 import { useFetchInvoiceById, useUpdateInvoice } from "@/hooks/useInvoices";
 import { useLockScroll } from "@/hooks/useLockScroll";
 import { invoiceDetailedSchema } from "@/schemas/invoiceFormSchema";
 import { InvoiceDetailed } from "@/types/invoiceTypes";
 import { renderId } from "@/utils/generateRenderId";
+import { useMediaQuery } from "@react-hookz/web";
 import { useParams, useRouter } from "next/navigation";
 import { JSX, useCallback, useEffect, useState } from "react";
 import { toast } from "sonner";
@@ -22,6 +23,7 @@ export default function EditInvoice(): JSX.Element {
     const { data, isLoading } = useFetchInvoiceById(invoiceId);
     const { mutate: updateInvoice, isPending } = useUpdateInvoice();
     const [invoice, setInvoice] = useState<InvoiceDetailed | null>(null);
+    const isMd = useMediaQuery("(min-width: 768px)");
 
     useLockScroll(isLoading);
 
@@ -100,7 +102,7 @@ export default function EditInvoice(): JSX.Element {
                                     </p>
                                 </div>
 
-                                <InvoiceForm
+                                <InvoiceFormSmall
                                     invoice={invoice}
                                     isDateDisabled={false}
                                     setInvoice={setInvoice}
