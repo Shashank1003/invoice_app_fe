@@ -83,7 +83,8 @@ export default function EditInvoice(): JSX.Element {
     return (
         <div>
             <Menubar />
-            <BackButton onClick={backHandler} />
+
+            {!isMd && <BackButton onClick={backHandler} />}
 
             {isLoading ? (
                 <FormLoaderUi />

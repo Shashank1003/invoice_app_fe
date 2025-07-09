@@ -35,7 +35,7 @@ export default function EditInvoice(): JSX.Element {
 
     const backHandler = useCallback(() => {
         router.back();
-    }, [router, invoiceId]);
+    }, [router]);
 
     const handleReset = useCallback(() => {
         setInvoice(activeInvoice);
@@ -88,6 +88,8 @@ export default function EditInvoice(): JSX.Element {
 
             <div className="flex-1 overflow-hidden bg-black/50">
                 <div className="bg-bg scrollbar-none h-full w-154 overflow-auto">
+                    {!isMd && <BackButton onClick={backHandler} />}
+
                     {isLoading ? (
                         <FormLoaderUi />
                     ) : (

@@ -78,7 +78,7 @@ export default function CreateNewInvoice(): JSX.Element {
         <div>
             <Menubar />
 
-            <BackButton onClick={handleBack} />
+            {!isMd && <BackButton onClick={handleBack} />}
 
             <div className="mt-6 mb-22 px-6">
                 <div className="text-text text-[24px] leading-[32px] font-bold tracking-[-0.5px]">
