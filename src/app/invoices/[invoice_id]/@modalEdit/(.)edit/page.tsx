@@ -1,6 +1,8 @@
 "use client";
+import CloseIcon from "@/assets/icon-close.svg";
 import BackButton from "@/components/common/buttons/BackButton";
 import CustomButton from "@/components/common/buttons/CustomButton";
+import TransparentButton from "@/components/common/buttons/TransparentButton";
 import Menubar from "@/components/common/Menubar";
 import FormLoaderUi from "@/components/invoiceForm/FormLoaderUI";
 import InvoiceFormSmall from "@/components/invoiceForm/InvoiceFormSmall";
@@ -87,8 +89,16 @@ export default function EditInvoice(): JSX.Element {
             </div>
 
             <div className="flex-1 overflow-hidden bg-black/50">
-                <div className="bg-bg scrollbar-none h-full w-154 overflow-auto">
-                    {!isMd && <BackButton onClick={backHandler} />}
+                <div className="bg-bg scrollbar-none relative h-full w-154 overflow-auto">
+                    {isMd ? (
+                        <TransparentButton
+                            ButtonIcon={CloseIcon}
+                            onClick={backHandler}
+                            className="text-form-label hover:text-text absolute top-4 right-4"
+                        />
+                    ) : (
+                        <BackButton onClick={backHandler} />
+                    )}
 
                     {isLoading ? (
                         <FormLoaderUi />
@@ -140,7 +150,7 @@ export default function EditInvoice(): JSX.Element {
                                             }
                                             disabled={isPending}
                                             variant="indigoButton"
-                                            extendedClass="w-[138px]"
+                                            extendedClass="w-[138px] md:w-[150px]"
                                         />
                                     </div>
                                 </div>

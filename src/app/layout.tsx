@@ -34,7 +34,9 @@ const RootLayout: FC<RootLayoutProps> = ({ children }) => {
             >
                 <ThemeProvider>
                     <TanstackProvider>
-                        <InvoiceProvider>{children}</InvoiceProvider>
+                        <InvoiceProvider>
+                            <div>{children}</div>
+                        </InvoiceProvider>
                     </TanstackProvider>
                     <Toaster
                         position="top-right"

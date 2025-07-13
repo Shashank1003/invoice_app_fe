@@ -1,4 +1,5 @@
 "use client";
+
 import BackButton from "@/components/common/buttons/BackButton";
 import CustomButton from "@/components/common/buttons/CustomButton";
 import Menubar from "@/components/common/Menubar";
@@ -75,71 +76,104 @@ export default function CreateNewInvoice(): JSX.Element {
     );
 
     return (
-        <div>
+        <div className="bg-bg w-full">
             <Menubar />
 
-            {!isMd && <BackButton onClick={handleBack} />}
+            <BackButton onClick={handleBack} extendedCls="md:ml-14 " />
 
-            <div className="mt-6 mb-22 px-6">
-                <div className="text-text text-[24px] leading-[32px] font-bold tracking-[-0.5px]">
-                    <p>New Invoice</p>
+            {invoice && (
+                <div>
+                    <div className="mt-6 mb-22 px-6 md:mt-8 md:mb-4 md:px-14">
+                        <div className="text-text text-[24px] leading-[32px] font-bold tracking-[-0.5px]">
+                            <p>New Invoice</p>
+                        </div>
+
+                        <InvoiceFormSmall
+                            invoice={invoice}
+                            isDateDisabled={false}
+                            setInvoice={setInvoice}
+                        />
+                    </div>
+                    <div className="bg-secondary-bg md:bg-bg shadow-custom flex h-[91px] w-full items-center justify-end gap-2 px-6 md:h-28 md:!justify-between md:px-14">
+                        <CustomButton
+                            buttonText="Discard"
+                            onClick={handleReset}
+                            variant="button3"
+                            extendedClass="!w-21 md:!w-24"
+                        />
+
+                        <CustomButton
+                            buttonText={
+                                isPending ? (
+                                    <div className="flex items-center justify-center gap-2">
+                                        <div className="h-4 w-4 animate-spin rounded-full border-2 border-current border-r-transparent"></div>
+                                        <span>Please wait!</span>
+                                    </div>
+                                ) : (
+                                    "Save as Draft"
+                                )
+                            }
+                            onClick={() => handleSubmit(invoice, true)}
+                            variant="button4"
+                            extendedClass="!w-[117px] md:!w-[134px] md:hidden"
+                            disabled={isPending}
+                        />
+
+                        <CustomButton
+                            buttonText={
+                                isPending ? (
+                                    <div className="flex items-center justify-center gap-2">
+                                        <div className="h-4 w-4 animate-spin rounded-full border-2 border-current border-r-transparent"></div>
+                                        <span>Please wait!</span>
+                                    </div>
+                                ) : (
+                                    "Save & Send"
+                                )
+                            }
+                            disabled={isPending}
+                            onClick={() => handleSubmit(invoice)}
+                            variant="indigoButton"
+                            extendedClass="!w-28 md:!w-32 md:hidden"
+                        />
+
+                        <div className="hidden items-center justify-end gap-2 md:flex">
+                            <CustomButton
+                                buttonText={
+                                    isPending ? (
+                                        <div className="flex items-center justify-center gap-2">
+                                            <div className="h-4 w-4 animate-spin rounded-full border-2 border-current border-r-transparent"></div>
+                                            <span>Please wait!</span>
+                                        </div>
+                                    ) : (
+                                        "Save as Draft"
+                                    )
+                                }
+                                onClick={() => handleSubmit(invoice, true)}
+                                variant="button4"
+                                extendedClass="!w-[134px]"
+                                disabled={isPending}
+                            />
+
+                            <CustomButton
+                                buttonText={
+                                    isPending ? (
+                                        <div className="flex items-center justify-center gap-2">
+                                            <div className="h-4 w-4 animate-spin rounded-full border-2 border-current border-r-transparent"></div>
+                                            <span>Please wait!</span>
+                                        </div>
+                                    ) : (
+                                        "Save & Send"
+                                    )
+                                }
+                                disabled={isPending}
+                                onClick={() => handleSubmit(invoice)}
+                                variant="indigoButton"
+                                extendedClass="!w-32"
+                            />
+                        </div>
+                    </div>
                 </div>
-
-                {invoice && (
-                    <InvoiceFormSmall
-                        invoice={invoice}
-                        isDateDisabled={false}
-                        setInvoice={setInvoice}
-                    />
-                )}
-            </div>
-
-            <div className="bg-secondary-bg shadow-custom flex h-[91px] items-center justify-center gap-2 px-6">
-                <CustomButton
-                    buttonText="Discard"
-                    onClick={handleReset}
-                    variant="button3"
-                    extendedClass="w-[84px]"
-                />
-
-                {invoice && (
-                    <CustomButton
-                        buttonText={
-                            isPending ? (
-                                <div className="flex items-center justify-center gap-2">
-                                    <div className="h-4 w-4 animate-spin rounded-full border-2 border-current border-r-transparent"></div>
-                                    <span>Please wait!</span>
-                                </div>
-                            ) : (
-                                "Save as Draft"
-                            )
-                        }
-                        onClick={() => handleSubmit(invoice, true)}
-                        variant="button4"
-                        extendedClass="w-[117px]"
-                        disabled={isPending}
-                    />
-                )}
-
-                {invoice && (
-                    <CustomButton
-                        buttonText={
-                            isPending ? (
-                                <div className="flex items-center justify-center gap-2">
-                                    <div className="h-4 w-4 animate-spin rounded-full border-2 border-current border-r-transparent"></div>
-                                    <span>Please wait!</span>
-                                </div>
-                            ) : (
-                                "Save & Send"
-                            )
-                        }
-                        disabled={isPending}
-                        onClick={() => handleSubmit(invoice)}
-                        variant="indigoButton"
-                        extendedClass="w-[112px]"
-                    />
-                )}
-            </div>
+            )}
         </div>
     );
 }

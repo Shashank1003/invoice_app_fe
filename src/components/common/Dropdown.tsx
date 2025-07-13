@@ -52,7 +52,7 @@ export default function Dropdown({
         middleware: [
             offset(12), // offset the floating element by 24px
             flip(),
-            shift(state => ({ padding: state.rects.reference.width / 2 + 24 })),
+            // shift(state => ({ padding: state.rects.reference.width / 2 + 24 })),
         ],
     });
 
@@ -66,7 +66,13 @@ export default function Dropdown({
                     className="bg-bg text-text flex cursor-pointer items-center justify-between gap-3 text-[12px] leading-[15px] font-bold tracking-[-0.25px] md:gap-4"
                 >
                     <span>{label}</span>
-                    <DownIcon />
+                    <DownIcon
+                        className={
+                            open
+                                ? "rotate-180 transition-transform duration-300"
+                                : "transition-transform duration-300"
+                        }
+                    />
                 </button>
             ) : (
                 <div className="flex w-full flex-col gap-[10px]">
@@ -82,7 +88,13 @@ export default function Dropdown({
                         className="bg-secondary-bg text-text border-border focus:border-indigo-primary hover:border-indigo-primary flex h-12 w-full cursor-pointer items-center justify-between rounded border px-5 text-[12px] leading-[15px] font-bold tracking-[-0.25px] focus:outline-none"
                     >
                         <span>{getValueFromKey(value)}</span>
-                        <DownIcon />
+                        <DownIcon
+                            className={
+                                open
+                                    ? "rotate-180 transition-transform duration-300"
+                                    : "transition-transform duration-300"
+                            }
+                        />
                     </button>
                 </div>
             )}
@@ -93,7 +105,7 @@ export default function Dropdown({
                     role="listbox"
                     style={floatingStyles}
                     className={clsx(
-                        "shadow-dd-light dark:shadow-dd-dark absolute top-[24px] left-1/2 -translate-x-1/2 rounded-[8px]",
+                        "shadow-dd-light dark:shadow-dd-dark rounded-[8px]",
                         {
                             "bg-calender-bg w-full": type === "SELECT",
 

@@ -1,6 +1,8 @@
 "use client";
+import CloseIcon from "@/assets/icon-close.svg";
 import BackButton from "@/components/common/buttons/BackButton";
 import CustomButton from "@/components/common/buttons/CustomButton";
+import TransparentButton from "@/components/common/buttons/TransparentButton";
 import Menubar from "@/components/common/Menubar";
 import FormLoaderUi from "@/components/invoiceForm/FormLoaderUI";
 import InvoiceFormSmall from "@/components/invoiceForm/InvoiceFormSmall";
@@ -25,7 +27,7 @@ export default function EditInvoice(): JSX.Element {
     const [invoice, setInvoice] = useState<InvoiceDetailed | null>(null);
     const isMd = useMediaQuery("(min-width: 768px)");
 
-    useLockScroll(isLoading);
+    useLockScroll(isPending);
 
     useEffect(() => {
         if (!data || !invoiceId) return;
@@ -34,8 +36,8 @@ export default function EditInvoice(): JSX.Element {
     }, [data, setActiveInvoice, invoiceId]);
 
     const backHandler = useCallback(() => {
-        router.push(`/invoices/${invoiceId}`);
-    }, [router, invoiceId]);
+        router.back();
+    }, [router]);
 
     const handleReset = useCallback(() => {
         setInvoice(activeInvoice);
@@ -81,64 +83,66 @@ export default function EditInvoice(): JSX.Element {
     );
 
     return (
-        <div>
+        <div className="bg-bg w-full">
             <Menubar />
 
-            {!isMd && <BackButton onClick={backHandler} />}
+            <div>
+                <BackButton onClick={backHandler} extendedCls="md:ml-14 " />
 
-            {isLoading ? (
-                <FormLoaderUi />
-            ) : (
-                <div>
-                    {invoice && (
-                        <div>
-                            <div className="mt-6 mb-22 px-6">
-                                <div className="text-text text-[24px] leading-[32px] font-bold tracking-[-0.5px]">
-                                    <p>
-                                        Edit{" "}
-                                        <span className="text-gray-steel">
-                                            #
-                                        </span>
-                                        {renderId(invoiceId)}
-                                    </p>
+                {isLoading ? (
+                    <FormLoaderUi />
+                ) : (
+                    <div>
+                        {invoice && (
+                            <div>
+                                <div className="mt-6 mb-22 px-6 md:mt-8 md:mb-4 md:px-14">
+                                    <div className="text-text text-[24px] leading-[32px] font-bold tracking-[-0.5px]">
+                                        <p>
+                                            Edit{" "}
+                                            <span className="text-gray-steel">
+                                                #
+                                            </span>
+                                            {renderId(invoiceId)}
+                                        </p>
+                                    </div>
+
+                                    <InvoiceFormSmall
+                                        invoice={invoice}
+                                        isDateDisabled={false}
+                                        setInvoice={setInvoice}
+                                    />
                                 </div>
 
-                                <InvoiceFormSmall
-                                    invoice={invoice}
-                                    isDateDisabled={false}
-                                    setInvoice={setInvoice}
-                                />
-                            </div>
+                                <div className="bg-secondary-bg md:bg-bg shadow-custom flex h-[91px] items-center justify-end gap-2 px-6 md:h-28 md:px-14">
+                                    <CustomButton
+                                        buttonText="Cancel"
+                                        onClick={handleReset}
+                                        variant="button3"
+                                        extendedClass="w-[96px]"
+                                    />
 
-                            <div className="bg-secondary-bg shadow-custom flex h-[91px] items-center justify-end gap-2 px-6">
-                                <CustomButton
-                                    buttonText="Cancel"
-                                    onClick={handleReset}
-                                    variant="button3"
-                                    extendedClass="w-[96px]"
-                                />
-
-                                <CustomButton
-                                    buttonText={
-                                        isPending ? (
-                                            <div className="flex items-center justify-center gap-2">
-                                                <div className="h-4 w-4 animate-spin rounded-full border-2 border-current border-r-transparent"></div>
-                                                <span>Please wait!</span>
-                                            </div>
-                                        ) : (
-                                            "Save Invoice"
-                                        )
-                                    }
-                                    onClick={() => handleSubmit(invoice)}
-                                    disabled={isPending}
-                                    variant="indigoButton"
-                                    extendedClass="w-[138px]"
-                                />
+                                    <CustomButton
+                                        buttonText={
+                                            isPending ? (
+                                                <div className="flex items-center justify-center gap-2">
+                                                    <div className="h-4 w-4 animate-spin rounded-full border-2 border-current border-r-transparent"></div>
+                                                    <span>Please wait!</span>
+                                                </div>
+                                            ) : (
+                                                "Save Invoice"
+                                            )
+                                        }
+                                        onClick={() => handleSubmit(invoice)}
+                                        disabled={isPending}
+                                        variant="indigoButton"
+                                        extendedClass="w-[138px] md:w-[150px]"
+                                    />
+                                </div>
                             </div>
-                        </div>
-                    )}
-                </div>
-            )}
+                        )}
+                    </div>
+                )}
+            </div>
         </div>
     );
 }

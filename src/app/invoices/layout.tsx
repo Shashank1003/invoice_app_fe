@@ -1,16 +1,16 @@
 import { JSX } from "react";
 
-export default function LayoutEdit({
-    modalEdit,
+export default function LayoutCreate({
+    modalCreate,
     children,
 }: {
-    modalEdit: React.ReactNode;
+    modalCreate: React.ReactNode;
     children: React.ReactNode;
 }): JSX.Element {
     return (
         <>
             <div>{children}</div>
-            <div>{modalEdit}</div>
+            <div>{modalCreate}</div>
         </>
     );
 }
