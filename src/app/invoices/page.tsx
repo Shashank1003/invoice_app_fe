@@ -1,10 +1,11 @@
 "use client";
 
 import NoInvoiceImg from "@/assets/illustration-empty.svg";
-import InvoiceCardMedium from "@/components/allInvoices/InvoiceCardMedium";
-import InvoiceCardSmall from "@/components/allInvoices/InvoiceCardSmall";
-import InvoiceHeader from "@/components/allInvoices/InvoiceHeader";
-import Menubar from "@/components/common/Menubar";
+import MenubarLarge from "@/components/common/MenubarLarge";
+import MenubarSmall from "@/components/common/MenubarSmall";
+import InvoiceCardMedium from "@/components/invoices/InvoiceCardMedium";
+import InvoiceCardSmall from "@/components/invoices/InvoiceCardSmall";
+import InvoiceHeader from "@/components/invoices/InvoiceHeader";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useInvoiceContext } from "@/context/invoiceContext";
 import { useFetchInvoices } from "@/hooks/useInvoices";
@@ -25,6 +26,7 @@ export default function Invoices(): JSX.Element {
     const [totalInvoices, setTotalInvoices] = useState<number>(0);
     const isFirstRender = useRef(true);
     const isMd = useMediaQuery("(min-width: 768px)");
+    const isLg = useMediaQuery("(min-width: 1024px)");
 
     useLockScroll(isLoading ? true : false);
 
@@ -108,68 +110,72 @@ export default function Invoices(): JSX.Element {
     );
 
     return (
-        <div>
-            <Menubar />
-            <InvoiceHeader
-                onOptionClick={handleStatus}
-                activeStatus={activeStatus}
-                totalInvoices={totalInvoices}
-            />
+        <div className="w-full lg:flex lg:flex-col lg:items-center lg:justify-center">
+            <MenubarSmall extendedCls="lg:hidden" />
+            <MenubarLarge extendedCls="hidden lg:flex" />
 
-            {isLoading ? (
-                <div className="mx-6 mt-8 flex flex-col items-center justify-center gap-4">
-                    {Array.from({
-                        length: 10,
-                    }).map((_, i) => {
-                        return (
-                            <Skeleton
-                                key={i}
-                                className="bg-skeleton h-[134px] w-full rounded-[8px]"
-                            />
-                        );
-                    })}
-                </div>
-            ) : !invoiceData || invoiceData?.length === 0 ? (
-                <div
-                    style={{ height: `calc(100vh - 180px)` }}
-                    className="flex flex-col items-center justify-center gap-10"
-                >
-                    <NoInvoiceImg />
+            <div className="lg:w-full lg:max-w-220 lg:pl-26">
+                <InvoiceHeader
+                    onOptionClick={handleStatus}
+                    activeStatus={activeStatus}
+                    totalInvoices={totalInvoices}
+                />
 
-                    <div>
-                        <p className="text-text text-[20px] leading-normal font-bold tracking-[-0.63px]">
-                            There is nothing here
-                        </p>
-
-                        <p className="text-gray-steel dark:text-gray-soft tracking-[-0.25px mt-6 flex flex-col items-center justify-center text-[12px] leading-[15px] font-medium">
-                            <span>Create an invoice by clicking the</span>
-                            <span>
-                                <span className="font-bold">New</span> button
-                                and get started
-                            </span>
-                        </p>
+                {isLoading ? (
+                    <div className="mx-6 mt-8 flex flex-col items-center justify-center gap-4">
+                        {Array.from({
+                            length: 10,
+                        }).map((_, i) => {
+                            return (
+                                <Skeleton
+                                    key={i}
+                                    className="bg-skeleton h-[134px] w-full rounded-[8px]"
+                                />
+                            );
+                        })}
                     </div>
-                </div>
-            ) : (
-                <div className="mx-6 mt-8 mb-6 flex flex-col items-center justify-center gap-4 md:mx-12 md:mt-14 md:mb-12">
-                    {invoiceData &&
-                        invoiceData.map((invoice: InvoiceBrief) =>
-                            isMd ? (
-                                <InvoiceCardMedium
-                                    key={invoice.id}
-                                    invoice={invoice}
-                                    handleClick={handleClick}
-                                />
-                            ) : (
-                                <InvoiceCardSmall
-                                    key={invoice.id}
-                                    invoice={invoice}
-                                    handleClick={handleClick}
-                                />
-                            )
-                        )}
-                </div>
-            )}
+                ) : !invoiceData || invoiceData?.length === 0 ? (
+                    <div
+                        style={{ height: `calc(100vh - 180px)` }}
+                        className="flex flex-col items-center justify-center gap-10"
+                    >
+                        <NoInvoiceImg />
+
+                        <div>
+                            <p className="text-text text-[20px] leading-normal font-bold tracking-[-0.63px]">
+                                There is nothing here
+                            </p>
+
+                            <p className="text-gray-steel dark:text-gray-soft tracking-[-0.25px mt-6 flex flex-col items-center justify-center text-[12px] leading-[15px] font-medium">
+                                <span>Create an invoice by clicking the</span>
+                                <span>
+                                    <span className="font-bold">New</span>{" "}
+                                    button and get started
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                ) : (
+                    <div className="mx-6 mt-8 mb-6 flex flex-col items-center justify-center gap-4 md:mx-12 md:mt-14 md:mb-12 lg:mt-16 lg:mb-14">
+                        {invoiceData &&
+                            invoiceData.map((invoice: InvoiceBrief) =>
+                                isMd ? (
+                                    <InvoiceCardMedium
+                                        key={invoice.id}
+                                        invoice={invoice}
+                                        handleClick={handleClick}
+                                    />
+                                ) : (
+                                    <InvoiceCardSmall
+                                        key={invoice.id}
+                                        invoice={invoice}
+                                        handleClick={handleClick}
+                                    />
+                                )
+                            )}
+                    </div>
+                )}
+            </div>
         </div>
     );
 }

@@ -3,7 +3,7 @@ import CloseIcon from "@/assets/icon-close.svg";
 import BackButton from "@/components/common/buttons/BackButton";
 import CustomButton from "@/components/common/buttons/CustomButton";
 import TransparentButton from "@/components/common/buttons/TransparentButton";
-import Menubar from "@/components/common/Menubar";
+import Menubar from "@/components/common/MenubarSmall";
 import FormLoaderUi from "@/components/invoiceForm/FormLoaderUI";
 import InvoiceFormSmall from "@/components/invoiceForm/InvoiceFormSmall";
 import { useInvoiceContext } from "@/context/invoiceContext";

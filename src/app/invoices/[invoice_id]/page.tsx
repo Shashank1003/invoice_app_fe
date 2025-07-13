@@ -2,7 +2,7 @@
 
 import BackButton from "@/components/common/buttons/BackButton";
 import CustomButton from "@/components/common/buttons/CustomButton";
-import Menubar from "@/components/common/Menubar";
+import Menubar from "@/components/common/MenubarSmall";
 import DeleteConfirmation from "@/components/invoice/DeleteConfirmation";
 import InvoiceDetails from "@/components/invoice/InvoiceDetails";
 import { Skeleton } from "@/components/ui/skeleton";

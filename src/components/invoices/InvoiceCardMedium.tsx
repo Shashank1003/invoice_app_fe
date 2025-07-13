@@ -15,8 +15,9 @@ export default function InvoiceCardMedium({
 }): JSX.Element {
     return (
         <div
+            onClick={() => handleClick(invoice.id)}
             id={`invoiceCard-${invoice.id}`}
-            className="shadow-custom text-text bg-secondary-bg grid h-18 w-full grid-cols-[85px_120px_1fr_1fr_143px] items-center justify-center rounded-[8px] pr-7 pl-6"
+            className="shadow-custom text-text bg-secondary-bg grid h-18 w-full cursor-pointer grid-cols-[85px_120px_1fr_1fr_143px] items-center justify-center rounded-[8px] pr-7 pl-6"
         >
             <h2 className="text-gray-steel dark:text-gray-soft text-[12px] leading-[15px] font-bold tracking-[-0.25px]">
                 <span className="text-gray-muted">#</span>
@@ -38,11 +39,7 @@ export default function InvoiceCardMedium({
             <div className="flex items-center justify-between">
                 <StatusBox invoiceStatus={invoice.status} />
 
-                <CustomButton
-                    buttonText={<RightArrowIcon />}
-                    onClick={() => handleClick(invoice.id)}
-                    extendedClass=" p-1"
-                />
+                <RightArrowIcon />
             </div>
         </div>
     );

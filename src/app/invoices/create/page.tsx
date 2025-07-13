@@ -2,7 +2,7 @@
 
 import BackButton from "@/components/common/buttons/BackButton";
 import CustomButton from "@/components/common/buttons/CustomButton";
-import Menubar from "@/components/common/Menubar";
+import Menubar from "@/components/common/MenubarSmall";
 import InvoiceFormSmall from "@/components/invoiceForm/InvoiceFormSmall";
 import { useInvoiceContext } from "@/context/invoiceContext";
 import { useCreateInvoice } from "@/hooks/useInvoices";
