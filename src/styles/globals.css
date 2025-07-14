@@ -12,17 +12,18 @@
     --color-red-hover: #ff9797;
 
     /* Gray tones */
-    --color-gray-soft: #dfe3fa; 
-    --color-gray-dark: #494e6e; 
-    --color-gray-very-dark: #0c0e16; 
+    --color-gray-soft: #dfe3fa;
+    --color-gray-dark: #494e6e;
+    --color-gray-very-dark: #0c0e16;
     --color-gray-deep: #252945;
     --color-gray-muted: #7e88c3;
-    --color-gray-cool: #858bb2; 
+    --color-gray-cool: #858bb2;
     --color-gray-steel: #888eb0;
     --color-gray-ink: #1e2139;
     --color-cloud-white: #f9fafe;
     --color-slate-blue: #373b53;
     --color-gray-graphite: #777f98;
+    --color-gray-neutral: #979797;
 
     --color-success: #33d69f;
     --color-error: #ff5e5e;

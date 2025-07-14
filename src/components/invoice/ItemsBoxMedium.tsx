@@ -9,7 +9,7 @@ export default function ItemsBoxMedium({
     total: number;
 }): JSX.Element {
     return (
-        <div className="mt-[40px]">
+        <div className="mt-10 lg:mt-[45px]">
             <div className="bg-cloud-white dark:bg-gray-deep w-full rounded-t-[8px] px-8 pt-1 pb-3">
                 <table className="w-full table-fixed border-separate border-spacing-y-7">
                     <thead>

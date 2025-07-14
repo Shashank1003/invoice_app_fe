@@ -17,7 +17,7 @@ export default function InvoiceCardMedium({
         <div
             onClick={() => handleClick(invoice.id)}
             id={`invoiceCard-${invoice.id}`}
-            className="shadow-custom text-text bg-secondary-bg grid h-18 w-full cursor-pointer grid-cols-[85px_120px_1fr_1fr_143px] items-center justify-center rounded-[8px] pr-8 pl-6 lg:px-8"
+            className="shadow-custom text-text bg-secondary-bg hover:border-indigo-primary grid h-18 w-full cursor-pointer grid-cols-[85px_120px_1fr_1fr_143px] items-center justify-center rounded-[8px] pr-8 pl-6 hover:border lg:px-8"
         >
             <h2 className="text-gray-steel dark:text-gray-soft text-[12px] leading-[15px] font-bold tracking-[-0.25px]">
                 <span className="text-gray-muted">#</span>

@@ -13,7 +13,7 @@ export default function BackButton({
         <button
             onClick={onClick}
             className={clsx(
-                "mt-8 ml-6 flex cursor-pointer items-center justify-center gap-4 p-1 pl-0 md:mt-12 md:ml-10 md:gap-6",
+                "mt-8 ml-6 flex cursor-pointer items-center justify-center gap-4 p-1 pl-0 md:mt-12 md:ml-10 md:gap-6 lg:mt-16",
                 extendedCls
             )}
         >

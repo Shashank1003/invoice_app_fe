@@ -38,6 +38,7 @@ module.exports = {
             "gray-steel": "var(--color-gray-steel)",
             "gray-ink": "var(--color-gray-ink)",
             "gray-graphite": "var(--color-gray-graphite)",
+            "gray-neutral" : "var(--color-gray-neutral)",
 
             "indigo-primary": "var(--color-indigo-primary)",
             "indigo-hover": "var(--color-indigo-hover)",

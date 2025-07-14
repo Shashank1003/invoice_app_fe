@@ -2,7 +2,8 @@
 
 import BackButton from "@/components/common/buttons/BackButton";
 import CustomButton from "@/components/common/buttons/CustomButton";
-import Menubar from "@/components/common/MenubarSmall";
+import MenubarLarge from "@/components/common/MenubarLarge";
+import MenubarSmall from "@/components/common/MenubarSmall";
 import DeleteConfirmation from "@/components/invoice/DeleteConfirmation";
 import InvoiceDetails from "@/components/invoice/InvoiceDetails";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -81,69 +82,72 @@ export default function InvoicePage(): JSX.Element {
     }, [invoiceData, setActiveInvoice, setInvoiceData, updateInvoice]);
 
     return (
-        <div>
-            <Menubar />
+        <div className="w-full lg:flex lg:flex-col lg:items-center lg:justify-center">
+            <MenubarSmall extendedCls="lg:hidden" />
+            <MenubarLarge extendedCls="hidden lg:flex" />
 
-            <BackButton onClick={handleBack} />
+            <div className="max-w-215 lg:w-full lg:pl-26">
+                <BackButton onClick={handleBack} />
 
-            {isLoading ? (
-                <div className="mx-6 mt-8">
-                    <Skeleton className="bg-skeleton h-[90px] w-full rounded-[8px]" />
-                    <Skeleton className="bg-skeleton mt-4 h-[700px] w-full rounded-[8px]" />
-                </div>
-            ) : (
-                <div>
-                    {invoiceData && (
-                        <InvoiceDetails
-                            invoiceData={invoiceData}
-                            handleEdit={handleEdit}
-                            showDeletePopup={() => setIsDeletePopup(true)}
-                            isPending={isPending}
-                            handlePaid={handlePaid}
-                        />
-                    )}
+                {isLoading ? (
+                    <div className="mx-6 mt-8">
+                        <Skeleton className="bg-skeleton h-[90px] w-full rounded-[8px]" />
+                        <Skeleton className="bg-skeleton mt-4 h-[700px] w-full rounded-[8px]" />
+                    </div>
+                ) : (
+                    <div>
+                        {invoiceData && (
+                            <InvoiceDetails
+                                invoiceData={invoiceData}
+                                handleEdit={handleEdit}
+                                showDeletePopup={() => setIsDeletePopup(true)}
+                                isPending={isPending}
+                                handlePaid={handlePaid}
+                            />
+                        )}
 
-                    {!isMd && (
-                        <div
-                            className={clsx(
-                                "bg-secondary-bg shadow-custom flex h-[91px] items-center justify-between px-6"
-                            )}
-                        >
-                            <CustomButton
-                                variant="button3"
-                                buttonText="Edit"
-                                onClick={handleEdit}
-                            />
-                            <CustomButton
-                                variant="redButton"
-                                buttonText="Delete"
-                                onClick={() => setIsDeletePopup(true)}
-                            />
-                            <CustomButton
-                                variant="indigoButton"
-                                buttonText={
-                                    isPending ? (
-                                        <div className="flex items-center justify-center gap-2">
-                                            <div className="h-4 w-4 animate-spin rounded-full border-2 border-current border-r-transparent"></div>
-                                            <span>Please wait!</span>
-                                        </div>
-                                    ) : (
-                                        "Mark as Paid"
-                                    )
-                                }
-                                onClick={handlePaid}
-                                disabled={
-                                    isPending
-                                        ? true
-                                        : invoiceData?.status !== "PENDING"
-                                          ? true
-                                          : false
-                                }
-                            />
-                        </div>
-                    )}
-                </div>
-            )}
+                        {!isMd && (
+                            <div
+                                className={clsx(
+                                    "bg-secondary-bg shadow-custom flex h-[91px] items-center justify-between px-6"
+                                )}
+                            >
+                                <CustomButton
+                                    variant="button3"
+                                    buttonText="Edit"
+                                    onClick={handleEdit}
+                                />
+                                <CustomButton
+                                    variant="redButton"
+                                    buttonText="Delete"
+                                    onClick={() => setIsDeletePopup(true)}
+                                />
+                                <CustomButton
+                                    variant="indigoButton"
+                                    buttonText={
+                                        isPending ? (
+                                            <div className="flex items-center justify-center gap-2">
+                                                <div className="h-4 w-4 animate-spin rounded-full border-2 border-current border-r-transparent"></div>
+                                                <span>Please wait!</span>
+                                            </div>
+                                        ) : (
+                                            "Mark as Paid"
+                                        )
+                                    }
+                                    onClick={handlePaid}
+                                    disabled={
+                                        isPending
+                                            ? true
+                                            : invoiceData?.status !== "PENDING"
+                                              ? true
+                                              : false
+                                    }
+                                />
+                            </div>
+                        )}
+                    </div>
+                )}
+            </div>
 
             {isDeletePopup && (
                 <DeleteConfirmation

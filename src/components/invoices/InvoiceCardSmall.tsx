@@ -15,7 +15,7 @@ export default function InvoiceCardSmall({
         <div
             id={`invoiceCard-${invoice.id}`}
             onClick={() => handleClick(invoice.id)}
-            className="shadow-custom text-text bg-secondary-bg flex h-[134px] w-full cursor-pointer flex-col items-center justify-between rounded-[8px] px-6"
+            className="shadow-custom text-text bg-secondary-bg hover:border-indigo-primary flex h-[134px] w-full cursor-pointer flex-col items-center justify-between rounded-[8px] px-6 hover:border"
         >
             <div className="mt-6 flex w-full items-center justify-between">
                 <h2 className="text-[12px] leading-[15px] font-bold">

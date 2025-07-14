@@ -26,7 +26,6 @@ export default function Invoices(): JSX.Element {
     const [totalInvoices, setTotalInvoices] = useState<number>(0);
     const isFirstRender = useRef(true);
     const isMd = useMediaQuery("(min-width: 768px)");
-    const isLg = useMediaQuery("(min-width: 1024px)");
 
     useLockScroll(isLoading ? true : false);
 

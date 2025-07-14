@@ -88,7 +88,7 @@ export default function InvoiceDetails({
                 )}
             </div>
 
-            <div className="bg-secondary-bg shadow-custom mt-4 rounded-[8px] p-6 text-[12px] leading-[15px] tracking-[-0.25px] md:mt-6 md:p-8">
+            <div className="bg-secondary-bg shadow-custom mt-4 rounded-[8px] p-6 text-[12px] leading-[15px] tracking-[-0.25px] md:mt-6 md:p-8 lg:p-12">
                 {!isMd ? (
                     <>
                         {invoiceData.id && (
@@ -135,7 +135,7 @@ export default function InvoiceDetails({
                     </div>
                 )}
 
-                <div className="mt-8 grid grid-cols-[100px_1fr] gap-[42px] md:mt-5 md:grid-cols-[100px_auto_1fr] md:gap-[98px]">
+                <div className="mt-8 grid grid-cols-[100px_1fr] gap-[42px] md:mt-5 md:grid-cols-[100px_auto_1fr] md:gap-[98px] lg:gap-20">
                     <div className="flex flex-col justify-between">
                         <div>
                             <p className="text-text-secondary font-medium">
