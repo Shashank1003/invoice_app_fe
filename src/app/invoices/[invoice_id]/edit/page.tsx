@@ -87,7 +87,7 @@ export default function EditInvoice(): JSX.Element {
             <MenubarSmall extendedCls="lg:hidden" />
             <MenubarLarge extendedCls="hidden lg:flex" />
 
-            <div className="ml-26 w-full max-w-169">
+            <div className="w-full max-w-169 lg:ml-26">
                 <BackButton
                     onClick={backHandler}
                     extendedCls="md:ml-14 lg:ml-0"
