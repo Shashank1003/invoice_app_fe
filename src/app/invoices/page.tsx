@@ -114,7 +114,7 @@ export default function Invoices(): JSX.Element {
             <MenubarSmall extendedCls="lg:hidden" />
             <MenubarLarge extendedCls="hidden lg:flex" />
 
-            <div className="lg:w-full lg:max-w-220 lg:pl-26">
+            <div className="max-w-215 lg:w-full lg:pl-26">
                 <InvoiceHeader
                     onOptionClick={handleStatus}
                     activeStatus={activeStatus}
@@ -156,7 +156,7 @@ export default function Invoices(): JSX.Element {
                         </div>
                     </div>
                 ) : (
-                    <div className="mx-6 mt-8 mb-6 flex flex-col items-center justify-center gap-4 md:mx-12 md:mt-14 md:mb-12 lg:mt-16 lg:mb-14">
+                    <div className="mx-6 mt-8 mb-6 flex flex-col items-center justify-center gap-4 md:mx-12 md:mt-14 md:mb-12 lg:mx-0 lg:mt-16 lg:mb-14">
                         {invoiceData &&
                             invoiceData.map((invoice: InvoiceBrief) =>
                                 isMd ? (
