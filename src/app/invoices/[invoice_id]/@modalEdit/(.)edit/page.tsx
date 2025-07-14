@@ -3,7 +3,8 @@ import CloseIcon from "@/assets/icon-close.svg";
 import BackButton from "@/components/common/buttons/BackButton";
 import CustomButton from "@/components/common/buttons/CustomButton";
 import TransparentButton from "@/components/common/buttons/TransparentButton";
-import Menubar from "@/components/common/MenubarSmall";
+import MenubarLarge from "@/components/common/MenubarLarge";
+import MenubarSmall from "@/components/common/MenubarSmall";
 import FormLoaderUi from "@/components/invoiceForm/FormLoaderUI";
 import InvoiceFormSmall from "@/components/invoiceForm/InvoiceFormSmall";
 import { useInvoiceContext } from "@/context/invoiceContext";
@@ -85,16 +86,17 @@ export default function EditInvoice(): JSX.Element {
     return (
         <div className="fixed inset-0 flex flex-col">
             <div className="bg-bg shrink-0">
-                <Menubar />
+                <MenubarSmall extendedCls="lg:hidden" />
+                <MenubarLarge extendedCls="hidden lg:flex" />
             </div>
 
-            <div className="flex-1 overflow-hidden bg-black/50">
+            <div className="flex-1 overflow-hidden bg-black/50 lg:ml-26">
                 <div className="bg-bg scrollbar-none relative h-full w-154 overflow-auto">
                     {isMd ? (
                         <TransparentButton
                             ButtonIcon={CloseIcon}
                             onClick={backHandler}
-                            className="text-form-label hover:text-text absolute top-4 right-4"
+                            className="text-form-label hover:text-text absolute top-4 right-4 lg:top-6 lg:right-6"
                         />
                     ) : (
                         <BackButton onClick={backHandler} />
@@ -142,7 +144,7 @@ export default function EditInvoice(): JSX.Element {
                                                         </span>
                                                     </div>
                                                 ) : (
-                                                    "Save Invoice"
+                                                    "Save Changes"
                                                 )
                                             }
                                             onClick={() =>

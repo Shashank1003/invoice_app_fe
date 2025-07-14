@@ -1,9 +1,9 @@
 "use client";
-import CloseIcon from "@/assets/icon-close.svg";
+
 import BackButton from "@/components/common/buttons/BackButton";
 import CustomButton from "@/components/common/buttons/CustomButton";
-import TransparentButton from "@/components/common/buttons/TransparentButton";
-import Menubar from "@/components/common/MenubarSmall";
+import MenubarLarge from "@/components/common/MenubarLarge";
+import MenubarSmall from "@/components/common/MenubarSmall";
 import FormLoaderUi from "@/components/invoiceForm/FormLoaderUI";
 import InvoiceFormSmall from "@/components/invoiceForm/InvoiceFormSmall";
 import { useInvoiceContext } from "@/context/invoiceContext";
@@ -83,11 +83,15 @@ export default function EditInvoice(): JSX.Element {
     );
 
     return (
-        <div className="bg-bg w-full">
-            <Menubar />
+        <div className="bg-bg w-full lg:flex lg:flex-col lg:items-center lg:justify-center">
+            <MenubarSmall extendedCls="lg:hidden" />
+            <MenubarLarge extendedCls="hidden lg:flex" />
 
-            <div>
-                <BackButton onClick={backHandler} extendedCls="md:ml-14 " />
+            <div className="ml-26 w-full max-w-169">
+                <BackButton
+                    onClick={backHandler}
+                    extendedCls="md:ml-14 lg:ml-0"
+                />
 
                 {isLoading ? (
                     <FormLoaderUi />
@@ -95,7 +99,7 @@ export default function EditInvoice(): JSX.Element {
                     <div>
                         {invoice && (
                             <div>
-                                <div className="mt-6 mb-22 px-6 md:mt-8 md:mb-4 md:px-14">
+                                <div className="mt-6 mb-22 px-6 md:mt-8 md:mb-4 md:px-14 lg:px-0">
                                     <div className="text-text text-[24px] leading-[32px] font-bold tracking-[-0.5px]">
                                         <p>
                                             Edit{" "}
@@ -113,7 +117,7 @@ export default function EditInvoice(): JSX.Element {
                                     />
                                 </div>
 
-                                <div className="bg-secondary-bg md:bg-bg shadow-custom flex h-[91px] items-center justify-end gap-2 px-6 md:h-28 md:px-14">
+                                <div className="bg-secondary-bg md:bg-bg shadow-custom flex h-[91px] items-center justify-end gap-2 px-6 md:h-28 md:px-14 lg:px-0">
                                     <CustomButton
                                         buttonText="Cancel"
                                         onClick={handleReset}
