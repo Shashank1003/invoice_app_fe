@@ -82,11 +82,11 @@ export default function InvoicePage(): JSX.Element {
     }, [invoiceData, setActiveInvoice, setInvoiceData, updateInvoice]);
 
     return (
-        <div className="w-full lg:flex lg:flex-col lg:items-center lg:justify-center">
+        <div className="relative lg:flex w-full lg:flex-col lg:items-center lg:justify-center">
             <MenubarSmall extendedCls="lg:hidden" />
             <MenubarLarge extendedCls="hidden lg:flex" />
 
-            <div className="max-w-215 lg:w-full lg:pl-26">
+            <div className="lg:w-full lg:max-w-215 lg:pl-26">
                 <BackButton onClick={handleBack} />
 
                 {isLoading ? (

@@ -28,3 +28,13 @@ export interface InvoiceBrief {
     total: number;
     client_name: string;
 }
+
+export interface InvoiceFormProps {
+    handleBack: () => void;
+    handleReset: () => void;
+    handleSubmit: (payload: InvoiceDetailed, isDraft?: boolean) => void;
+    invoice: InvoiceDetailed | null;
+    setInvoice: React.Dispatch<React.SetStateAction<InvoiceDetailed | null>>;
+    isPending: boolean;
+    isLoading?: boolean;
+}

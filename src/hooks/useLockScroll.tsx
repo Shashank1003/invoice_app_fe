@@ -9,9 +9,11 @@ export const useLockScroll = (shouldLock: boolean): void => {
                 document.body
             ).overflow;
             document.body.style.overflow = "hidden";
+            console.log("Original Style", originalStyle);
 
             return () => {
-                document.body.style.overflow = originalStyle;
+                document.body.style.overflow =
+                    originalStyle === "hidden" ? "auto" : originalStyle;
             };
         }
     }, [shouldLock]);

@@ -113,7 +113,7 @@ export default function Invoices(): JSX.Element {
             <MenubarSmall extendedCls="lg:hidden" />
             <MenubarLarge extendedCls="hidden lg:flex" />
 
-            <div className="max-w-215 lg:w-full lg:pl-26">
+            <div className="lg:w-full lg:max-w-215 lg:pl-26">
                 <InvoiceHeader
                     onOptionClick={handleStatus}
                     activeStatus={activeStatus}
