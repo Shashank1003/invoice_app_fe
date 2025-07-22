@@ -10,7 +10,7 @@ export default function CreateInvoiceButton({
     return (
         <button
             onClick={onClick}
-            className="bg-indigo-primary hover:bg-indigo-hover flex cursor-pointer items-center justify-between gap-2 rounded-[24px] py-[6px] pr-4 pl-[6px] md:gap-4 md:py-2 md:pl-2"
+            className="bg-indigo-primary theme-transition hover:bg-indigo-hover flex cursor-pointer items-center justify-between gap-2 rounded-[24px] py-[6px] pr-4 pl-[6px] md:gap-4 md:py-2 md:pl-2"
         >
             <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white">
                 <PlusIcon />

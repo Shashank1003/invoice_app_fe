@@ -26,7 +26,7 @@
     --color-gray-neutral: #979797;
 
     --color-success: #33d69f;
-    --color-error: #ff5e5e;
+    --color-error: #ec5757;
     --color-warning: #f2c94c;
     --color-info: #0ea5e9;
 
@@ -84,7 +84,7 @@
 
 html,
 body {
-    @apply m-0 p-0 antialiased;
+    @apply m-0 p-0 antialiased transition-colors duration-300;
     scroll-behavior: smooth;
     min-block-size: 100%;
     font-family: var(--font-sans);
@@ -102,4 +102,8 @@ body {
     .no-spinner {
         -moz-appearance: textfield;
     }
+}
+
+.theme-transition {
+    @apply transition-colors duration-300 ease-in-out;
 }

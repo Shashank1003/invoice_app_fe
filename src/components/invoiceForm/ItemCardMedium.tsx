@@ -2,7 +2,7 @@ import DeleteIcon from "@/assets/icon-delete.svg";
 import { Item } from "@/types/itemTypes";
 import { JSX } from "react";
 import CustomInput from "../common/CustomInput";
-
+import TransparentButton from "../common/buttons/TransparentButton";
 interface ItemCardProps {
     item: Item;
     onChange: (_event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -15,7 +15,7 @@ export default function ItemCardMedium({
     onRemoveItem,
 }: ItemCardProps): JSX.Element {
     return (
-        <div className="flex w-full items-start justify-between gap-4">
+        <div className="theme-transition flex w-full items-start justify-between gap-4">
             <div className="w-[214px]">
                 <CustomInput
                     id={`name-${item.id}`}
@@ -58,16 +58,18 @@ export default function ItemCardMedium({
                     role="textbox"
                     aria-disabled="true"
                     aria-label="Total"
-                    className="bg-bg text-gray-steel flex h-12 w-full items-center justify-start overflow-hidden text-[12px] leading-[15px] font-bold tracking-[-0.25px]"
+                    className="bg-bg theme-transition text-gray-steel flex h-12 w-full items-center justify-start overflow-hidden text-[12px] leading-[15px] font-bold tracking-[-0.25px]"
                 >
                     {item.total}
                 </div>
             </div>
 
             <div className="flex items-center justify-center self-end pb-4">
-                <button onClick={() => onRemoveItem(item.id!)}>
-                    <DeleteIcon className="text-gray-steel hover:text-indigo-primary h-4 w-[13px] cursor-pointer" />
-                </button>
+                <TransparentButton
+                    ButtonIcon={DeleteIcon}
+                    onClick={() => onRemoveItem(item.id!)}
+                    className="!text-gray-steel hover:!text-color-error !h-4 !w-[13px]"
+                />
             </div>
         </div>
     );

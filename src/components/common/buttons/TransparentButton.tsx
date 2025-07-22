@@ -17,7 +17,7 @@ export default function TransparentButton({
     return (
         <button
             className={clsx(
-                "text-icon hover:text-gray-soft cursor-pointer",
+                "text-icon hover:text-gray-soft theme-transition cursor-pointer",
                 className
             )}
             style={customStyle}

@@ -37,13 +37,13 @@ export default function StatusBox({
                 background: getStatusColors(invoiceStatus)?.background,
                 color: getStatusColors(invoiceStatus)?.color,
             }}
-            className="flex h-10 w-26 items-center justify-center gap-2 rounded-[6px] text-[12px] leading-[15px] font-bold tracking-[-0.25px]"
+            className="theme-transition flex h-10 w-26 items-center justify-center gap-2 rounded-[6px] text-[12px] leading-[15px] font-bold tracking-[-0.25px]"
         >
             <span
                 style={{
                     background: getStatusColors(invoiceStatus)?.color,
                 }}
-                className="h-[8px] w-[8px] rounded-full"
+                className="theme-transition h-[8px] w-[8px] rounded-full"
             />
             <span>{toCapitalized(invoiceStatus)}</span>
         </div>

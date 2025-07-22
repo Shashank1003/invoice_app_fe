@@ -63,7 +63,7 @@ export default function Dropdown({
                     onClick={onToggle}
                     id={id}
                     ref={refs.setReference}
-                    className="bg-bg text-text flex cursor-pointer items-center justify-between gap-3 text-[12px] leading-[15px] font-bold tracking-[-0.25px] md:gap-4"
+                    className="bg-bg text-text hover:text-indigo-primary theme-transition flex cursor-pointer items-center justify-between gap-3 text-[12px] leading-[15px] font-bold tracking-[-0.25px] md:gap-4"
                 >
                     <span>{label}</span>
                     <DownIcon
@@ -75,17 +75,17 @@ export default function Dropdown({
                     />
                 </button>
             ) : (
-                <div className="flex w-full flex-col gap-[10px]">
+                <div className="theme-transition flex w-full flex-col gap-[10px]">
                     <label
                         htmlFor={id}
-                        className="text-form-label text-[12px] leading-[15px] font-medium tracking-[-0.25px]"
+                        className="text-form-label theme-transition text-[12px] leading-[15px] font-medium tracking-[-0.25px]"
                     >
                         {label}
                     </label>
                     <button
                         ref={refs.setReference}
                         onClick={onToggle}
-                        className="bg-secondary-bg text-text border-border focus:border-indigo-primary hover:border-indigo-primary flex h-12 w-full cursor-pointer items-center justify-between rounded border px-5 text-[12px] leading-[15px] font-bold tracking-[-0.25px] focus:outline-none"
+                        className="bg-secondary-bg text-text theme-transition border-border focus:border-indigo-primary hover:border-indigo-primary flex h-12 w-full cursor-pointer items-center justify-between rounded border px-5 text-[12px] leading-[15px] font-bold tracking-[-0.25px] focus:outline-none"
                     >
                         <span>{getValueFromKey(value)}</span>
                         <DownIcon
@@ -105,11 +105,11 @@ export default function Dropdown({
                     role="listbox"
                     style={floatingStyles}
                     className={clsx(
-                        "shadow-dd-light dark:shadow-dd-dark rounded-[8px]",
+                        "shadow-dd-light dark:shadow-dd-dark bg-calender-bg theme-transition rounded-[8px]",
                         {
-                            "bg-calender-bg w-full": type === "SELECT",
+                            "w-full": type === "SELECT",
 
-                            "bg-secondary-bg flex w-[120px] flex-col items-start justify-center gap-[12px] p-[20px]":
+                            "flex w-[120px] flex-col items-start justify-center gap-[12px] p-[20px]":
                                 type === "FILTER",
                         }
                     )}
@@ -121,6 +121,7 @@ export default function Dropdown({
                                 role="option"
                                 aria-selected={value === option}
                                 onClick={() => onChange(option as string)}
+                                className="group"
                             >
                                 <button
                                     type="button"
@@ -128,7 +129,7 @@ export default function Dropdown({
                                 >
                                     <div
                                         className={
-                                            "border-indigo-primary flex h-[16px] w-[16px] items-center justify-center rounded-[2px] border" +
+                                            "group-hover:border-indigo-primary theme-transition flex h-4 w-4 items-center justify-center rounded-[2px] group-hover:border" +
                                             (value === option
                                                 ? " bg-indigo-primary"
                                                 : " bg-gray-soft dark:bg-gray-ink")
@@ -136,7 +137,7 @@ export default function Dropdown({
                                     >
                                         {value === option ? <CheckIcon /> : ""}
                                     </div>
-                                    <div className="text-gray-ink flex items-center justify-center text-[12px] leading-[15px] font-bold dark:text-white">
+                                    <div className="text-gray-ink theme-transition flex items-center justify-center text-[12px] leading-[15px] font-bold dark:text-white">
                                         {toCapitalized(option as string)}
                                     </div>
                                 </button>
@@ -150,7 +151,7 @@ export default function Dropdown({
                             >
                                 <button
                                     className={clsx(
-                                        "hover:dark:bg-slate-blue hover:bg-gray-soft h-12 w-full cursor-pointer px-6 py-4 text-left text-[12px] leading-[15px] font-bold tracking-[-0.25px]",
+                                        "hover:dark:bg-slate-blue hover:bg-gray-soft theme-transition h-12 w-full cursor-pointer px-6 py-4 text-left text-[12px] leading-[15px] font-bold tracking-[-0.25px]",
                                         value === option.key
                                             ? "text-indigo-primary"
                                             : "text-calender-text"
@@ -159,7 +160,7 @@ export default function Dropdown({
                                     {toCapitalized(option.value)}
                                 </button>
                                 {i !== options.length - 1 && (
-                                    <div className="bg-gray-soft dark:bg-gray-ink h-[1px] w-full" />
+                                    <div className="bg-gray-soft dark:bg-gray-ink theme-transition h-[1px] w-full" />
                                 )}
                             </li>
                         );

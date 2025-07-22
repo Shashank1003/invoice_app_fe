@@ -1,8 +1,8 @@
 "use client";
 
 import NoInvoiceImg from "@/assets/illustration-empty.svg";
-import MenubarLarge from "@/components/common/MenubarLarge";
-import MenubarSmall from "@/components/common/MenubarSmall";
+import MenubarLarge from "@/components/common/menubar/MenubarLarge";
+import MenubarSmall from "@/components/common/menubar/MenubarSmall";
 import InvoiceCardMedium from "@/components/invoices/InvoiceCardMedium";
 import InvoiceCardSmall from "@/components/invoices/InvoiceCardSmall";
 import InvoiceHeader from "@/components/invoices/InvoiceHeader";
@@ -109,7 +109,7 @@ export default function Invoices(): JSX.Element {
     );
 
     return (
-        <div className="w-full lg:flex lg:flex-col lg:items-center lg:justify-center">
+        <div className="theme-transition w-full lg:flex lg:flex-col lg:items-center lg:justify-center">
             <MenubarSmall extendedCls="lg:hidden" />
             <MenubarLarge extendedCls="hidden lg:flex" />
 
@@ -128,7 +128,7 @@ export default function Invoices(): JSX.Element {
                             return (
                                 <Skeleton
                                     key={i}
-                                    className="bg-skeleton h-[134px] w-full rounded-[8px]"
+                                    className="bg-skeleton theme-transition h-[134px] w-full rounded-[8px]"
                                 />
                             );
                         })}
@@ -141,11 +141,11 @@ export default function Invoices(): JSX.Element {
                         <NoInvoiceImg />
 
                         <div>
-                            <p className="text-text text-[20px] leading-normal font-bold tracking-[-0.63px]">
+                            <p className="text-text theme-transition theme-transition text-[20px] leading-normal font-bold tracking-[-0.63px]">
                                 There is nothing here
                             </p>
 
-                            <p className="text-gray-steel dark:text-gray-soft tracking-[-0.25px mt-6 flex flex-col items-center justify-center text-[12px] leading-[15px] font-medium">
+                            <p className="text-gray-steel theme-transition dark:text-gray-soft tracking-[-0.25px mt-6 flex flex-col items-center justify-center text-[12px] leading-[15px] font-medium">
                                 <span>Create an invoice by clicking the</span>
                                 <span>
                                     <span className="font-bold">New</span>{" "}

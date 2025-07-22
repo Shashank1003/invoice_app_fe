@@ -41,14 +41,14 @@ export default function YearSelect({
         <div className="relative w-full px-4" ref={wrapperRef}>
             <button
                 type="button"
-                className="!text-calender-text hover:!bg-calender-bg hover:!text-indigo-hover cursor-pointer text-[12px] leading-[15px] font-bold tracking-[-0.25px]"
+                className="!text-calender-text hover:!bg-calender-bg hover:!text-indigo-hover theme-transition cursor-pointer text-[12px] leading-[15px] font-bold tracking-[-0.25px]"
                 onClick={() => setIsOpen(!isOpen)}
             >
                 {format(selectedDate, "MMMM yyyy")}
             </button>
 
             {isOpen && (
-                <ul className="shadow-dd-light dark:shadow-dd-dark dark:bg-gray-deep text-text absolute left-1/2 z-10 mt-2 max-h-[180px] w-full -translate-x-1/2 overflow-auto rounded-[8px] bg-white font-bold">
+                <ul className="shadow-dd-light theme-transition dark:shadow-dd-dark dark:bg-gray-deep text-text absolute left-1/2 z-10 mt-2 max-h-[180px] w-full -translate-x-1/2 overflow-auto rounded-[8px] bg-white font-bold">
                     {options.map((option: number) => (
                         <li
                             key={option}
@@ -59,7 +59,7 @@ export default function YearSelect({
                             }}
                         >
                             <p
-                                className={`hover:dark:bg-slate-blue hover:bg-gray-soft cursor-pointer px-4 py-2 ${
+                                className={`hover:dark:bg-slate-blue hover:bg-gray-soft theme-transition cursor-pointer px-4 py-2 ${
                                     option === selectedDate.getFullYear()
                                         ? "text-indigo-primary font-bold"
                                         : ""
@@ -67,7 +67,7 @@ export default function YearSelect({
                             >
                                 {option}
                             </p>
-                            <div className="border-gray-soft dark:border-gray-ink h-[1px] w-full border" />
+                            <div className="border-gray-soft theme-transition dark:border-gray-ink h-[1px] w-full border" />
                         </li>
                     ))}
                 </ul>

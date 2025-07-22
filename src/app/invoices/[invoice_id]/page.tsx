@@ -2,8 +2,8 @@
 
 import BackButton from "@/components/common/buttons/BackButton";
 import CustomButton from "@/components/common/buttons/CustomButton";
-import MenubarLarge from "@/components/common/MenubarLarge";
-import MenubarSmall from "@/components/common/MenubarSmall";
+import MenubarLarge from "@/components/common/menubar/MenubarLarge";
+import MenubarSmall from "@/components/common/menubar/MenubarSmall";
 import DeleteConfirmation from "@/components/invoice/DeleteConfirmation";
 import InvoiceDetails from "@/components/invoice/InvoiceDetails";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -82,7 +82,7 @@ export default function InvoicePage(): JSX.Element {
     }, [invoiceData, setActiveInvoice, setInvoiceData, updateInvoice]);
 
     return (
-        <div className="relative lg:flex w-full lg:flex-col lg:items-center lg:justify-center">
+        <div className="theme-transition relative w-full lg:flex lg:flex-col lg:items-center lg:justify-center">
             <MenubarSmall extendedCls="lg:hidden" />
             <MenubarLarge extendedCls="hidden lg:flex" />
 
@@ -91,8 +91,8 @@ export default function InvoicePage(): JSX.Element {
 
                 {isLoading ? (
                     <div className="mx-6 mt-8">
-                        <Skeleton className="bg-skeleton h-[90px] w-full rounded-[8px]" />
-                        <Skeleton className="bg-skeleton mt-4 h-[700px] w-full rounded-[8px]" />
+                        <Skeleton className="bg-skeleton theme-transition h-[90px] w-full rounded-[8px]" />
+                        <Skeleton className="bg-skeleton theme-transition mt-4 h-[700px] w-full rounded-[8px]" />
                     </div>
                 ) : (
                     <div>
@@ -109,7 +109,7 @@ export default function InvoicePage(): JSX.Element {
                         {!isMd && (
                             <div
                                 className={clsx(
-                                    "bg-secondary-bg shadow-custom flex h-[91px] items-center justify-between px-6"
+                                    "bg-secondary-bg theme-transition shadow-custom flex h-[91px] items-center justify-between px-6"
                                 )}
                             >
                                 <CustomButton
@@ -127,7 +127,7 @@ export default function InvoicePage(): JSX.Element {
                                     buttonText={
                                         isPending ? (
                                             <div className="flex items-center justify-center gap-2">
-                                                <div className="h-4 w-4 animate-spin rounded-full border-2 border-current border-r-transparent"></div>
+                                                <div className="theme-transition h-4 w-4 animate-spin rounded-full border-2 border-current border-r-transparent"></div>
                                                 <span>Please wait!</span>
                                             </div>
                                         ) : (

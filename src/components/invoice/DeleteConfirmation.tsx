@@ -12,13 +12,13 @@ export default function DeleteConfirmation({
     useLockScroll(true);
 
     return (
-        <div className="fixed inset-0 flex items-center justify-center bg-black/75 px-6">
-            <div className="bg-secondary-bg shadow-custom rounded-[8px] p-8 md:p-12">
-                <p className="text-text text-[20px] leading-[32px] font-bold tracking-[-0.42px] md:text-[24px] md:leading-[-0.5px]">
+        <div className="theme-transition fixed inset-0 flex items-center justify-center bg-black/75 px-6">
+            <div className="bg-secondary-bg theme-transition shadow-custom rounded-[8px] p-8 md:p-12">
+                <p className="text-text theme-transition text-[20px] leading-[32px] font-bold tracking-[-0.42px] md:text-[24px] md:leading-[-0.5px]">
                     Confirm Deletion
                 </p>
 
-                <p className="text-gray-steel mt-2 text-[12px] leading-[22px] font-medium tracking-[-0.25px] md:mt-3">
+                <p className="text-gray-steel theme-transition mt-2 text-[12px] leading-[22px] font-medium tracking-[-0.25px] md:mt-3">
                     Are you sure you want to delete invoice #XM9141? This action
                     cannot be undone.
                 </p>

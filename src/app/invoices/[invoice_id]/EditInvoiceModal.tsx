@@ -4,10 +4,10 @@ import CloseIcon from "@/assets/icon-close.svg";
 import BackButton from "@/components/common/buttons/BackButton";
 import CustomButton from "@/components/common/buttons/CustomButton";
 import TransparentButton from "@/components/common/buttons/TransparentButton";
-import MenubarLarge from "@/components/common/MenubarLarge";
-import MenubarSmall from "@/components/common/MenubarSmall";
+import MenubarLarge from "@/components/common/menubar/MenubarLarge";
+import MenubarSmall from "@/components/common/menubar/MenubarSmall";
 import FormLoaderUi from "@/components/invoiceForm/FormLoaderUI";
-import InvoiceFormSmall from "@/components/invoiceForm/InvoiceFormSmall";
+import InvoiceForm from "@/components/invoiceForm/InvoiceForm";
 import { useLockScroll } from "@/hooks/useLockScroll";
 import { InvoiceFormProps } from "@/types/invoiceTypes";
 import { renderId } from "@/utils/generateRenderId";
@@ -31,14 +31,14 @@ export default function EditInvoiceModal({
     useLockScroll(true);
 
     return (
-        <div className="fixed inset-0 flex flex-col">
+        <div className="theme-transition fixed inset-0 flex flex-col">
             <div className="bg-bg shrink-0">
                 <MenubarSmall extendedCls="lg:hidden" />
                 <MenubarLarge extendedCls="hidden lg:flex" />
             </div>
 
-            <div className="flex-1 overflow-hidden bg-black/50 lg:ml-26">
-                <div className="bg-bg scrollbar-none relative h-full w-154 overflow-auto">
+            <div className="theme-transition flex-1 overflow-hidden bg-black/50 lg:ml-26">
+                <div className="bg-bg theme-transition scrollbar-none relative h-full w-154 overflow-auto">
                     {isMd ? (
                         <TransparentButton
                             ButtonIcon={CloseIcon}
@@ -55,24 +55,24 @@ export default function EditInvoiceModal({
                             {invoice && (
                                 <div>
                                     <div className="mt-6 mb-22 px-6 md:mt-14 md:mb-4 md:px-14">
-                                        <div className="text-text text-[24px] leading-[32px] font-bold tracking-[-0.5px]">
+                                        <div className="text-text theme-transition text-[24px] leading-[32px] font-bold tracking-[-0.5px]">
                                             <p>
                                                 Edit{" "}
-                                                <span className="text-gray-steel">
+                                                <span className="text-gray-steel theme-transition">
                                                     #
                                                 </span>
                                                 {renderId(invoiceId)}
                                             </p>
                                         </div>
 
-                                        <InvoiceFormSmall
+                                        <InvoiceForm
                                             invoice={invoice}
                                             isDateDisabled={false}
                                             setInvoice={setInvoice}
                                         />
                                     </div>
 
-                                    <div className="bg-secondary-bg md:bg-bg shadow-custom flex h-[91px] items-center justify-end gap-2 px-6 md:h-28 md:px-14">
+                                    <div className="bg-secondary-bg md:bg-bg theme-transition shadow-custom flex h-[91px] items-center justify-end gap-2 px-6 md:h-28 md:px-14">
                                         <CustomButton
                                             buttonText="Cancel"
                                             onClick={handleReset}
@@ -84,7 +84,7 @@ export default function EditInvoiceModal({
                                             buttonText={
                                                 isPending ? (
                                                     <div className="flex items-center justify-center gap-2">
-                                                        <div className="h-4 w-4 animate-spin rounded-full border-2 border-current border-r-transparent"></div>
+                                                        <div className="theme-transition h-4 w-4 animate-spin rounded-full border-2 border-current border-r-transparent"></div>
                                                         <span>
                                                             Please wait!
                                                         </span>

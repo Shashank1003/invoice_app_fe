@@ -27,7 +27,7 @@ const DateHeader = ({
     );
 
     return (
-        <div className="text-calender-text flex items-center justify-between px-2 pt-5 text-[12px] leading-[15px] font-bold tracking-[-0.25px]">
+        <div className="text-calender-text theme-transition flex items-center justify-between px-2 pt-5 text-[12px] leading-[15px] font-bold tracking-[-0.25px]">
             <button
                 onClick={decreaseMonth}
                 className="cursor-pointer p-1"

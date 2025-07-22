@@ -18,7 +18,7 @@ interface InvoiceFormProps {
     setInvoice: React.Dispatch<React.SetStateAction<InvoiceDetailed | null>>;
 }
 
-export default function InvoiceFormSmall({
+export default function InvoiceForm({
     invoice,
     isDateDisabled,
     setInvoice,
@@ -141,7 +141,7 @@ export default function InvoiceFormSmall({
     return (
         <div>
             <div className="mt-6 space-y-6 md:mt-12">
-                <p className="text-indigo-primary text-[12px] leading-[15px] font-bold tracking-[-0.25px]">
+                <p className="text-indigo-primary theme-transition text-[12px] leading-[15px] font-bold tracking-[-0.25px]">
                     Bill From
                 </p>
 
@@ -198,7 +198,7 @@ export default function InvoiceFormSmall({
             </div>
 
             <div className="mt-10 space-y-6 md:mt-12">
-                <p className="text-indigo-primary text-[12px] leading-[15px] font-bold tracking-[-0.25px]">
+                <p className="text-indigo-primary theme-transition text-[12px] leading-[15px] font-bold tracking-[-0.25px]">
                     Bill To
                 </p>
 
@@ -310,13 +310,13 @@ export default function InvoiceFormSmall({
             </div>
 
             <div className="mt-[66px] md:mt-12">
-                <p className="text-gray-graphite mb-6 text-[18px] leading-[32px] font-bold tracking-[-0.38px]">
+                <p className="text-gray-graphite theme-transition mb-6 text-[18px] leading-[32px] font-bold tracking-[-0.38px]">
                     Items List
                 </p>
 
                 {isMd ? (
                     <div className="space-y-4">
-                        <div className="text-12px text-form-label flex items-center justify-start gap-4 leading-[15px] font-medium tracking-[-0.25px]">
+                        <div className="text-12px text-form-label theme-transition flex items-center justify-start gap-4 leading-[15px] font-medium tracking-[-0.25px]">
                             <p className="w-[214px]">Item Name</p>
                             <p className="w-[46px]">Qty.</p>
                             <p className="w-25">Price</p>

@@ -2,10 +2,10 @@
 
 import BackButton from "@/components/common/buttons/BackButton";
 import CustomButton from "@/components/common/buttons/CustomButton";
-import MenubarLarge from "@/components/common/MenubarLarge";
-import MenubarSmall from "@/components/common/MenubarSmall";
+import MenubarLarge from "@/components/common/menubar/MenubarLarge";
+import MenubarSmall from "@/components/common/menubar/MenubarSmall";
 import FormLoaderUi from "@/components/invoiceForm/FormLoaderUI";
-import InvoiceFormSmall from "@/components/invoiceForm/InvoiceFormSmall";
+import InvoiceForm from "@/components/invoiceForm/InvoiceForm";
 import { useLockScroll } from "@/hooks/useLockScroll";
 import { InvoiceFormProps } from "@/types/invoiceTypes";
 import { renderId } from "@/utils/generateRenderId";
@@ -27,7 +27,7 @@ export default function EditInvoicePage({
     useLockScroll(true);
 
     return (
-        <div className="bg-bg scrollbar-none fixed inset-0 w-full overflow-auto lg:flex lg:flex-col lg:items-center lg:justify-center">
+        <div className="bg-bg scrollbar-none theme-transition fixed inset-0 w-full overflow-auto lg:flex lg:flex-col lg:items-center lg:justify-start">
             <MenubarSmall extendedCls="lg:hidden" />
             <MenubarLarge extendedCls="hidden lg:flex" />
 
@@ -44,24 +44,24 @@ export default function EditInvoicePage({
                         {invoice && (
                             <div>
                                 <div className="mt-6 mb-22 px-6 md:mt-8 md:mb-4 md:px-14 lg:px-0">
-                                    <div className="text-text text-[24px] leading-[32px] font-bold tracking-[-0.5px]">
+                                    <div className="text-text theme-transition text-[24px] leading-[32px] font-bold tracking-[-0.5px]">
                                         <p>
                                             Edit{" "}
-                                            <span className="text-gray-steel">
+                                            <span className="text-gray-steel theme-transition">
                                                 #
                                             </span>
                                             {renderId(invoiceId)}
                                         </p>
                                     </div>
 
-                                    <InvoiceFormSmall
+                                    <InvoiceForm
                                         invoice={invoice}
                                         isDateDisabled={false}
                                         setInvoice={setInvoice}
                                     />
                                 </div>
 
-                                <div className="bg-secondary-bg md:bg-bg shadow-custom flex h-[91px] items-center justify-end gap-2 px-6 md:h-28 md:px-14 lg:px-0">
+                                <div className="bg-secondary-bg theme-transition md:bg-bg shadow-custom flex h-[91px] items-center justify-end gap-2 px-6 md:h-28 md:px-14 lg:px-0">
                                     <CustomButton
                                         buttonText="Cancel"
                                         onClick={handleReset}
@@ -73,7 +73,7 @@ export default function EditInvoicePage({
                                         buttonText={
                                             isPending ? (
                                                 <div className="flex items-center justify-center gap-2">
-                                                    <div className="h-4 w-4 animate-spin rounded-full border-2 border-current border-r-transparent"></div>
+                                                    <div className="theme-transition h-4 w-4 animate-spin rounded-full border-2 border-current border-r-transparent"></div>
                                                     <span>Please wait!</span>
                                                 </div>
                                             ) : (

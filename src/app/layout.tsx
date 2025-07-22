@@ -29,7 +29,7 @@ const RootLayout: FC<RootLayoutProps> = ({ children }) => {
     return (
         <html lang="en" className={leagueSpartan.variable}>
             <body
-                className={`${leagueSpartan.variable} antialiased`}
+                className={`${leagueSpartan.variable} antialiased, theme-transition`}
                 suppressHydrationWarning={true}
             >
                 <ThemeProvider>
@@ -43,12 +43,14 @@ const RootLayout: FC<RootLayoutProps> = ({ children }) => {
                         richColors
                         toastOptions={{
                             classNames: {
-                                toast: "!bg-secondary-bg !text-text !rounded-[8px] !py-[14px] !px-[18px] !shadow-toaster !border !border-border !text-[14px] !font-medium !flex !items-center !gap-3 !transition-all !duration-300 !ease-in-out",
+                                toast: "!bg-secondary-bg !text-text !rounded-[8px] !py-[14px] !px-[18px] !shadow-toaster !border !border-border !text-[14px] !font-medium !flex !items-center !gap-3 !transition-all !duration-300 !ease-in-out theme-transition",
 
-                                success: "!border-l-4 !border-l-color-success",
-                                error: "!border-l-4 !border-l-color-error",
-                                warning: "!border-l-4 !border-l-color-warning",
-                                info: "!border-l-4 !border-l-color-info",
+                                success:
+                                    "!border-l-4 !border-l-color-success theme-transition",
+                                error: "!border-l-4 !border-l-color-error theme-transition",
+                                warning:
+                                    "!border-l-4 !border-l-color-warning theme-transition",
+                                info: "!border-l-4 !border-l-color-info theme-transition",
                             },
                         }}
                     />

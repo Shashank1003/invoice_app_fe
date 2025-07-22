@@ -42,12 +42,12 @@ export default function InvoiceHeader({
     if (!isMounted) return null;
 
     return (
-        <div className="mx-6 mt-8 flex items-center justify-between gap-2 md:mx-12 md:mt-14 lg:mx-0 lg:mt-18">
+        <div className="theme-transition mx-6 mt-8 flex items-center justify-between gap-2 md:mx-12 md:mt-14 lg:mx-0 lg:mt-18">
             <div>
-                <h1 className="text-text text-[20px] leading-normal font-bold tracking-[-0.63px] md:text-[32px] md:tracking-[-1px] lg:tracking-[-1px]">
+                <h1 className="text-text theme-transition text-[20px] leading-normal font-bold tracking-[-0.63px] md:text-[32px] md:tracking-[-1px] lg:tracking-[-1px]">
                     Invoices
                 </h1>
-                <p className="text-gray-steel dark:text-gray-soft text-[12px] leading-[15px] font-medium tracking-[-0.25px]">
+                <p className="text-gray-steel dark:text-gray-soft theme-transition text-[12px] leading-[15px] font-medium tracking-[-0.25px]">
                     <span className="block md:hidden">
                         {totalInvoices} invoices
                     </span>

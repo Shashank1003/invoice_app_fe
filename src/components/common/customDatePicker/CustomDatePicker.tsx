@@ -36,13 +36,13 @@ export default function CustomDatePicker({
     return (
         <div
             className={clsx(
-                "relative flex w-full flex-col gap-[10px]",
+                "relative flex w-full flex-col gap-[10px] theme-transition",
                 disabled && "opacity-50"
             )}
         >
             <label
                 htmlFor="invoice_date"
-                className="text-form-label text-[12px] leading-[15px] font-medium tracking-[-0.25px]"
+                className="text-form-label theme-transition text-[12px] leading-[15px] font-medium tracking-[-0.25px]"
             >
                 Invoice Date
             </label>

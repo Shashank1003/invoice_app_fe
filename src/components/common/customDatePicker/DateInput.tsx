@@ -14,7 +14,7 @@ const DateInput = React.forwardRef<HTMLButtonElement, DateInputProps>(
         <button
             type="button"
             className={clsx(
-                "bg-secondary-bg text-text border-border flex h-12 w-full items-center justify-between rounded border px-5 text-[12px] leading-[15px] font-bold tracking-[-0.25px] focus:outline-none",
+                "bg-secondary-bg text-text border-border theme-transition flex h-12 w-full items-center justify-between rounded border px-5 text-[12px] leading-[15px] font-bold tracking-[-0.25px] focus:outline-none",
                 {
                     "focus:border-indigo-primary hover:border-indigo-primary cursor-pointer":
                         !isDisabled,

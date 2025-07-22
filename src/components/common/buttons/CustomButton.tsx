@@ -22,7 +22,7 @@ export default function CustomButton({
         <button
             style={style}
             className={clsx(
-                "h-[48px] rounded-[24px] text-[12px] leading-[15px] font-bold tracking-[-0.25px]",
+                "theme-transition h-[48px] rounded-[24px] text-[12px] leading-[15px] font-bold tracking-[-0.25px]",
                 disabled
                     ? "pointer-events-none opacity-50"
                     : "cursor-pointer opacity-100",

@@ -23,11 +23,11 @@ export default function CustomInput({
     extendedCls = "",
 }: InputProps): JSX.Element {
     return (
-        <div className="flex w-full flex-col gap-[10px]">
+        <div className="theme-transition flex w-full flex-col gap-[10px]">
             {!noLabel && (
                 <label
                     htmlFor={id}
-                    className="text-form-label text-[12px] leading-[15px] font-medium tracking-[-0.25px]"
+                    className="text-form-label theme-transition text-[12px] leading-[15px] font-medium tracking-[-0.25px]"
                 >
                     {label}
                 </label>
@@ -38,7 +38,7 @@ export default function CustomInput({
                 name={id}
                 id={id}
                 className={clsx(
-                    "bg-secondary-bg text-text border-border focus:border-indigo-primary hover:border-indigo-primary no-spinner h-12 w-full rounded border px-5 text-[12px] leading-[15px] font-bold tracking-[-0.25px] focus:outline-none",
+                    "bg-secondary-bg theme-transition text-text border-border focus:border-indigo-primary hover:border-indigo-primary no-spinner h-12 w-full rounded border px-5 text-[12px] leading-[15px] font-bold tracking-[-0.25px] focus:outline-none",
                     extendedCls
                 )}
                 placeholder={placeholder}
