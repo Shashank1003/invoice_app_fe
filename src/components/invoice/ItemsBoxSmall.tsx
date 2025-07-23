@@ -1,4 +1,5 @@
 import { Item } from "@/types/itemTypes";
+import { truncate } from "@/utils/truncate";
 import { JSX } from "react";
 
 export default function ItemsBoxSmall({
@@ -20,7 +21,7 @@ export default function ItemsBoxSmall({
                             >
                                 <div>
                                     <p className="text-text theme-transition mb-[8px]">
-                                        {item.name}
+                                        {truncate(item.name, 25)}
                                     </p>
                                     <p className="text-gray-muted theme-transition dark:text-gray-steel">{`${item.quantity} x £ ${item.price}`}</p>
                                 </div>

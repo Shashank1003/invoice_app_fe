@@ -1,10 +1,10 @@
 import RightArrowIcon from "@/assets/icon-arrow-right.svg";
 import { InvoiceBrief } from "@/types/invoiceTypes";
 import { renderId } from "@/utils/generateRenderId";
+import { truncate } from "@/utils/truncate";
 import { format } from "date-fns";
 import { JSX } from "react";
 import StatusBox from "../common/StatusBox";
-import CustomButton from "../common/buttons/CustomButton";
 
 export default function InvoiceCardMedium({
     invoice,
@@ -29,7 +29,7 @@ export default function InvoiceCardMedium({
             </p>
 
             <p className="text-gray-cool theme-transition text-[12px] leading-[15px] font-medium tracking-[-0.25px] dark:text-white">
-                {invoice.client_name}
+                {truncate(invoice.client_name, 30)}
             </p>
 
             <p className="text-text theme-transition justify-self-end pr-10 text-[16px] leading-[24px] font-bold tracking-[-0.25px]">

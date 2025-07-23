@@ -2,6 +2,7 @@ import StatusBox from "@/components/common/StatusBox";
 import ItemsBoxSmall from "@/components/invoice/ItemsBoxSmall";
 import { InvoiceDetailed } from "@/types/invoiceTypes";
 import { renderId } from "@/utils/generateRenderId";
+import { truncate } from "@/utils/truncate";
 import { useMediaQuery } from "@react-hookz/web";
 import clsx from "clsx";
 import { format } from "date-fns";
@@ -99,16 +100,16 @@ export default function InvoiceDetails({
                                 </p>
 
                                 <p className="text-text-secondary theme-transition mt-1 text-[12px] font-medium">
-                                    {invoiceData.description}
+                                    {truncate(invoiceData.description)}
                                 </p>
                             </div>
                         )}
 
                         <div className="text-text-secondary theme-transition mt-[30px] flex flex-col items-start justify-center gap-1 text-[11px] leading-[18px] font-medium tracking-[-0.23px]">
-                            <p>{invoiceData.street_from}</p>
-                            <p>{invoiceData.city_from}</p>
+                            <p>{truncate(invoiceData.street_from)}</p>
+                            <p>{truncate(invoiceData.city_from)}</p>
                             <p>{invoiceData.postcode_from}</p>
-                            <p>{invoiceData.country_from}</p>
+                            <p>{truncate(invoiceData.country_from)}</p>
                         </div>
                     </>
                 ) : (
@@ -121,16 +122,16 @@ export default function InvoiceDetails({
                                 </p>
 
                                 <p className="text-text-secondary theme-transition mt-2 text-[12px] font-medium">
-                                    {invoiceData.description}
+                                    {truncate(invoiceData.description)}
                                 </p>
                             </div>
                         )}
 
                         <div className="text-text-secondary theme-transition flex flex-col items-end justify-center gap-1 text-[11px] leading-[18px] font-medium tracking-[-0.23px]">
-                            <p>{invoiceData.street_from}</p>
-                            <p>{invoiceData.city_from}</p>
+                            <p>{truncate(invoiceData.street_from)}</p>
+                            <p>{truncate(invoiceData.city_from)}</p>
                             <p>{invoiceData.postcode_from}</p>
-                            <p>{invoiceData.country_from}</p>
+                            <p>{truncate(invoiceData.country_from)}</p>
                         </div>
                     </div>
                 )}
@@ -171,14 +172,14 @@ export default function InvoiceDetails({
                         </p>
 
                         <p className="text-text theme-transition mt-3 text-[15px] leading-[20px] font-bold tracking-[-0.31px]">
-                            {invoiceData.client_name}
+                            {truncate(invoiceData.client_name, 30)}
                         </p>
 
                         <div className="text-text-secondary theme-transition mt-3 flex flex-col items-start justify-center gap-1 text-[11px] leading-[18px] font-medium tracking-[-0.23px] md:mt-2">
-                            <p>{invoiceData.street_to}</p>
-                            <p>{invoiceData.city_to}</p>
+                            <p>{truncate(invoiceData.street_to, 30)}</p>
+                            <p>{truncate(invoiceData.city_to, 30)}</p>
                             <p>{invoiceData.postcode_to}</p>
-                            <p>{invoiceData.country_to}</p>
+                            <p>{truncate(invoiceData.country_to, 30)}</p>
                         </div>
                     </div>
 
@@ -187,7 +188,7 @@ export default function InvoiceDetails({
                             Sent to
                         </p>
                         <p className="text-text theme-transition mt-3 text-[15px] leading-[20px] font-bold tracking-[-0.31px]">
-                            {invoiceData.client_email}
+                            {truncate(invoiceData.client_email, 25)}
                         </p>
                     </div>
                 </div>
@@ -197,7 +198,7 @@ export default function InvoiceDetails({
                         Sent to
                     </p>
                     <p className="text-text theme-transition mt-3 text-[15px] leading-[20px] font-bold tracking-[-0.31px]">
-                        {invoiceData.client_email}
+                        {truncate(invoiceData.client_email, 30)}
                     </p>
                 </div>
 

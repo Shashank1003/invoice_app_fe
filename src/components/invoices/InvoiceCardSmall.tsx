@@ -1,5 +1,6 @@
 import { InvoiceBrief } from "@/types/invoiceTypes";
 import { renderId } from "@/utils/generateRenderId";
+import { truncate } from "@/utils/truncate";
 import { format } from "date-fns";
 import { JSX } from "react";
 import StatusBox from "../common/StatusBox";
@@ -23,7 +24,7 @@ export default function InvoiceCardSmall({
                     <span>{renderId(invoice.id)}</span>
                 </h2>
                 <p className="text-gray-cool theme-transition text-[12px] leading-[15px] font-medium dark:text-white">
-                    {invoice.client_name}
+                    {truncate(invoice.client_name, 20)}
                 </p>
             </div>
 

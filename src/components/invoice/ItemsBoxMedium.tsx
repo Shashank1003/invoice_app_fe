@@ -1,4 +1,5 @@
 import { Item } from "@/types/itemTypes";
+import { truncate } from "@/utils/truncate";
 import { JSX } from "react";
 
 export default function ItemsBoxMedium({
@@ -28,7 +29,9 @@ export default function ItemsBoxMedium({
                                     key={item.id}
                                     className="text-text theme-transition text-left text-[12px] leading-[15px] font-bold tracking-[-0.25px]"
                                 >
-                                    <td className="text-left">{item.name}</td>
+                                    <td className="text-left">
+                                        {truncate(item.name, 30)}
+                                    </td>
                                     <td className="text-right">
                                         {item.quantity}
                                     </td>
