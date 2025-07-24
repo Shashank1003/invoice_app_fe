@@ -2,6 +2,7 @@ import { paymentTerms } from "@/misc/paymentTerms";
 import { InvoiceDetailed } from "@/types/invoiceTypes";
 import { Item } from "@/types/itemTypes";
 import { useMediaQuery } from "@react-hookz/web";
+import clsx from "clsx";
 import { format } from "date-fns";
 import React, { JSX, useCallback, useState } from "react";
 import { v4 as uuid4 } from "uuid";
@@ -16,12 +17,14 @@ interface InvoiceFormProps {
     invoice: InvoiceDetailed;
     isDateDisabled: boolean;
     setInvoice: React.Dispatch<React.SetStateAction<InvoiceDetailed | null>>;
+    isModal?: boolean;
 }
 
 export default function InvoiceForm({
     invoice,
     isDateDisabled,
     setInvoice,
+    isModal = true,
 }: InvoiceFormProps): JSX.Element {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const dropdownOptions = Object.entries(paymentTerms).map(([key, value]) => {
@@ -316,10 +319,29 @@ export default function InvoiceForm({
 
                 {isMd ? (
                     <div className="space-y-4">
-                        <div className="text-12px text-form-label theme-transition flex items-center justify-start gap-4 leading-[15px] font-medium tracking-[-0.25px]">
-                            <p className="w-[214px]">Item Name</p>
-                            <p className="w-[46px]">Qty.</p>
-                            <p className="w-25">Price</p>
+                        <div
+                            className={clsx(
+                                "text-12px text-form-label theme-transition flex items-center gap-4 leading-[15px] font-medium tracking-[-0.25px]",
+                                isModal ? "justify-between" : "justify-start"
+                            )}
+                        >
+                            <p
+                                className={clsx(
+                                    isModal ? "w-[214px]" : "min-w-[42%]"
+                                )}
+                            >
+                                Item Name
+                            </p>
+                            <p className={isModal ? "w-[46px]" : "min-w-[9%]"}>
+                                Qty.
+                            </p>
+                            <p
+                                className={clsx(
+                                    isModal ? "w-25" : "min-w-[19%]"
+                                )}
+                            >
+                                Price
+                            </p>
                             <p className="w-17">Total</p>
                         </div>
 
@@ -331,6 +353,7 @@ export default function InvoiceForm({
                                         item={item}
                                         onChange={onItemChange}
                                         onRemoveItem={onRemoveItem}
+                                        isModal={isModal}
                                     />
                                 );
                             })}

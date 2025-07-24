@@ -1,6 +1,6 @@
 "use client";
 
-import EditInvoicePage from "@/app/invoices/[invoice_id]/EditInvoicePage";
+import EditInvoicePage from "@/components/invoiceForm/EditInvoicePage";
 import { useInvoiceContext } from "@/context/invoiceContext";
 import { useFetchInvoiceById, useUpdateInvoice } from "@/hooks/useInvoices";
 import { useLockScroll } from "@/hooks/useLockScroll";
@@ -14,7 +14,8 @@ export default function EditInvoice(): JSX.Element {
     const router = useRouter();
     const params = useParams();
     const invoiceId = params.invoice_id as string;
-    const { setActiveInvoice, activeInvoice } = useInvoiceContext();
+    const { setActiveInvoice, activeInvoice, setScrollToId } =
+        useInvoiceContext();
     const { data, isLoading } = useFetchInvoiceById(invoiceId);
     const { mutate: updateInvoice, isPending } = useUpdateInvoice();
     const [invoice, setInvoice] = useState<InvoiceDetailed | null>(null);
@@ -25,6 +26,7 @@ export default function EditInvoice(): JSX.Element {
         if (!data || !invoiceId) return;
         setInvoice(data || null);
         setActiveInvoice(data || null);
+        setScrollToId(`invoiceCard-${invoiceId}`);
     }, [data, setActiveInvoice, invoiceId]);
 
     const handleBack = useCallback(() => {
@@ -68,6 +70,7 @@ export default function EditInvoice(): JSX.Element {
             updateInvoice(updatedPayload, {
                 onSuccess: () => {
                     setActiveInvoice(updatedPayload);
+                    handleBack();
                 },
             });
         },

@@ -20,7 +20,8 @@ import { toast } from "sonner";
 export default function Invoices(): JSX.Element {
     const router = useRouter();
     const { data, isLoading } = useFetchInvoices();
-    const { invoices, setInvoices } = useInvoiceContext();
+    const { invoices, setInvoices, scrollToId, setScrollToId } =
+        useInvoiceContext();
     const [invoiceData, setInvoiceData] = useState<InvoiceBrief[]>([]);
     const [activeStatus, setActiveStatus] = useState<string>("");
     const [totalInvoices, setTotalInvoices] = useState<number>(0);
@@ -66,29 +67,36 @@ export default function Invoices(): JSX.Element {
     }, [invoiceData]);
 
     useEffect(() => {
-        const searchParams = new URLSearchParams(window.location.search);
-        const scrollId = searchParams.get("scrollId");
+        const savedIdFromSession = sessionStorage.getItem("scrollToId");
+        const shouldScroll = sessionStorage.getItem("shouldScroll") === "true";
 
-        if (!scrollId) return;
+        // Clear it *now* so reloads or second visits don't use it again
+        sessionStorage.removeItem("scrollToId");
+        sessionStorage.removeItem("shouldScroll");
+
+        const savedId = scrollToId || savedIdFromSession;
+
+        if (!savedId || !shouldScroll) return;
+
         const maxAttempts = 20;
         let attempts = 0;
 
-        const scrollToId = () => {
-            const element = document.getElementById(scrollId);
-
+        const scroll = () => {
+            const element = document.getElementById(`invoiceCard-${savedId}`);
             if (element) {
                 element.scrollIntoView({
                     behavior: "smooth",
                     block: "start",
                 });
+                setScrollToId(null);
             } else if (attempts < maxAttempts) {
                 attempts += 1;
-                setTimeout(scrollToId, 100);
+                setTimeout(scroll, 100);
             }
         };
 
-        scrollToId();
-    }, []);
+        scroll();
+    }, [scrollToId]);
 
     const handleStatus = useCallback(
         (status: string) => {
@@ -121,18 +129,25 @@ export default function Invoices(): JSX.Element {
                 />
 
                 {isLoading ? (
-                    <div className="mx-6 mt-8 flex flex-col items-center justify-center gap-4">
-                        {Array.from({
-                            length: 10,
-                        }).map((_, i) => {
-                            return (
-                                <Skeleton
-                                    key={i}
-                                    className="bg-skeleton theme-transition h-[134px] w-full rounded-[8px]"
-                                />
-                            );
-                        })}
-                    </div>
+                    <>
+                        <div className="mt-8 flex items-center justify-between px-6 md:mt-16 md:px-12 lg:mt-18 lg:px-0">
+                            <div className="bg-skeleton theme-transition h-11 w-20 rounded-[8px] md:h-16 md:w-34" />
+
+                            <div className="bg-skeleton theme-transition h-11 w-43 rounded-[8px] md:h-16 md:w-70" />
+                        </div>
+                        <div className="mt-8 flex flex-col items-center justify-center gap-4 px-6 md:mt-14 md:px-12 lg:mt-18 lg:px-0">
+                            {Array.from({
+                                length: 10,
+                            }).map((_, i) => {
+                                return (
+                                    <Skeleton
+                                        key={i}
+                                        className="bg-skeleton theme-transition h-[134px] w-full rounded-[8px] md:h-18"
+                                    />
+                                );
+                            })}
+                        </div>
+                    </>
                 ) : !invoiceData || invoiceData?.length === 0 ? (
                     <div
                         style={{ height: `calc(100vh - 180px)` }}

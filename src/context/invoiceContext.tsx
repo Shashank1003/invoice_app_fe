@@ -14,6 +14,8 @@ export interface InvoiceContextType {
     setInvoices: (_invoices: InvoiceBrief[]) => void;
     activeInvoice: InvoiceDetailed | null;
     setActiveInvoice: (_invoice: InvoiceDetailed | null) => void;
+    scrollToId: string | null;
+    setScrollToId: (_scrollId: string | null) => void;
 }
 const InvoiceContext = createContext<InvoiceContextType | undefined>(undefined);
 
@@ -26,6 +28,7 @@ export const InvoiceProvider = ({
     const [activeInvoice, setActiveInvoice] = useState<InvoiceDetailed | null>(
         null
     );
+    const [scrollToId, setScrollToId] = useState<string | null>(null);
 
     return (
         <InvoiceContext.Provider
@@ -34,6 +37,8 @@ export const InvoiceProvider = ({
                 setInvoices,
                 activeInvoice,
                 setActiveInvoice,
+                scrollToId,
+                setScrollToId,
             }}
         >
             {children}

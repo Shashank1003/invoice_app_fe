@@ -6,8 +6,8 @@ import CustomButton from "@/components/common/buttons/CustomButton";
 import TransparentButton from "@/components/common/buttons/TransparentButton";
 import MenubarLarge from "@/components/common/menubar/MenubarLarge";
 import MenubarSmall from "@/components/common/menubar/MenubarSmall";
-import FormLoaderUi from "@/components/invoiceForm/FormLoaderUI";
 import InvoiceForm from "@/components/invoiceForm/InvoiceForm";
+import ModalLoaderUi from "@/components/invoiceForm/ModalLoaderUi";
 import { useLockScroll } from "@/hooks/useLockScroll";
 import { InvoiceFormProps } from "@/types/invoiceTypes";
 import { renderId } from "@/utils/generateRenderId";
@@ -49,7 +49,7 @@ export default function EditInvoiceModal({
                         <BackButton onClick={handleBack} />
                     )}
                     {isLoading ? (
-                        <FormLoaderUi />
+                        <ModalLoaderUi />
                     ) : (
                         <div>
                             {invoice && (
@@ -67,8 +67,9 @@ export default function EditInvoiceModal({
 
                                         <InvoiceForm
                                             invoice={invoice}
-                                            isDateDisabled={false}
+                                            isDateDisabled={true}
                                             setInvoice={setInvoice}
+                                            isModal={true}
                                         />
                                     </div>
 

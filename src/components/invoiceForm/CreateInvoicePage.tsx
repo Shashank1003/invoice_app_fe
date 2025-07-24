@@ -41,6 +41,7 @@ export default function CreateInvoicePage({
                                 invoice={invoice}
                                 isDateDisabled={false}
                                 setInvoice={setInvoice}
+                                isModal={false}
                             />
                         </div>
                         <div className="bg-secondary-bg theme-transition md:bg-bg shadow-custom flex h-[91px] w-full items-center justify-end gap-2 px-6 md:h-28 md:!justify-between md:px-14 lg:px-0">

@@ -26,7 +26,7 @@ export default function InvoicePage(): JSX.Element {
     const router = useRouter();
     const queryClient = useQueryClient();
     const invoiceId = params.invoice_id as string;
-    const { setActiveInvoice } = useInvoiceContext();
+    const { setActiveInvoice, setScrollToId } = useInvoiceContext();
     const { data, isLoading } = useFetchInvoiceById(invoiceId);
     const { mutate: deleteInvoice } = useDeleteInvoice();
     const { mutate: updateInvoice, isPending } = useUpdateInvoice();
@@ -42,17 +42,18 @@ export default function InvoicePage(): JSX.Element {
         if (!data || !invoiceId) return;
         setInvoiceData(data || null);
         setActiveInvoice(data || null);
+        setScrollToId(invoiceId);
         queryClient.setQueryData(["invoice", invoiceId], data);
     }, [data, setActiveInvoice, invoiceId, queryClient]);
 
     const handleBack = useCallback(() => {
         // Can use router.back() as well but it won't work if user
         // directly navigates to this page from bookmarks or other sites
-        if (invoiceData && invoiceData.id) {
-            router.push(`/invoices?scrollId=invoiceCard-${invoiceData?.id}`);
-        } else {
-            router.push("/invoices");
-        }
+        const id = invoiceData?.id;
+        sessionStorage.setItem("scrollToId", id ?? "");
+        sessionStorage.setItem("shouldScroll", "true");
+        setScrollToId(id ?? null);
+        router.push("/invoices");
     }, [router, invoiceData]);
 
     const handleCancel = useCallback(() => {
@@ -90,8 +91,8 @@ export default function InvoicePage(): JSX.Element {
                 <BackButton onClick={handleBack} />
 
                 {isLoading ? (
-                    <div className="mx-6 mt-8">
-                        <Skeleton className="bg-skeleton theme-transition h-[90px] w-full rounded-[8px]" />
+                    <div className="mt-8 px-6 md:mt-26 md:px-10 lg:mt-10">
+                        <Skeleton className="bg-skeleton theme-transition h-[90px] w-full rounded-[8px] md:h-22" />
                         <Skeleton className="bg-skeleton theme-transition mt-4 h-[700px] w-full rounded-[8px]" />
                     </div>
                 ) : (

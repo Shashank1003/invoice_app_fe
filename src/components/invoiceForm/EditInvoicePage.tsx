@@ -4,8 +4,8 @@ import BackButton from "@/components/common/buttons/BackButton";
 import CustomButton from "@/components/common/buttons/CustomButton";
 import MenubarLarge from "@/components/common/menubar/MenubarLarge";
 import MenubarSmall from "@/components/common/menubar/MenubarSmall";
-import FormLoaderUi from "@/components/invoiceForm/FormLoaderUI";
 import InvoiceForm from "@/components/invoiceForm/InvoiceForm";
+import PageLoaderUi from "@/components/invoiceForm/PageLoaderUi.tsx";
 import { useLockScroll } from "@/hooks/useLockScroll";
 import { InvoiceFormProps } from "@/types/invoiceTypes";
 import { renderId } from "@/utils/generateRenderId";
@@ -38,7 +38,7 @@ export default function EditInvoicePage({
                 />
 
                 {isLoading ? (
-                    <FormLoaderUi />
+                    <PageLoaderUi />
                 ) : (
                     <div>
                         {invoice && (
@@ -56,8 +56,9 @@ export default function EditInvoicePage({
 
                                     <InvoiceForm
                                         invoice={invoice}
-                                        isDateDisabled={false}
+                                        isDateDisabled={true}
                                         setInvoice={setInvoice}
+                                        isModal={false}
                                     />
                                 </div>
 

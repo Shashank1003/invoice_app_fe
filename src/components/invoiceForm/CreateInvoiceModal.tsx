@@ -53,6 +53,7 @@ export default function CreateInvoiceModal({
                                     invoice={invoice}
                                     isDateDisabled={false}
                                     setInvoice={setInvoice}
+                                    isModal={true}
                                 />
                             </div>
 

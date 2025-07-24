@@ -1,7 +1,7 @@
 "use client";
 
-import CreateInvoiceModal from "@/app/invoices/CreateInvoiceModal";
-import CreateInvoicePage from "@/app/invoices/CreateInvoicePage";
+import CreateInvoiceModal from "@/components/invoiceForm/CreateInvoiceModal";
+import CreateInvoicePage from "@/components/invoiceForm/CreateInvoicePage";
 import { useInvoiceContext } from "@/context/invoiceContext";
 import { useCreateInvoice } from "@/hooks/useInvoices";
 import { useLockScroll } from "@/hooks/useLockScroll";
@@ -15,7 +15,8 @@ import { toast } from "sonner";
 
 export default function CreateNewInvoice(): JSX.Element {
     const router = useRouter();
-    const { activeInvoice, setActiveInvoice } = useInvoiceContext();
+    const { activeInvoice, setActiveInvoice, setScrollToId } =
+        useInvoiceContext();
     const { mutate: createInvoice, isPending } = useCreateInvoice();
     const [invoice, setInvoice] = useState<InvoiceDetailed | null>(null);
     const isSm = useMediaQuery("(max-width: 767px)");
@@ -69,7 +70,11 @@ export default function CreateNewInvoice(): JSX.Element {
             };
             createInvoice(updatedPayload, {
                 onSuccess: data => {
-                    router.push(`/invoices?scrollId=invoiceCard-${data.id}`);
+                    const id = data?.id;
+                    sessionStorage.setItem("scrollToId", id ?? "");
+                    sessionStorage.setItem("shouldScroll", "true");
+                    setScrollToId(id ?? null);
+                    router.back();
                 },
             });
         },

@@ -1,6 +1,6 @@
 "use client";
 
-import CreateInvoicePage from "@/app/invoices/CreateInvoicePage";
+import CreateInvoicePage from "@/components/invoiceForm/CreateInvoicePage";
 import { useInvoiceContext } from "@/context/invoiceContext";
 import { useCreateInvoice } from "@/hooks/useInvoices";
 import { emptyInvoiceData } from "@/misc/emptyInvoiceData";
@@ -13,7 +13,8 @@ import { toast } from "sonner";
 
 export default function CreateNewInvoice(): JSX.Element {
     const router = useRouter();
-    const { activeInvoice, setActiveInvoice } = useInvoiceContext();
+    const { activeInvoice, setActiveInvoice, setScrollToId } =
+        useInvoiceContext();
     const { mutate: createInvoice, isPending } = useCreateInvoice();
     const [invoice, setInvoice] = useState<InvoiceDetailed | null>(null);
     const isMd = useMediaQuery("(min-width: 768px)");
@@ -65,7 +66,11 @@ export default function CreateNewInvoice(): JSX.Element {
             };
             createInvoice(updatedPayload, {
                 onSuccess: data => {
-                    router.push(`/invoices?scrollId=invoiceCard-${data.id}`);
+                    const id = data?.id;
+                    sessionStorage.setItem("scrollToId", id ?? "");
+                    sessionStorage.setItem("shouldScroll", "true");
+                    setScrollToId(id ?? null);
+                    router.push("/invoices");
                 },
             });
         },

@@ -1,23 +1,33 @@
 import DeleteIcon from "@/assets/icon-delete.svg";
 import { Item } from "@/types/itemTypes";
 import { numberFormatter } from "@/utils/numberFormatter";
+import clsx from "clsx";
 import { JSX } from "react";
 import CustomInput from "../common/CustomInput";
 import TransparentButton from "../common/buttons/TransparentButton";
+
 interface ItemCardProps {
     item: Item;
     onChange: (_event: React.ChangeEvent<HTMLInputElement>) => void;
     onRemoveItem: (_itemId: string) => void;
+    isModal?: boolean;
 }
 
 export default function ItemCardMedium({
     item,
     onChange,
     onRemoveItem,
+    isModal = true,
 }: ItemCardProps): JSX.Element {
+    console.log(isModal);
     return (
-        <div className="theme-transition flex w-full items-start justify-between gap-4">
-            <div className="w-[214px]">
+        <div
+            className={clsx(
+                "theme-transition flex w-full items-start gap-4",
+                isModal ? "justify-between" : "justify-start"
+            )}
+        >
+            <div className={clsx(isModal ? "w-[214px]" : "min-w-[42%]")}>
                 <CustomInput
                     id={`name-${item.id}`}
                     label="Item Name"
@@ -29,7 +39,7 @@ export default function ItemCardMedium({
                 />
             </div>
 
-            <div className="w-[46px]">
+            <div className={isModal ? "w-[46px]" : "min-w-[9%]"}>
                 <CustomInput
                     type="number"
                     id={`quantity-${item.id}`}
@@ -42,7 +52,7 @@ export default function ItemCardMedium({
                 />
             </div>
 
-            <div className="w-25">
+            <div className={clsx(isModal ? "w-25" : "min-w-[19%]")}>
                 <CustomInput
                     type="number"
                     id={`price-${item.id}`}
@@ -54,7 +64,7 @@ export default function ItemCardMedium({
                 />
             </div>
 
-            <div className="w-17">
+            <div className={clsx(isModal ? "w-17" : "w-full")}>
                 <div
                     role="textbox"
                     aria-disabled="true"
