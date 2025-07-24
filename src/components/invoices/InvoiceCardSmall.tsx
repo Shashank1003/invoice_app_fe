@@ -1,5 +1,6 @@
 import { InvoiceBrief } from "@/types/invoiceTypes";
 import { renderId } from "@/utils/generateRenderId";
+import { numberFormatter } from "@/utils/numberFormatter";
 import { truncate } from "@/utils/truncate";
 import { format } from "date-fns";
 import { JSX } from "react";
@@ -37,7 +38,7 @@ export default function InvoiceCardSmall({
                         {format(new Date(invoice.due_date), "dd MMMM yyyy")}
                     </p>
                     <p className="text-text theme-transition text-[16px] leading-[24px] font-bold">
-                        £ {invoice.total.toFixed(2)}
+                        {numberFormatter(invoice.total, { type: "currency" })}
                     </p>
                 </div>
 

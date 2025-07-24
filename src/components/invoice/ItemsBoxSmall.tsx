@@ -1,4 +1,5 @@
 import { Item } from "@/types/itemTypes";
+import { numberFormatter } from "@/utils/numberFormatter";
 import { truncate } from "@/utils/truncate";
 import { JSX } from "react";
 
@@ -23,11 +24,15 @@ export default function ItemsBoxSmall({
                                     <p className="text-text theme-transition mb-[8px]">
                                         {truncate(item.name, 25)}
                                     </p>
-                                    <p className="text-gray-muted theme-transition dark:text-gray-steel">{`${item.quantity} x £ ${item.price}`}</p>
+                                    <p className="text-gray-muted theme-transition dark:text-gray-steel">{`${numberFormatter(item.quantity)} x ${numberFormatter(item.price, { type: "currency" })}`}</p>
                                 </div>
 
                                 <div>
-                                    <p className="text-text theme-transition">{`£ ${item.total}`}</p>
+                                    <p className="text-text theme-transition">
+                                        {numberFormatter(item.total, {
+                                            type: "currency",
+                                        })}
+                                    </p>
                                 </div>
                             </div>
                         );
@@ -38,7 +43,9 @@ export default function ItemsBoxSmall({
                 <p className="theme-transition text-[11px] leading-[18px] font-medium tracking-[-0.23px]">
                     Amount Due
                 </p>
-                <p className="theme-transition text-[20px] leading-[32px] font-bold tracking-[-0.42px]">{`£ ${total}`}</p>
+                <p className="theme-transition text-[20px] leading-[32px] font-bold tracking-[-0.42px]">
+                    {numberFormatter(total, { type: "currency" })}
+                </p>
             </div>
         </div>
     );

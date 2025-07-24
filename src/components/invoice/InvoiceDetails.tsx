@@ -188,7 +188,7 @@ export default function InvoiceDetails({
                             Sent to
                         </p>
                         <p className="text-text theme-transition mt-3 text-[15px] leading-[20px] font-bold tracking-[-0.31px]">
-                            {truncate(invoiceData.client_email, 25)}
+                            {truncate(invoiceData.client_email, 27)}
                         </p>
                     </div>
                 </div>

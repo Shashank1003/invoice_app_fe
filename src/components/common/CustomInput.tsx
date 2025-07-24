@@ -38,7 +38,10 @@ export default function CustomInput({
                 name={id}
                 id={id}
                 className={clsx(
-                    "bg-secondary-bg theme-transition text-text border-border focus:border-indigo-primary hover:border-indigo-primary no-spinner h-12 w-full rounded border px-5 text-[12px] leading-[15px] font-bold tracking-[-0.25px] focus:outline-none",
+                    "bg-secondary-bg theme-transition text-text border-border focus:border-indigo-primary hover:border-indigo-primary no-spinner h-12 w-full rounded border text-[12px] leading-[15px] font-bold tracking-[-0.25px] focus:outline-none",
+
+                    type === "number" ? "pr-2 pl-5" : "px-5",
+
                     extendedCls
                 )}
                 placeholder={placeholder}

@@ -1,6 +1,7 @@
 import RightArrowIcon from "@/assets/icon-arrow-right.svg";
 import { InvoiceBrief } from "@/types/invoiceTypes";
 import { renderId } from "@/utils/generateRenderId";
+import { numberFormatter } from "@/utils/numberFormatter";
 import { truncate } from "@/utils/truncate";
 import { format } from "date-fns";
 import { JSX } from "react";
@@ -33,7 +34,7 @@ export default function InvoiceCardMedium({
             </p>
 
             <p className="text-text theme-transition justify-self-end pr-10 text-[16px] leading-[24px] font-bold tracking-[-0.25px]">
-                £ {invoice.total.toFixed(2)}
+                {numberFormatter(invoice.total, { type: "currency" })}
             </p>
 
             <div className="flex items-center justify-between">

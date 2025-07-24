@@ -1,5 +1,6 @@
 import DeleteIcon from "@/assets/icon-delete.svg";
 import { Item } from "@/types/itemTypes";
+import { numberFormatter } from "@/utils/numberFormatter";
 import { JSX } from "react";
 import CustomInput from "../common/CustomInput";
 import TransparentButton from "../common/buttons/TransparentButton";
@@ -39,7 +40,7 @@ export default function ItemCardSmall({
                             type="number"
                             name={`quantity-${item.id}`}
                             id={`quantity-${item.id}`}
-                            className="bg-secondary-bg text-text border-border focus:border-indigo-primary theme-transition theme-transition hover:border-indigo-primary no-spinner h-12 w-full rounded border pl-5 text-[12px] leading-[15px] font-bold tracking-[-0.25px] focus:outline-none"
+                            className="bg-secondary-bg text-text border-border focus:border-indigo-primary theme-transition hover:border-indigo-primary no-spinner h-12 w-full rounded border pr-2 pl-5 text-[12px] leading-[15px] font-bold tracking-[-0.25px] focus:outline-none"
                             value={item.quantity}
                             onChange={onChange}
                         />
@@ -56,7 +57,7 @@ export default function ItemCardSmall({
                             type="number"
                             name={`price-${item.id}`}
                             id={`price-${item.id}`}
-                            className="bg-secondary-bg text-text theme-transition border-border focus:border-indigo-primary hover:border-indigo-primary no-spinner h-12 w-full rounded border pl-5 text-[12px] leading-[15px] font-bold tracking-[-0.25px] focus:outline-none"
+                            className="bg-secondary-bg text-text theme-transition border-border focus:border-indigo-primary hover:border-indigo-primary no-spinner h-12 w-full rounded border pr-2 pl-5 text-[12px] leading-[15px] font-bold tracking-[-0.25px] focus:outline-none"
                             value={item.price}
                             onChange={onChange}
                         />
@@ -75,7 +76,7 @@ export default function ItemCardSmall({
                             aria-labelledby={`total-${item.id}`}
                             className="bg-bg text-gray-steel theme-transition flex h-12 w-full items-center justify-start text-[12px] leading-[15px] font-bold tracking-[-0.25px]"
                         >
-                            {item.total}
+                            {numberFormatter(item.total, { type: "currency" })}
                         </div>
                     </div>
                 </div>

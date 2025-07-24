@@ -1,5 +1,6 @@
 import DeleteIcon from "@/assets/icon-delete.svg";
 import { Item } from "@/types/itemTypes";
+import { numberFormatter } from "@/utils/numberFormatter";
 import { JSX } from "react";
 import CustomInput from "../common/CustomInput";
 import TransparentButton from "../common/buttons/TransparentButton";
@@ -60,7 +61,7 @@ export default function ItemCardMedium({
                     aria-label="Total"
                     className="bg-bg theme-transition text-gray-steel flex h-12 w-full items-center justify-start overflow-hidden text-[12px] leading-[15px] font-bold tracking-[-0.25px]"
                 >
-                    {item.total}
+                    {numberFormatter(item.total, { type: "currency" })}
                 </div>
             </div>
 

@@ -1,5 +1,7 @@
 import { Item } from "@/types/itemTypes";
+import { numberFormatter } from "@/utils/numberFormatter";
 import { truncate } from "@/utils/truncate";
+import millify from "millify";
 import { JSX } from "react";
 
 export default function ItemsBoxMedium({
@@ -33,10 +35,18 @@ export default function ItemsBoxMedium({
                                         {truncate(item.name, 30)}
                                     </td>
                                     <td className="text-right">
-                                        {item.quantity}
+                                        {numberFormatter(item.quantity)}
                                     </td>
-                                    <td className="text-right">{`£ ${item.price}`}</td>
-                                    <td className="text-right">{`£ ${item.total}`}</td>
+                                    <td className="text-right">
+                                        {numberFormatter(item.price, {
+                                            type: "currency",
+                                        })}
+                                    </td>
+                                    <td className="text-right">
+                                        {numberFormatter(item.total, {
+                                            type: "currency",
+                                        })}
+                                    </td>
                                 </tr>
                             );
                         })}
@@ -48,7 +58,9 @@ export default function ItemsBoxMedium({
                 <p className="theme-transition text-[11px] leading-[18px] font-medium tracking-[-0.23px]">
                     Amount Due
                 </p>
-                <p className="theme-transition text-[24px] leading-[32px] font-bold tracking-[-0.5px]">{`£ ${total}`}</p>
+                <p className="theme-transition text-[24px] leading-[32px] font-bold tracking-[-0.5px]">
+                    {numberFormatter(total, { type: "currency" })}
+                </p>
             </div>
         </div>
     );
