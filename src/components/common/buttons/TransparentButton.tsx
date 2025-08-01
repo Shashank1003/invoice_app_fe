@@ -1,26 +1,23 @@
-import clsx from "clsx";
 import { JSX } from "react";
+import { twMerge } from "tailwind-merge";
 
 interface TransparentButtonProps {
     ButtonIcon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
-    customStyle?: React.CSSProperties;
     onClick: () => void;
-    className?: string;
+    extendedClass?: string;
 }
 
 export default function TransparentButton({
     ButtonIcon,
-    customStyle = {},
     onClick,
-    className = "",
+    extendedClass = "",
 }: TransparentButtonProps): JSX.Element {
     return (
         <button
-            className={clsx(
+            className={twMerge(
                 "text-icon hover:text-gray-soft theme-transition cursor-pointer",
-                className
+                extendedClass
             )}
-            style={customStyle}
             onClick={onClick}
         >
             <ButtonIcon />

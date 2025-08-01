@@ -27,10 +27,10 @@ const DateHeader = ({
     );
 
     return (
-        <div className="text-calender-text theme-transition flex items-center justify-between px-2 pt-5 text-[12px] leading-[15px] font-bold tracking-[-0.25px]">
+        <div className="text-indigo-primary theme-transition flex items-center justify-between px-2 pt-5 text-[12px] leading-[15px] font-bold tracking-[-0.25px]">
             <button
                 onClick={decreaseMonth}
-                className="cursor-pointer p-1"
+                className="hover:text-indigo-hover cursor-pointer p-1"
                 disabled={prevMonthButtonDisabled}
             >
                 <LeftArrow />
@@ -46,7 +46,7 @@ const DateHeader = ({
 
             <button
                 onClick={increaseMonth}
-                className="cursor-pointer p-1"
+                className="hover:text-indigo-hover cursor-pointer p-1"
                 disabled={nextMonthButtonDisabled}
             >
                 <RightArrow />

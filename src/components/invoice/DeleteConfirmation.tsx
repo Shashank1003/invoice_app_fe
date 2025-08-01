@@ -28,14 +28,14 @@ export default function DeleteConfirmation({
                         variant="button3"
                         buttonText="Cancel"
                         onClick={onCancel}
-                        extendedClass="!w-[90px]"
+                        extendedClass="w-[90px]"
                     />
 
                     <CustomButton
                         variant="redButton"
                         buttonText="Delete"
                         onClick={onDelete}
-                        extendedClass="!w-[90px]"
+                        extendedClass="w-[90px]"
                     />
                 </div>
             </div>

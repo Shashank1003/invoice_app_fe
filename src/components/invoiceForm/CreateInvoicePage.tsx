@@ -27,7 +27,7 @@ export default function CreateInvoicePage({
             <div className="w-full lg:ml-26 lg:max-w-169">
                 <BackButton
                     onClick={handleBack}
-                    extendedCls="md:ml-14 lg:ml-0"
+                    extendedClass="md:ml-14 lg:ml-0"
                 />
 
                 {invoice && (
@@ -49,7 +49,7 @@ export default function CreateInvoicePage({
                                 buttonText="Discard"
                                 onClick={handleReset}
                                 variant="button3"
-                                extendedClass="!w-21 md:!w-24"
+                                extendedClass="w-21 md:w-24"
                             />
 
                             <CustomButton
@@ -65,7 +65,7 @@ export default function CreateInvoicePage({
                                 }
                                 onClick={() => handleSubmit(invoice, true)}
                                 variant="button4"
-                                extendedClass="!w-[117px] md:!w-[134px] md:hidden"
+                                extendedClass="w-29  md:hidden"
                                 disabled={isPending}
                             />
 
@@ -83,7 +83,7 @@ export default function CreateInvoicePage({
                                 disabled={isPending}
                                 onClick={() => handleSubmit(invoice)}
                                 variant="indigoButton"
-                                extendedClass="!w-28 md:!w-32 md:hidden"
+                                extendedClass="w-28 md:hidden"
                             />
 
                             <div className="hidden items-center justify-end gap-2 md:flex">
@@ -100,7 +100,7 @@ export default function CreateInvoicePage({
                                     }
                                     onClick={() => handleSubmit(invoice, true)}
                                     variant="button4"
-                                    extendedClass="!w-[134px]"
+                                    extendedClass="w-[134px]"
                                     disabled={isPending}
                                 />
 
@@ -118,7 +118,7 @@ export default function CreateInvoicePage({
                                     disabled={isPending}
                                     onClick={() => handleSubmit(invoice)}
                                     variant="indigoButton"
-                                    extendedClass="!w-32"
+                                    extendedClass="w-32"
                                 />
                             </div>
                         </div>

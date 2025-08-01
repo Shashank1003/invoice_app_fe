@@ -41,7 +41,7 @@ export default function YearSelect({
         <div className="relative w-full px-4" ref={wrapperRef}>
             <button
                 type="button"
-                className="!text-calender-text hover:!bg-calender-bg hover:!text-indigo-hover theme-transition cursor-pointer text-[12px] leading-[15px] font-bold tracking-[-0.25px]"
+                className="!text-indigo-primary hover:!bg-calender-bg hover:!text-indigo-hover theme-transition cursor-pointer text-[12px] leading-[15px] font-bold tracking-[-0.25px]"
                 onClick={() => setIsOpen(!isOpen)}
             >
                 {format(selectedDate, "MMMM yyyy")}

@@ -43,7 +43,7 @@ export default function EditInvoiceModal({
                         <TransparentButton
                             ButtonIcon={CloseIcon}
                             onClick={handleBack}
-                            className="text-form-label hover:text-text absolute top-4 right-4 lg:top-6 lg:right-6"
+                            extendedClass="text-form-label hover:text-text absolute top-4 right-4 lg:top-6 lg:right-6"
                         />
                     ) : (
                         <BackButton onClick={handleBack} />
@@ -78,7 +78,7 @@ export default function EditInvoiceModal({
                                             buttonText="Cancel"
                                             onClick={handleReset}
                                             variant="button3"
-                                            extendedClass="w-[96px]"
+                                            extendedClass="w-24"
                                         />
 
                                         <CustomButton

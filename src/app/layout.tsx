@@ -43,14 +43,12 @@ const RootLayout: FC<RootLayoutProps> = ({ children }) => {
                         richColors
                         toastOptions={{
                             classNames: {
-                                toast: "!bg-secondary-bg !text-text !rounded-[8px] !py-[14px] !px-[18px] !shadow-toaster !border !border-border !text-[14px] !font-medium !flex !items-center !gap-3 !transition-all !duration-300 !ease-in-out theme-transition",
+                                toast: "!bg-secondary-bg !text-text !rounded-[8px] !py-[14px] md:!py-4 lg:!py-[18px] !px-[18px] md:!px-[22px] lg:!px-6 !shadow-toaster !border !border-border !text-[14px] md:!text-[15px] lg:!text-[16px] !font-medium !flex !items-center !gap-3 !transition-all !duration-300 !ease-in-out !max-w-100 md:!max-w-115 lg:!max-w-125  md:!w-full !mr-4 md:!mr-8 lg:!mr-12",
 
-                                success:
-                                    "!border-l-4 !border-l-color-success theme-transition",
-                                error: "!border-l-4 !border-l-color-error theme-transition",
-                                warning:
-                                    "!border-l-4 !border-l-color-warning theme-transition",
-                                info: "!border-l-4 !border-l-color-info theme-transition",
+                                success: "!border-l-4 !border-l-color-success",
+                                error: "!border-l-4 !border-l-color-error",
+                                warning: "!border-l-4 !border-l-color-warning",
+                                info: "!border-l-4 !border-l-color-info ",
                             },
                         }}
                     />

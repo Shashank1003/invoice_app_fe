@@ -85,7 +85,7 @@ export default function ItemCardSmall({
                     <TransparentButton
                         ButtonIcon={DeleteIcon}
                         onClick={() => onRemoveItem(item.id!)}
-                        className="!text-gray-steel hover:!text-color-error !h-4 !w-[13px]"
+                        extendedClass="text-gray-steel hover:text-color-error h-4 w-3"
                     />
                 </div>
             </div>

@@ -151,7 +151,7 @@ export default function Invoices(): JSX.Element {
                 ) : !invoiceData || invoiceData?.length === 0 ? (
                     <div
                         style={{ height: `calc(100vh - 180px)` }}
-                        className="flex flex-col items-center justify-center gap-10"
+                        className="flex flex-col items-center justify-center gap-10 md:gap-16"
                     >
                         <NoInvoiceImg />
 

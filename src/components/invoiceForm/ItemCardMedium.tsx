@@ -23,8 +23,7 @@ export default function ItemCardMedium({
     return (
         <div
             className={clsx(
-                "theme-transition flex w-full items-start gap-4",
-                isModal ? "justify-between" : "justify-start"
+                "theme-transition flex w-full items-start justify-start gap-4"
             )}
         >
             <div className={clsx(isModal ? "w-[214px]" : "min-w-[42%]")}>
@@ -79,7 +78,7 @@ export default function ItemCardMedium({
                 <TransparentButton
                     ButtonIcon={DeleteIcon}
                     onClick={() => onRemoveItem(item.id!)}
-                    className="!text-gray-steel hover:!text-color-error !h-4 !w-[13px]"
+                    extendedClass="text-gray-steel hover:text-color-error h-4 w-3"
                 />
             </div>
         </div>

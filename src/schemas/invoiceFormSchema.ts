@@ -26,16 +26,40 @@ const zDateString = z
 export const invoiceDetailedSchema = z.object({
     id: z.string().uuid().optional(),
     due_date: zDateString.optional(),
-    client_name: z.string().min(1, "Client name is required!"),
-    client_email: z.string().email("Invalid email!"),
+    client_name: z
+        .string()
+        .min(1, "Client name is required!")
+        .max(100, "Client name must be at most 100 characters long!"),
+    client_email: z
+        .string()
+        .email("Invalid email!")
+        .max(100, "Client email must be at most 100 characters long!"),
     street_from: z.string().min(1, "Street is required!"),
     street_to: z.string().min(1, "Street is required!"),
-    city_from: z.string().min(1, "City is required!"),
-    city_to: z.string().min(1, "City is required!"),
-    postcode_from: z.string().min(1, "Postcode is required!"),
-    postcode_to: z.string().min(1, "Postcode is required!"),
-    country_from: z.string().min(1, "Country is required!"),
-    country_to: z.string().min(1, "Country is required!"),
+    city_from: z
+        .string()
+        .min(1, "City is required!")
+        .max(100, "City must be at most 100 characters long!"),
+    city_to: z
+        .string()
+        .min(1, "City is required!")
+        .max(100, "City must be at most 100 characters long!"),
+    postcode_from: z
+        .string()
+        .min(1, "Postcode is required!")
+        .max(10, "Postcode must be at most 10 characters long!"),
+    postcode_to: z
+        .string()
+        .min(1, "Postcode is required!")
+        .max(10, "Postcode must be at most 10 characters long!"),
+    country_from: z
+        .string()
+        .min(1, "Country is required!")
+        .max(100, "Country must be at most 100 characters long!"),
+    country_to: z
+        .string()
+        .min(1, "Country is required!")
+        .max(100, "Country must be at most 100 characters long!"),
     invoice_date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Invalid date!"),
     status: z.enum(["DRAFT", "PENDING", "PAID"]),
     payment_terms: z.enum(["ONE", "SEVEN", "FOURTEEN", "THIRTY"]),

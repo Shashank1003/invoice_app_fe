@@ -36,7 +36,7 @@ export default function CreateInvoiceModal({
                         <TransparentButton
                             ButtonIcon={CloseIcon}
                             onClick={handleBack}
-                            className="text-form-label theme-transition hover:text-text absolute top-4 right-4 lg:top-6 lg:right-6"
+                            extendedClass="text-form-label theme-transition hover:text-text absolute top-4 right-4 lg:top-6 lg:right-6"
                         />
                     ) : (
                         <BackButton onClick={handleBack} />
@@ -62,7 +62,7 @@ export default function CreateInvoiceModal({
                                     buttonText="Discard"
                                     onClick={handleReset}
                                     variant="button3"
-                                    extendedClass="!w-21 md:!w-24"
+                                    extendedClass="w-21 md:w-24"
                                 />
 
                                 <CustomButton
@@ -78,7 +78,7 @@ export default function CreateInvoiceModal({
                                     }
                                     onClick={() => handleSubmit(invoice, true)}
                                     variant="button4"
-                                    extendedClass="!w-[117px] md:!w-[134px] md:hidden"
+                                    extendedClass="w-29 md:hidden"
                                     disabled={isPending}
                                 />
 
@@ -96,7 +96,7 @@ export default function CreateInvoiceModal({
                                     disabled={isPending}
                                     onClick={() => handleSubmit(invoice)}
                                     variant="indigoButton"
-                                    extendedClass="!w-28 md:!w-32 md:hidden"
+                                    extendedClass="w-28  md:hidden"
                                 />
 
                                 <div className="hidden items-center justify-end gap-2 md:flex">
@@ -115,7 +115,7 @@ export default function CreateInvoiceModal({
                                             handleSubmit(invoice, true)
                                         }
                                         variant="button4"
-                                        extendedClass="!w-[134px]"
+                                        extendedClass="w-[134px]"
                                         disabled={isPending}
                                     />
 
@@ -133,7 +133,7 @@ export default function CreateInvoiceModal({
                                         disabled={isPending}
                                         onClick={() => handleSubmit(invoice)}
                                         variant="indigoButton"
-                                        extendedClass="!w-32"
+                                        extendedClass="w-32"
                                     />
                                 </div>
                             </div>

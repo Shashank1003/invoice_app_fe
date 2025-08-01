@@ -3,9 +3,15 @@
 import { z } from "zod";
 
 export const itemSchema = z.object({
-    name: z.string().min(1, "Item name is required"),
-    quantity: z.number().gt(0, "Quantity must be greater than 0"),
-    price: z.number().gt(0, "Price must be greater than 0"),
+    name: z
+        .string()
+        .min(1, "Item name is required!")
+        .max(100, "Item name must be at most 100 characters long!"),
+    quantity: z
+        .number()
+        .int("Quantity must be an integer!")
+        .gt(0, "Quantity must be greater than 0!"),
+    price: z.number().gt(0, "Price must be greater than 0!"),
     total: z.number(),
     id: z.string().optional(),
 });

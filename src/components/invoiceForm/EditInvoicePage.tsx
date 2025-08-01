@@ -34,7 +34,7 @@ export default function EditInvoicePage({
             <div className="w-full lg:ml-26 lg:max-w-169">
                 <BackButton
                     onClick={handleBack}
-                    extendedCls="md:ml-14 lg:ml-0"
+                    extendedClass="md:ml-14 lg:ml-0"
                 />
 
                 {isLoading ? (
@@ -67,7 +67,7 @@ export default function EditInvoicePage({
                                         buttonText="Cancel"
                                         onClick={handleReset}
                                         variant="button3"
-                                        extendedClass="w-[96px]"
+                                        extendedClass="w-24"
                                     />
 
                                     <CustomButton

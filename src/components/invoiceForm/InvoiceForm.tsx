@@ -321,8 +321,7 @@ export default function InvoiceForm({
                     <div className="space-y-4">
                         <div
                             className={clsx(
-                                "text-12px text-form-label theme-transition flex items-center gap-4 leading-[15px] font-medium tracking-[-0.25px]",
-                                isModal ? "justify-between" : "justify-start"
+                                "text-12px text-form-label theme-transition flex items-center justify-start gap-4 leading-[15px] font-medium tracking-[-0.25px]"
                             )}
                         >
                             <p
@@ -345,18 +344,19 @@ export default function InvoiceForm({
                             <p className="w-17">Total</p>
                         </div>
 
-                        {invoice.items?.length &&
-                            invoice.items.map((item: Item) => {
-                                return (
-                                    <ItemCardMedium
-                                        key={item.id}
-                                        item={item}
-                                        onChange={onItemChange}
-                                        onRemoveItem={onRemoveItem}
-                                        isModal={isModal}
-                                    />
-                                );
-                            })}
+                        {invoice.items?.length
+                            ? invoice.items.map((item: Item) => {
+                                  return (
+                                      <ItemCardMedium
+                                          key={item.id}
+                                          item={item}
+                                          onChange={onItemChange}
+                                          onRemoveItem={onRemoveItem}
+                                          isModal={isModal}
+                                      />
+                                  );
+                              })
+                            : ""}
 
                         <CustomButton
                             buttonText="+ Add New Item"
@@ -367,17 +367,18 @@ export default function InvoiceForm({
                     </div>
                 ) : (
                     <div className="space-y-12">
-                        {invoice.items?.length &&
-                            invoice.items.map((item: Item) => {
-                                return (
-                                    <ItemCardSmall
-                                        key={item.id}
-                                        item={item}
-                                        onChange={onItemChange}
-                                        onRemoveItem={onRemoveItem}
-                                    />
-                                );
-                            })}
+                        {invoice.items?.length
+                            ? invoice.items.map((item: Item) => {
+                                  return (
+                                      <ItemCardSmall
+                                          key={item.id}
+                                          item={item}
+                                          onChange={onItemChange}
+                                          onRemoveItem={onRemoveItem}
+                                      />
+                                  );
+                              })
+                            : ""}
 
                         <CustomButton
                             buttonText="+ Add New Item"

@@ -28,7 +28,7 @@ export default function InvoiceDetails({
     const isMd = useMediaQuery("(min-width: 768px)");
 
     return (
-        <div className="theme-transition mb-14 px-6 md:mb-24 md:px-10 ">
+        <div className="theme-transition mb-14 px-6 md:mb-24 md:px-10">
             <div className="bg-secondary-bg theme-transition shadow-custom mt-8 flex h-23 items-center justify-between rounded-[8px] px-6 md:h-22 md:px-8">
                 {!isMd ? (
                     <>
@@ -82,7 +82,7 @@ export default function InvoiceDetails({
                                           ? true
                                           : false
                                 }
-                                extendedClass="md:w-[139px]"
+                                extendedClass="md:w-35"
                             />
                         </div>
                     </>

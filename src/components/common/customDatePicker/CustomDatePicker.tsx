@@ -36,7 +36,7 @@ export default function CustomDatePicker({
     return (
         <div
             className={clsx(
-                "relative flex w-full flex-col gap-[10px] theme-transition",
+                "theme-transition relative flex w-full flex-col gap-[10px]",
                 disabled && "opacity-50"
             )}
         >
@@ -57,6 +57,7 @@ export default function CustomDatePicker({
                 popperClassName="w-full shadow-dd-light dark:shadow-dd-dark"
                 showMonthDropdown
                 showYearDropdown
+                disabledKeyboardNavigation
                 dropdownMode="select"
                 renderCustomHeader={props => <DateHeader {...props} />}
                 closeOnScroll={false}
