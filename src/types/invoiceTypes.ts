@@ -32,7 +32,7 @@ export interface InvoiceBrief {
 export interface InvoiceFormProps {
     handleBack: () => void;
     handleReset: () => void;
-    handleSubmit: (payload: InvoiceDetailed, isDraft?: boolean) => void;
+    handleSubmit: (_payload: InvoiceDetailed, _isDraft?: boolean) => void;
     invoice: InvoiceDetailed | null;
     setInvoice: React.Dispatch<React.SetStateAction<InvoiceDetailed | null>>;
     isPending: boolean;

@@ -96,7 +96,7 @@ export default function Invoices(): JSX.Element {
         };
 
         scroll();
-    }, [scrollToId]);
+    }, [scrollToId, setScrollToId]);
 
     const handleStatus = useCallback(
         (status: string) => {

@@ -6,7 +6,6 @@ import { useCreateInvoice } from "@/hooks/useInvoices";
 import { emptyInvoiceData } from "@/misc/emptyInvoiceData";
 import { invoiceDetailedSchema } from "@/schemas/invoiceFormSchema";
 import { InvoiceDetailed } from "@/types/invoiceTypes";
-import { useMediaQuery } from "@react-hookz/web";
 import { useRouter } from "next/navigation";
 import { JSX, useCallback, useEffect, useState } from "react";
 import { toast } from "sonner";
@@ -17,7 +16,6 @@ export default function CreateNewInvoice(): JSX.Element {
         useInvoiceContext();
     const { mutate: createInvoice, isPending } = useCreateInvoice();
     const [invoice, setInvoice] = useState<InvoiceDetailed | null>(null);
-    const isMd = useMediaQuery("(min-width: 768px)");
 
     useEffect(() => {
         if (!emptyInvoiceData) return;
@@ -74,7 +72,7 @@ export default function CreateNewInvoice(): JSX.Element {
                 },
             });
         },
-        [createInvoice, router]
+        [createInvoice, router, setScrollToId]
     );
 
     return (

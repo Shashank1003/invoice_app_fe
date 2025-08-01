@@ -1,7 +1,6 @@
 import { Item } from "@/types/itemTypes";
 import { numberFormatter } from "@/utils/numberFormatter";
 import { truncate } from "@/utils/truncate";
-import millify from "millify";
 import { JSX } from "react";
 
 export default function ItemsBoxMedium({

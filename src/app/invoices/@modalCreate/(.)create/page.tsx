@@ -78,7 +78,7 @@ export default function CreateNewInvoice(): JSX.Element {
                 },
             });
         },
-        [createInvoice, router]
+        [createInvoice, router, setScrollToId]
     );
 
     return !isSm ? (

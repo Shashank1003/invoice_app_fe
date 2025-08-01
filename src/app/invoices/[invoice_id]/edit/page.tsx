@@ -27,11 +27,11 @@ export default function EditInvoice(): JSX.Element {
         setInvoice(data || null);
         setActiveInvoice(data || null);
         setScrollToId(`invoiceCard-${invoiceId}`);
-    }, [data, setActiveInvoice, invoiceId]);
+    }, [data, setActiveInvoice, invoiceId, setScrollToId]);
 
     const handleBack = useCallback(() => {
         router.push(`/invoices/${invoiceId}`);
-    }, [router]);
+    }, [router, invoiceId]);
 
     const handleReset = useCallback(() => {
         setInvoice(activeInvoice);
@@ -74,7 +74,7 @@ export default function EditInvoice(): JSX.Element {
                 },
             });
         },
-        [updateInvoice, setActiveInvoice]
+        [updateInvoice, setActiveInvoice, handleBack]
     );
 
     return (

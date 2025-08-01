@@ -19,7 +19,6 @@ export default function ItemCardMedium({
     onRemoveItem,
     isModal = true,
 }: ItemCardProps): JSX.Element {
-    console.log(isModal);
     return (
         <div
             className={clsx(

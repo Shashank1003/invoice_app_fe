@@ -30,7 +30,7 @@ export default function EditInvoice(): JSX.Element {
         setInvoice(data || null);
         setActiveInvoice(data || null);
         setScrollToId(`invoiceCard-${invoiceId}`);
-    }, [data, setActiveInvoice, invoiceId]);
+    }, [data, setActiveInvoice, invoiceId, setScrollToId]);
 
     const handleBack = useCallback(() => {
         router.back();
@@ -77,7 +77,7 @@ export default function EditInvoice(): JSX.Element {
                 },
             });
         },
-        [updateInvoice, setActiveInvoice]
+        [updateInvoice, setActiveInvoice, handleBack]
     );
 
     return !isSm ? (

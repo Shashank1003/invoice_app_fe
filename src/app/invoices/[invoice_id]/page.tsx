@@ -44,7 +44,7 @@ export default function InvoicePage(): JSX.Element {
         setActiveInvoice(data || null);
         setScrollToId(invoiceId);
         queryClient.setQueryData(["invoice", invoiceId], data);
-    }, [data, setActiveInvoice, invoiceId, queryClient]);
+    }, [data, setActiveInvoice, invoiceId, queryClient, setScrollToId]);
 
     const handleBack = useCallback(() => {
         // Can use router.back() as well but it won't work if user
@@ -54,7 +54,7 @@ export default function InvoicePage(): JSX.Element {
         sessionStorage.setItem("shouldScroll", "true");
         setScrollToId(id ?? null);
         router.push("/invoices");
-    }, [router, invoiceData]);
+    }, [router, invoiceData, setScrollToId]);
 
     const handleCancel = useCallback(() => {
         setIsDeletePopup(false);

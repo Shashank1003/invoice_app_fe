@@ -2,7 +2,7 @@ import DownIcon from "@/assets/icon-arrow-down.svg";
 import CheckIcon from "@/assets/icon-check.svg";
 import { useForceClose } from "@/hooks/useForceClose";
 import { toCapitalized } from "@/utils/toCapitalized";
-import { flip, offset, shift, useFloating } from "@floating-ui/react";
+import { flip, offset, useFloating } from "@floating-ui/react";
 import clsx from "clsx";
 import { JSX, useRef } from "react";
 

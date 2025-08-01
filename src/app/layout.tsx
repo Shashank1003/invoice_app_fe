@@ -1,3 +1,4 @@
+import { RootAlert } from "@/components/common/RootAlert";
 import { InvoiceProvider } from "@/context/invoiceContext";
 import { TanstackProvider } from "@/context/tanstackProvider";
 import { ThemeProvider } from "@/context/themeContext";
@@ -6,6 +7,7 @@ import type { Metadata, Viewport } from "next";
 import { League_Spartan } from "next/font/google";
 import { FC, ReactNode } from "react";
 import { Toaster } from "sonner";
+
 interface RootLayoutProps {
     children: ReactNode;
 }
@@ -52,6 +54,7 @@ const RootLayout: FC<RootLayoutProps> = ({ children }) => {
                             },
                         }}
                     />
+                    <RootAlert />
                 </ThemeProvider>
             </body>
         </html>
