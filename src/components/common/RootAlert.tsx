@@ -1,9 +1,9 @@
 "use client";
 
-import { JSX, useEffect } from "react";
+import { useEffect } from "react";
 import { toast } from "sonner"; // or react-toastify
 
-export function RootAlert(): JSX.Element {
+export function RootAlert(): null {
     useEffect(() => {
         const shown = sessionStorage.getItem("slow-backend-alert");
         if (!shown) {

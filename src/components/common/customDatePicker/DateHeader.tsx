@@ -1,7 +1,7 @@
 import LeftArrow from "@/assets/icon-arrow-left.svg";
 import RightArrow from "@/assets/icon-arrow-right.svg";
+import YearSelect from "@/components/common/customDatePicker/YearSelect";
 import { JSX } from "react";
-import YearSelect from "./YearSelect";
 
 type DateHeaderProps = {
     date: Date;

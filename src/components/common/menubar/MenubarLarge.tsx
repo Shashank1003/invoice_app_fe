@@ -2,12 +2,12 @@ import Moon from "@/assets/icon-moon.svg";
 import Sun from "@/assets/icon-sun.svg";
 import UserImage from "@/assets/image-avatar.jpg";
 import TransparentButton from "@/components/common/buttons/TransparentButton";
+import Logo from "@/components/common/Logo";
 import { useThemeContext } from "@/context/themeContext";
 import clsx from "clsx";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { JSX, useCallback } from "react";
-import Logo from "../Logo";
 
 export default function MenubarSmall({
     extendedCls = "",

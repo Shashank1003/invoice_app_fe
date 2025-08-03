@@ -1,9 +1,9 @@
 "use client";
+import CreateInvoiceButton from "@/components/common/buttons/CreateInvoiceButton";
+import Dropdown from "@/components/common/Dropdown";
 import { useMediaQuery } from "@react-hookz/web";
 import { useRouter } from "next/navigation";
 import { JSX, useCallback, useEffect, useState } from "react";
-import Dropdown from "../common/Dropdown";
-import CreateInvoiceButton from "../common/buttons/CreateInvoiceButton";
 
 interface InvoiceHeaderProps {
     activeStatus: string;

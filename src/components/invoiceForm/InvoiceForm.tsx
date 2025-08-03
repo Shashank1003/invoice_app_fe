@@ -1,3 +1,9 @@
+import CustomButton from "@/components/common/buttons/CustomButton";
+import CustomDatePicker from "@/components/common/customDatePicker/CustomDatePicker";
+import CustomInput from "@/components/common/CustomInput";
+import Dropdown from "@/components/common/Dropdown";
+import ItemCardMedium from "@/components/invoiceForm/ItemCardMedium";
+import ItemCardSmall from "@/components/invoiceForm/ItemCardSmall";
 import { paymentTerms } from "@/misc/paymentTerms";
 import { InvoiceDetailed } from "@/types/invoiceTypes";
 import { Item } from "@/types/itemTypes";
@@ -6,12 +12,6 @@ import clsx from "clsx";
 import { format } from "date-fns";
 import React, { JSX, useCallback, useState } from "react";
 import { v4 as uuid4 } from "uuid";
-import CustomButton from "../common/buttons/CustomButton";
-import CustomDatePicker from "../common/customDatePicker/CustomDatePicker";
-import CustomInput from "../common/CustomInput";
-import Dropdown from "../common/Dropdown";
-import ItemCardMedium from "./ItemCardMedium";
-import ItemCardSmall from "./ItemCardSmall";
 
 interface InvoiceFormProps {
     invoice: InvoiceDetailed;

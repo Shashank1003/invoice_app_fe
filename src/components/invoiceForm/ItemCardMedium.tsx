@@ -1,10 +1,10 @@
 import DeleteIcon from "@/assets/icon-delete.svg";
+import TransparentButton from "@/components/common/buttons/TransparentButton";
+import CustomInput from "@/components/common/CustomInput";
 import { Item } from "@/types/itemTypes";
 import { numberFormatter } from "@/utils/numberFormatter";
 import clsx from "clsx";
 import { JSX } from "react";
-import CustomInput from "../common/CustomInput";
-import TransparentButton from "../common/buttons/TransparentButton";
 
 interface ItemCardProps {
     item: Item;

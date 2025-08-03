@@ -1,4 +1,6 @@
+import CustomButton from "@/components/common/buttons/CustomButton";
 import StatusBox from "@/components/common/StatusBox";
+import ItemsBoxMedium from "@/components/invoice/ItemsBoxMedium";
 import ItemsBoxSmall from "@/components/invoice/ItemsBoxSmall";
 import { InvoiceDetailed } from "@/types/invoiceTypes";
 import { renderId } from "@/utils/generateRenderId";
@@ -7,8 +9,6 @@ import { useMediaQuery } from "@react-hookz/web";
 import clsx from "clsx";
 import { format } from "date-fns";
 import { JSX } from "react";
-import CustomButton from "../common/buttons/CustomButton";
-import ItemsBoxMedium from "./ItemsBoxMedium";
 
 interface InvoiceDetailsProps {
     invoiceData: InvoiceDetailed;

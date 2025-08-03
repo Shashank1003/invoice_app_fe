@@ -1,6 +1,6 @@
+import CustomButton from "@/components/common/buttons/CustomButton";
 import { useLockScroll } from "@/hooks/useLockScroll";
 import { JSX } from "react";
-import CustomButton from "../common/buttons/CustomButton";
 
 export default function DeleteConfirmation({
     onCancel,

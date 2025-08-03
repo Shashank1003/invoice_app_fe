@@ -1,4 +1,4 @@
-import { Item } from "./itemTypes";
+import { Item } from "@/types/itemTypes";
 
 export interface InvoiceDetailed {
     id?: string;

@@ -1,10 +1,10 @@
+import StatusBox from "@/components/common/StatusBox";
 import { InvoiceBrief } from "@/types/invoiceTypes";
 import { renderId } from "@/utils/generateRenderId";
 import { numberFormatter } from "@/utils/numberFormatter";
 import { truncate } from "@/utils/truncate";
 import { format } from "date-fns";
 import { JSX } from "react";
-import StatusBox from "../common/StatusBox";
 
 export default function InvoiceCardSmall({
     invoice,

@@ -1,4 +1,3 @@
-// ✅ Proper TS-style config
 import type { NextConfig } from "next";
 import type { Configuration } from "webpack";
 
