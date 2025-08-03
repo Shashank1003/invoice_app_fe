@@ -40,7 +40,7 @@ export default function InvoiceCardMedium({
             <div className="flex items-center justify-between">
                 <StatusBox invoiceStatus={invoice.status} />
 
-                <RightArrowIcon />
+                <RightArrowIcon className="text-indigo-primary" />
             </div>
         </div>
     );
