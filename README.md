@@ -13,7 +13,7 @@ A mobile-first, modern invoice management application built with Next.js, Tailwi
 - **Zod** – schema-based validation
 - **Shadcn** – accessible UI components
 - **Context API** – global state management
-- **Backend:** FastAPI ([repo here](git@github.com:Shashank1003/invoice_app_be.git))
+- **Backend:** FastAPI `git@github.com:Shashank1003/invoice_app_be.git`
 
 ---
 
@@ -21,39 +21,32 @@ A mobile-first, modern invoice management application built with Next.js, Tailwi
 
 ### 1. Clone the repository
 
-    ``` bash
     git clone git@github.com:Shashank1003/invoice_app_fe.git
     cd invoice_app_fe
-    ```
 
 ### 2. Install dependencies
 
-    ```bash
     npm install
-    ```
 
 ### 3. Start the development server
 
-    ```bash
     npm run dev
-    ```
 
-    Visit [http://localhost:3000](http://localhost:3000) to view the app.
+Visit http://localhost:3000 to view the app.
 
 ---
 
 ## Linting and Formatting
 
-    Check code style and formatting anytime with:
+Check code style and formatting anytime with:
 
-    ```bash
     npm run lint
-    ```
 
 ---
 
 ## Folder Structure
 
+<pre> ``` 
 invoice_app_fe/
 ├── app/ # Next.js app directory (routes, layouts)
 ├── components/ # UI – Shadcn-based, reusable
@@ -66,6 +59,8 @@ invoice_app_fe/
 ├── public/ # Static assets
 ├── package.json
 └── ...
+    
+``` </pre>
 
 ---
 
@@ -82,7 +77,7 @@ invoice_app_fe/
 
 ## Backend
 
-Connects to the backend [here](git@github.com:Shashank1003/invoice_app_be.git), built with FastAPI.
+Connects to the backend `git@github.com:Shashank1003/invoice_app_be.git` , built with FastAPI.
 
 ---
 
