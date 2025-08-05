@@ -54,7 +54,7 @@ const RootLayout: FC<RootLayoutProps> = ({ children }) => {
                             },
                         }}
                     />
-                    <RootAlert />u
+                    <RootAlert />
                 </ThemeProvider>
             </body>
         </html>

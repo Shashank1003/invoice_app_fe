@@ -146,7 +146,7 @@ export default function InvoiceDetails({
                             <p className="text-text theme-transition mt-3 text-[15px] leading-[20px] font-bold tracking-[-0.31px]">
                                 {format(
                                     new Date(invoiceData.invoice_date),
-                                    "dd MMM yyyyy"
+                                    "dd MMM yyyy"
                                 )}
                             </p>
                         </div>
@@ -160,7 +160,7 @@ export default function InvoiceDetails({
                                 {invoiceData.due_date &&
                                     format(
                                         new Date(invoiceData.due_date),
-                                        "dd MMM yyyyy"
+                                        "dd MMM yyyy"
                                     )}
                             </p>
                         </div>

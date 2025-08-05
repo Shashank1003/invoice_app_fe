@@ -35,7 +35,7 @@ export default function InvoiceCardSmall({
                         <span className="text-gray-steel theme-transition dark:text-gray-soft">
                             Due
                         </span>
-                        {format(new Date(invoice.due_date), "dd MMMM yyyy")}
+                        {format(new Date(invoice.due_date), " dd MMM yyyy")}
                     </p>
                     <p className="text-text theme-transition text-[16px] leading-[24px] font-bold">
                         {numberFormatter(invoice.total, { type: "currency" })}
